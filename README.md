@@ -1,145 +1,57 @@
 # Aeperion Systems
 
-## Descripción
+Aeperion Systems es una plataforma de soluciones digitales construida con Next.js, React y Tailwind CSS.
 
-Aeperion Systems es una plataforma de soluciones digitales enfocada en analizar, categorizar y brindar soluciones a negocios con problemas operativos.
-
-## Estructura del Proyecto
-
-```
-Aeperion-Systems/
-├── Aeperion Web-App/
-│   ├── Aeperion App Web/          # Aplicación principal (Next.js)
-│   └── Aeperion Modules/          # Módulos de servicios
-└── README.md
-```
-
-## Stack Tecnológico
-
-- **Frontend**: Next.js 16, React 19, Tailwind CSS 4, Framer Motion
-- **UI Components**: Radix UI
-- **Styling**: Tailwind CSS v4 con tokens personalizados
-- **Animaciones**: Framer Motion
-- **Estado**: React hooks
-
-## Instalación
+## Desarrollo local
 
 ```bash
-cd "Aeperion Web-App/Aeperion App Web"
-npm install
+npm ci
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) para ver el resultado.
+Abre `http://localhost:3000`.
 
-## Comandos disponibles
+## Scripts
 
 ```bash
-npm run dev          # Desarrollo local
-npm run build        # Build de producción
-npm run build:static # Build estático para servidores sin Node
-npm run serve        # Servir build estático en puerto 3000
-npm run lint         # Ejecutar linter
+npm run build        # Compilacion de produccion y export estatico
+npm run build:static # Compilacion mas correccion de rutas relativas
+npm run start        # Servir la salida de produccion
+npm run serve        # Servir out/ como sitio estatico
+npm run lint         # Ejecutar ESLint
 ```
 
-## Estructura de Rutas
+La aplicacion esta en la raiz del repositorio para que plataformas como Vercel, Netlify o GitHub Actions detecten automaticamente `package.json`, `src/` y `public/`.
 
-- `/` - Landing page
-- `/asesoria` - Asesoría gratuita (quiz)
+## Rutas principales
+
+- `/` - Pagina principal
+- `/asesoria` - Asesoria gratuita
 - `/planes` - Planes de precios
-- `/herramientas` - Catálogo de herramientas (39 herramientas)
-- `/herramientas/[slug]` - Detalle de herramienta
-- `/demo/[slug]` - Demo interactiva
-- `/about` - Sobre Aeperion
-- `/metodo` - Nuestro método
-- `/blog` - Blog
-- `/blog/[slug]` - Artículo del blog
+- `/herramientas` - Catalogo de herramientas
+- `/demo/[slug]` - Demos interactivas
+- `/blog` y `/blog/[slug]` - Blog
 - `/faq` - Preguntas frecuentes
 - `/contacto` - Contacto
 
-## Características Principales
+Los recursos de `Aeperion Modules/` son material separado del frontend y no participan en el build de Next.js.
 
-### 1. **Asesoría Gratuita** (`/asesoria`)
-- Quiz interactivo de 5 preguntas
-- Diagnóstico automático
-- Recomendación de plan personalizada
-- Agendamiento de cita
+## Getting Started
 
-### 2. **Catálogo de Herramientas**
-- 39 herramientas individuales
-- 10 categorías
-- Búsqueda y filtros
-- Demos interactivas para 12 herramientas
+First, run the development server:
 
-### 3. **Sistema de Planes**
-- **Standart**: Entrada básica
-- **Fullpack**: Solución integral
-- **Syspack**: Enterprise completo
-- Comparación interactiva
-
-### 4. **Demos Interactivas**
-- Terminal (typewriter)
-- Visual (interfaz mockup)
-- Formulario (validación)
-- Dashboard (KPIs y gráficos)
-
-## Datos y Configuración
-
-### Archivos de datos
-- `src/lib/constants.ts` - Configuración global
-- `src/lib/plans-data.ts` - Planes y precios
-- `src/lib/tools-data.ts` - Catálogo de 39 herramientas
-- `src/lib/blog-data.ts` - 6 artículos del blog
-
-### Diseño
-- `src/app/globals.css` - Tokens de diseño (colores, tipografía, sombras)
-- Tema verde primario: `#6EC45E`
-- Escala de grises: `ae-gray-{50...900}`
-
-## Componentes Principales
-
-### UI Primitives
-- `Button` (5 variants, 5 sizes)
-- `Card` (5 subcomponentes)
-- `Badge` (6 variants)
-- `Input`, `Dialog`, `Separator`
-
-### Animaciones
-- `ParticleSystem` - Efecto de partículas
-- `MagneticButton` - Botón con efecto magnético
-- `CounterAnimation` - Números animados
-- `TextReveal` - Texto con reveal
-- `StaggerReveal` - Stagger grid
-- Y más...
-
-## Performance & Accesibilidad
-
-- ✅ Responsive design (mobile-first)
-- ✅ Lazy loading de componentes
-- ✅ Respeta `prefers-reduced-motion`
-- ✅ SEO optimizado (Next.js metadata)
-- ✅ Accessibility: ARIA labels, semantic HTML
-
-## Deploy
-
-### Vercel (recomendado)
 ```bash
-npm run build
-# Pushea a GitHub y conecta con Vercel
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### Servidor estático
-```bash
-npm run build:static
-npx serve@latest out/ -l 3000
-```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Soporte
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- WhatsApp: +57 300 123 4567
-- Email: contacto@aeperion.com
-- Web: https://aeperion.systems
-
-## Licencia
-
-Privada - Aeperion Systems 2026
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
