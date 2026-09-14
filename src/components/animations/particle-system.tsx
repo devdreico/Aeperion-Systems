@@ -74,15 +74,16 @@ export function ParticleSystem({
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+      width = rect.width || window.innerWidth;
+      height = rect.height || window.innerHeight;
+      
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
 
-      const responsiveCount = width < 768 ? Math.floor(count * 0.5) : count;
+      const responsiveCount = width < 768 ? Math.floor(count * 0.6) : count;
       particlesRef.current = initParticles(width, height, responsiveCount);
     };
 
@@ -223,7 +224,7 @@ export function ParticleSystem({
   return (
     <canvas
       ref={canvasRef}
-      className={cn("absolute inset-0 pointer-events-none z-0", className)}
+      className={cn("absolute inset-0 w-full h-full pointer-events-none z-0", className)}
       aria-hidden="true"
     />
   );
