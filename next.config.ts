@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
+const isVercel = process.env.VERCEL === "1" || !!process.env.VERCEL;
+const isStaticExport = process.env.STATIC_EXPORT === "true";
+
 const nextConfig: NextConfig = {
-  // === Static Export Configuration ===
-  // Genera HTML estático en /out/ con rutas relativas
-  // para soporte file:// y servidores estáticos
-  output: "export",
-  assetPrefix: "./",
+  ...(isStaticExport ? { output: "export", assetPrefix: "./" } : {}),
   trailingSlash: true,
 
   // Images must be unoptimized for static export
