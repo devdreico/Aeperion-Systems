@@ -20,18 +20,9 @@ export function StaggerReveal({
   className,
   staggerDelay = 0.08,
   delay = 0,
-  direction = "up",
-  distance = 30,
   once = true,
   as: Tag = "div",
 }: StaggerRevealProps) {
-  const offsets = {
-    up: { y: distance },
-    down: { y: -distance },
-    left: { x: distance },
-    right: { x: -distance },
-    none: {},
-  };
 
   const prefersReducedMotion = typeof window !== "undefined"
     ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -44,19 +35,6 @@ export function StaggerReveal({
       transition: {
         staggerChildren: prefersReducedMotion ? 0 : staggerDelay,
         delayChildren: delay,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, ...offsets[direction] },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
       },
     },
   };

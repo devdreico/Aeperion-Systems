@@ -54,6 +54,10 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
 
   return (
     <div className={cn("space-y-6", className)}>
+      <div className="flex items-center justify-between bg-white rounded-xl border border-ae-gray-200 px-5 py-3">
+        <span className="text-sm font-semibold text-ae-gray-900">{tool.name} — Demo Interactiva</span>
+        <span className="text-xs text-ae-green-600 font-medium bg-ae-green-50 px-2.5 py-1 rounded-full">Sistema Activo</span>
+      </div>
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[

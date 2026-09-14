@@ -13,7 +13,6 @@ interface SectionTransitionProps {
   duration?: number;
   once?: boolean;
   distance?: number;
-  as?: "div" | "section" | "article";
 }
 
 export function SectionTransition({
@@ -24,7 +23,6 @@ export function SectionTransition({
   duration = 0.6,
   once = true,
   distance = 40,
-  as: Tag = "div",
 }: SectionTransitionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });

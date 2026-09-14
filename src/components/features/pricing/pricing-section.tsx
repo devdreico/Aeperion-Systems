@@ -10,7 +10,6 @@ import { HoverCard } from "@/components/animations/hover-card";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
-import { formatCOP } from "@/lib/utils";
 
 interface PricingSectionProps {
   className?: string;

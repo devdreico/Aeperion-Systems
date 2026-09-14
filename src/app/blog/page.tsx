@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { BLOG_POSTS } from "@/lib/blog-data";
@@ -66,7 +65,7 @@ export default function BlogPage() {
 
           {/* HANDOFF-FRONTEND: Posts grid — animar con StaggerReveal */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {rest.map((post, index) => (
+            {rest.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 {/* HANDOFF-FRONTEND: Wrap en motion.div con stagger index delay */}
                 <Card className="group h-full border-ae-gray-100 hover:border-ae-green-200 hover:shadow-md transition-all duration-300">

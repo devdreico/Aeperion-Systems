@@ -29,26 +29,32 @@ export function TrustSection({ className }: TrustSectionProps) {
             { value: TRUST_METRICS.toolsOffered, label: "Herramientas disponibles", suffix: "" },
             { value: TRUST_METRICS.satisfactionRate, label: "Satisfacción", suffix: "%" },
             { value: TRUST_METRICS.yearsActive, label: "Años de experiencia", suffix: "+" },
-          ].map((metric, i) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center"
-            >
-              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-ae-green-500 mb-1">
-                <CounterAnimation
-                  from={0}
-                  to={metric.value}
-                  duration={2}
-                  delay={i * 0.15 + 0.3}
-                />
-                {metric.suffix}
-              </div>
-              <p className="text-sm text-ae-gray-500">{metric.label}</p>
-            </motion.div>
-          ))}
+          ].map((metric, i) => {
+            const Icon = metricIcons[i];
+            return (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center bg-ae-gray-50/50 rounded-2xl p-6 border border-ae-gray-100"
+              >
+                <div className="h-10 w-10 rounded-xl bg-ae-green-50 flex items-center justify-center mx-auto mb-3 text-ae-green-600">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-ae-gray-900 mb-1">
+                  <CounterAnimation
+                    from={0}
+                    to={metric.value}
+                    duration={2}
+                    delay={i * 0.15 + 0.3}
+                  />
+                  {metric.suffix}
+                </div>
+                <p className="text-xs text-ae-gray-500 font-medium">{metric.label}</p>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Values Cards */}
