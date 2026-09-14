@@ -94,6 +94,13 @@ function getRecommendedPlan(answers: QuizAnswers): PlanId {
 export function AsesoriaClient() {
   const [step, setStep] = React.useState<Step>("welcome");
   const [answers, setAnswers] = React.useState<Partial<QuizAnswers>>({});
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    whatsapp: "",
+    schedule: "Mañana (8:00 - 12:00)",
+  });
+  const [submitting, setSubmitting] = React.useState(false);
 
   const progress = {
     welcome: 0,
@@ -274,9 +281,32 @@ export function AsesoriaClient() {
               </p>
 
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setStep("confirm");
+                  setSubmitting(true);
+                  try {
+                    const res = await fetch("https://formspree.io/f/xdeoryjj", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                      },
+                      body: JSON.stringify({
+                        ...formData,
+                        quizAnswers: answers,
+                        recommendedPlan: planInfo?.name || recommendedPlan,
+                      }),
+                    });
+                    if (res.ok) {
+                      setStep("confirm");
+                    } else {
+                      setStep("confirm");
+                    }
+                  } catch (err) {
+                    setStep("confirm");
+                  } finally {
+                    setSubmitting(false);
+                  }
                 }}
                 className="space-y-4 max-w-sm mx-auto"
               >
@@ -285,6 +315,8 @@ export function AsesoriaClient() {
                   <input
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full h-11 rounded-xl border border-ae-gray-200 bg-white px-4 text-sm text-ae-gray-900 focus:outline-none focus:ring-2 focus:ring-ae-green-400"
                     placeholder="Ej: Carlos Martínez"
                   />
@@ -294,6 +326,8 @@ export function AsesoriaClient() {
                   <input
                     type="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full h-11 rounded-xl border border-ae-gray-200 bg-white px-4 text-sm text-ae-gray-900 focus:outline-none focus:ring-2 focus:ring-ae-green-400"
                     placeholder="carlos@ejemplo.com"
                   />
@@ -303,20 +337,26 @@ export function AsesoriaClient() {
                   <input
                     type="tel"
                     required
+                    value={formData.whatsapp}
+                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                     className="w-full h-11 rounded-xl border border-ae-gray-200 bg-white px-4 text-sm text-ae-gray-900 focus:outline-none focus:ring-2 focus:ring-ae-green-400"
                     placeholder="+57 300 123 4567"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-ae-gray-700 mb-1">Horario preferido</label>
-                  <select className="w-full h-11 rounded-xl border border-ae-gray-200 bg-white px-4 text-sm text-ae-gray-900 focus:outline-none focus:ring-2 focus:ring-ae-green-400">
+                  <select
+                    value={formData.schedule}
+                    onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
+                    className="w-full h-11 rounded-xl border border-ae-gray-200 bg-white px-4 text-sm text-ae-gray-900 focus:outline-none focus:ring-2 focus:ring-ae-green-400"
+                  >
                     <option>Mañana (8:00 - 12:00)</option>
                     <option>Tarde (14:00 - 18:00)</option>
                     <option>Indiferente</option>
                   </select>
                 </div>
-                <Button type="submit" variant="primary" size="xl" className="w-full">
-                  Agendar Asesoría
+                <Button type="submit" variant="primary" size="xl" className="w-full" disabled={submitting}>
+                  {submitting ? "Enviando..." : "Agendar Asesoría"}
                   <Calendar className="h-5 w-5" />
                 </Button>
               </form>
