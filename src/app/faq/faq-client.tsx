@@ -136,6 +136,7 @@ export function FAQSection() {
             <motion.button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               whileTap={{ scale: 0.995 }}
+              aria-expanded={openIndex === i}
               className="w-full flex items-center justify-between p-5 text-left hover:bg-ae-gray-50 transition-colors"
             >
               <span className="text-sm font-medium text-ae-gray-900 pr-4">

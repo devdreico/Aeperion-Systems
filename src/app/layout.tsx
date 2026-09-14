@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { ClientLayout } from "@/components/layout/client-layout";
+import { JsonLd } from "@/components/shared/json-ld";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aeperion.com"),
@@ -47,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full">
       <body className="min-h-screen flex flex-col bg-white text-ae-gray-900 antialiased">
+        <JsonLd />
         {/* HANDOFF-FRONTEND: ScrollProgress — animar barra de progreso */}
         <ScrollProgress />
 
