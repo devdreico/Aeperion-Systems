@@ -1,14 +1,10 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
  * AEPERION — Logo Component
  *
- * Renderiza el logo como SVG inline del brand.
- * Color verde: #6EC45E
- *
- * HANDOFF-FRONTEND:
- *   - Agregar hover animation (rotate o pulse sutil)
- *   - En hero: versión grande con animación de entrada
+ * Renderiza el logo real de Aeperion Systems.
  */
 
 interface LogoProps {
@@ -32,32 +28,19 @@ export function Logo({
 
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
-      {/* Logo SVG — Aeperion Green #6EC45E */}
-      <svg
-        width={logoSize}
-        height={logoSize}
-        viewBox="0 0 40 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0"
-        aria-label="Aeperion Systems logo"
+      <div
+        className="relative shrink-0 flex items-center justify-center"
+        style={{ width: logoSize, height: logoSize }}
       >
-        {/* Hexagonal shape */}
-        <path
-          d="M20 2L35 11V29L20 38L5 29V11L20 2Z"
-          fill="#6EC45E"
-          stroke="#5AB048"
-          strokeWidth="1"
+        <Image
+          src="/images/logo/logo-aeperion.png"
+          alt="Aeperion Systems Logo"
+          width={logoSize}
+          height={logoSize}
+          className="object-contain rounded-lg"
+          priority
         />
-        {/* Inner triangle - abstract A */}
-        <path
-          d="M20 10L28 28H12L20 10Z"
-          fill="white"
-          opacity="0.9"
-        />
-        {/* Accent dot */}
-        <circle cx="20" cy="20" r="3" fill="#6EC45E" />
-      </svg>
+      </div>
 
       {/* Text */}
       {showText && (
