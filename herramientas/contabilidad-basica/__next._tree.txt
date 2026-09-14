@@ -1,0 +1,2 @@
+:HL["/Aeperion-Systems/_next/static/chunks/0cz3yj8~wjoqi.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"herramientas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"contabilidad-basica","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"vnEdjBi7Hb_3xm7A2xmR6"}
