@@ -3,17 +3,20 @@
 import { useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
-interface Particle {
+interface Particle3D {
   x: number;
   y: number;
+  z: number;
+  origX: number;
+  origY: number;
+  origZ: number;
   vx: number;
   vy: number;
+  vz: number;
   size: number;
-  alpha: number;
-  alphaSpeed: number;
+  pulsePhase: number;
 }
 
-/** @description High-performance canvas-based particle system with mouse interactivity and connection lines */
 interface ParticleSystemProps {
   count?: number;
   color?: string;
@@ -24,132 +27,195 @@ interface ParticleSystemProps {
 }
 
 export function ParticleSystem({
-  count = 40,
-  color = "rgba(110, 196, 94, 0.5)",
-  speed = 0.3,
+  count = 60,
+  color = "#6EC45E",
+  speed = 0.4,
   className,
   interactive = true,
-  maxDistance = 120,
+  maxDistance = 140,
 }: ParticleSystemProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particlesRef = useRef<Particle[]>([]);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const particlesRef = useRef<Particle3D[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
   const animFrameRef = useRef<number>(0);
-  const prefersReducedMotionRef = useRef(false);
-
-  useEffect(() => {
-    prefersReducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }, []);
+  const timeRef = useRef<number>(0);
 
   const initParticles = useCallback((width: number, height: number, particleCount: number) => {
-    return Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * speed,
-      vy: (Math.random() - 0.5) * speed,
-      size: Math.random() * 2.5 + 0.5,
-      alpha: Math.random() * 0.5 + 0.2,
-      alphaSpeed: (Math.random() - 0.5) * 0.005,
-    }));
+    return Array.from({ length: particleCount }, () => {
+      const x = (Math.random() - 0.5) * width * 0.9;
+      const y = (Math.random() - 0.5) * height * 0.9;
+      const z = (Math.random() - 0.5) * 400;
+      return {
+        x,
+        y,
+        z,
+        origX: x,
+        origY: y,
+        origZ: z,
+        vx: (Math.random() - 0.5) * speed,
+        vy: (Math.random() - 0.5) * speed,
+        vz: (Math.random() - 0.5) * speed,
+        size: Math.random() * 2 + 1,
+        pulsePhase: Math.random() * Math.PI * 2,
+      };
+    });
   }, [speed]);
 
   useEffect(() => {
-    if (prefersReducedMotionRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let width = canvas.offsetWidth;
+    let height = canvas.offsetHeight;
+
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
 
-      const responsiveCount = window.innerWidth < 768 ? Math.floor(count * 0.3) : count;
-      particlesRef.current = initParticles(rect.width, rect.height, responsiveCount);
+      const responsiveCount = width < 768 ? Math.floor(count * 0.5) : count;
+      particlesRef.current = initParticles(width, height, responsiveCount);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
-    const animate = () => {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      const x = e.clientX - rect.left - width / 2;
+      const y = e.clientY - rect.top - height / 2;
+      mouseRef.current.targetX = x * 0.15;
+      mouseRef.current.targetY = y * 0.15;
+    };
 
-      particlesRef.current.forEach((p, i) => {
+    const handleMouseLeave = () => {
+      mouseRef.current.targetX = 0;
+      mouseRef.current.targetY = 0;
+    };
+
+    if (interactive) {
+      window.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    const animate = () => {
+      timeRef.current += 0.008;
+      const t = timeRef.current;
+
+      // Smooth mouse interpolation (lerp)
+      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
+      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 3D Camera Rotation angles based on time and mouse
+      const angleX = mouseRef.current.y * 0.002 + Math.sin(t * 0.5) * 0.15;
+      const angleY = mouseRef.current.x * 0.002 + t * 0.2;
+
+      const cosX = Math.cos(angleX);
+      const sinX = Math.sin(angleX);
+      const cosY = Math.cos(angleY);
+      const sinY = Math.sin(angleY);
+
+      const particles = particlesRef.current;
+      const projected: { x: number; y: number; z: number; size: number; alpha: number; p: Particle3D }[] = [];
+
+      // Update and 3D project particles
+      particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
-        p.alpha += p.alphaSpeed;
+        p.z += p.vz;
 
-        if (p.alpha > 0.8 || p.alpha < 0.1) p.alphaSpeed *= -1;
-        if (p.x < 0 || p.x > rect.width) p.vx *= -1;
-        if (p.y < 0 || p.y > rect.height) p.vy *= -1;
+        // Bounce bounds in 3D
+        if (Math.abs(p.x) > width * 0.6) p.vx *= -1;
+        if (Math.abs(p.y) > height * 0.6) p.vy *= -1;
+        if (Math.abs(p.z) > 300) p.vz *= -1;
 
-        if (interactive) {
-          for (let j = i + 1; j < particlesRef.current.length; j++) {
-            const p2 = particlesRef.current[j];
-            const dx = p.x - p2.x;
-            const dy = p.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < maxDistance) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = color.replace("0.5", String(Math.max(0, 0.15 * (1 - dist / maxDistance))));
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
+        // 3D Rotation around Y axis
+        const x1 = p.x * cosY - p.z * sinY;
+        const z1 = p.z * cosY + p.x * sinY;
 
-        if (interactive) {
-          const dx = p.x - mouseRef.current.x;
-          const dy = p.y - mouseRef.current.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDistance && dist > 0) {
-            p.vx += (dx / dist) * 0.02;
-            p.vy += (dy / dist) * 0.02;
-          }
-        }
+        // 3D Rotation around X axis
+        const y2 = p.y * cosX - z1 * sinX;
+        const z2 = z1 * cosX + p.y * sinX;
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.globalAlpha = p.alpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
+        // Perspective projection
+        const fov = 400;
+        const scale = fov / (fov + z2 + 200);
+        const projX = width / 2 + x1 * scale;
+        const projY = height / 2 + y2 * scale;
+
+        const alpha = Math.min(1, Math.max(0.1, (z2 + 300) / 600));
+        const pulse = Math.sin(t * 3 + p.pulsePhase) * 0.5 + 0.5;
+
+        projected.push({
+          x: projX,
+          y: projY,
+          z: z2,
+          size: Math.max(0.5, p.size * scale * (1 + pulse * 0.3)),
+          alpha,
+          p,
+        });
       });
 
+      // Draw connection lines between close projected particles
+      for (let i = 0; i < projected.length; i++) {
+        for (let j = i + 1; j < projected.length; j++) {
+          const p1 = projected[i];
+          const p2 = projected[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            const lineAlpha = (1 - dist / maxDistance) * Math.min(p1.alpha, p2.alpha) * 0.4;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = color;
+            ctx.globalAlpha = lineAlpha;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles with glowing nodes
+      projected.forEach(({ x, y, size, alpha }) => {
+        ctx.beginPath();
+        ctx.arc(x, y, size * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = alpha * 0.3;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      });
+
+      ctx.globalAlpha = 1;
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
-    const handleMouse = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-
-    const handleLeave = () => {
-      mouseRef.current = { x: -1000, y: -1000 };
-    };
-
-    if (interactive) {
-      canvas.addEventListener("mousemove", handleMouse);
-      canvas.addEventListener("mouseleave", handleLeave);
-    }
-
     return () => {
       cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener("resize", resize);
       if (interactive) {
-        canvas.removeEventListener("mousemove", handleMouse);
-        canvas.removeEventListener("mouseleave", handleLeave);
+        window.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
   }, [count, color, speed, interactive, maxDistance, initParticles]);
@@ -157,7 +223,7 @@ export function ParticleSystem({
   return (
     <canvas
       ref={canvasRef}
-      className={cn("absolute inset-0 pointer-events-none", className)}
+      className={cn("absolute inset-0 pointer-events-none z-0", className)}
       aria-hidden="true"
     />
   );
