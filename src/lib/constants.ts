@@ -14,11 +14,29 @@ export const SITE_CONFIG = {
     "Empresa de desarrollo de software enfocada en analizar, categorizar y brindar soluciones digitales a negocios que presentan problemas operativos o falta de estructura digital.",
   url: "https://aeperion.com",
   ogImage: "/images/og-image.png",
+  valueProp:
+    "Deja de operar a mano. Diseñamos sistemas digitales que venden, automatizan, organizan y hacen crecer tu negocio.",
   links: {
     whatsapp: "https://wa.me/573001234567",
     email: "contacto@aeperion.com",
     instagram: "https://instagram.com/aeperion",
     linkedin: "https://linkedin.com/company/aeperion",
+    mercadoPago: "https://www.mercadopago.com.co/",
+  },
+  contact: {
+    phoneDisplay: "+57 300 123 4567",
+    phoneCleansed: "573001234567",
+    responseTime: "Respuesta en menos de 1 hora",
+    businessHours: "Lunes a viernes: 8:00 - 18:00",
+    whatsappLabel: "WhatsApp directo",
+  },
+  payments: {
+    mercadoPago: {
+      enabled: false,
+      label: "Mercado Pago",
+      description: "Pago seguro para planes y herramientas. Configura tu access token en variables de entorno.",
+      publicKey: "",
+    },
   },
 } as const;
 

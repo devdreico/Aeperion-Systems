@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { SITE_CONFIG } from "@/lib/constants";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -37,14 +38,14 @@ export default function ContactoPage() {
             <div className="space-y-6">
               <div className="p-6 rounded-2xl border border-ae-gray-200 hover:border-ae-green-200 transition-colors">
                 <h3 className="font-semibold text-ae-gray-900 mb-2">WhatsApp</h3>
-                <p className="text-sm text-ae-gray-500 mb-3">Respuesta en menos de 1 hora</p>
+                <p className="text-sm text-ae-gray-500 mb-3">{SITE_CONFIG.contact.responseTime}</p>
                 <a
-                  href="https://wa.me/573001234567"
+                  href={SITE_CONFIG.links.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ae-green-600 font-medium hover:underline text-sm"
                 >
-                  +57 300 123 4567
+                  {SITE_CONFIG.contact.phoneDisplay}
                 </a>
               </div>
 
@@ -52,19 +53,34 @@ export default function ContactoPage() {
                 <h3 className="font-semibold text-ae-gray-900 mb-2">Email</h3>
                 <p className="text-sm text-ae-gray-500 mb-3">Respuesta en menos de 24 horas</p>
                 <a
-                  href="mailto:contacto@aeperion.com"
+                  href={`mailto:${SITE_CONFIG.links.email}`}
                   className="text-ae-green-600 font-medium hover:underline text-sm"
                 >
-                  contacto@aeperion.com
+                  {SITE_CONFIG.links.email}
                 </a>
               </div>
 
               <div className="p-6 rounded-2xl border border-ae-gray-200 hover:border-ae-green-200 transition-colors">
                 <h3 className="font-semibold text-ae-gray-900 mb-2">Horario</h3>
                 <p className="text-sm text-ae-gray-500">
-                  Lunes a viernes: 8:00 - 18:00<br />
+                  {SITE_CONFIG.contact.businessHours}<br />
                   Sábados: 9:00 - 13:00
                 </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-ae-green-200 bg-ae-green-50/60">
+                <h3 className="font-semibold text-ae-gray-900 mb-2">Pago seguro</h3>
+                <p className="text-sm text-ae-gray-600 mb-4">
+                  Paga por tu plan o herramienta con Mercado Pago, de forma segura y rápida.
+                </p>
+                <a
+                  href={SITE_CONFIG.links.mercadoPago}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-ae-green-600 hover:underline"
+                >
+                  Ir a Mercado Pago →
+                </a>
               </div>
 
               <div className="p-6 rounded-2xl bg-ae-green-50 border border-ae-green-200">

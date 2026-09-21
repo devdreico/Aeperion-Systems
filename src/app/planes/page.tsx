@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PricingSection } from "@/components/features/pricing/pricing-section";
+import { MercadoPagoButton } from "@/components/shared/mercado-pago-button";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Planes de Ejecución",
@@ -22,13 +24,29 @@ export default function PlanesPage() {
       {/* HANDOFF-FRONTEND: Hero interno con fade-in */}
       <section className="py-12 md:py-20 bg-gradient-to-b from-white to-ae-gray-50">
         <div className="container-ae text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-ae-gray-900 tracking-tight">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ae-green-600">
+            Soluciones para negocios en crecimiento
+          </p>
+          <h1 className="mt-4 text-4xl md:text-5xl font-bold text-ae-gray-900 tracking-tight">
             Planes de Ejecución
           </h1>
-          <p className="mt-4 text-lg text-ae-gray-500 max-w-2xl mx-auto">
-            Desde el primer paso digital hasta un sistema empresarial completo.
-            Cada plan está diseñado para un nivel de crecimiento diferente.
+          <p className="mt-4 text-lg text-ae-gray-500 max-w-3xl mx-auto">
+            {SITE_CONFIG.valueProp}
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <MercadoPagoButton
+              planName="Plan Fullpack"
+              amount={450000}
+              customerEmail="contacto@aeperion.com"
+              className="min-w-[220px]"
+            />
+            <a
+              href="/asesoria"
+              className="inline-flex items-center justify-center rounded-xl border border-ae-gray-200 bg-white px-6 py-3 text-sm font-semibold text-ae-gray-700 hover:border-ae-green-300 hover:text-ae-green-700 transition-colors"
+            >
+              Agendar diagnóstico gratuito
+            </a>
+          </div>
         </div>
       </section>
 
