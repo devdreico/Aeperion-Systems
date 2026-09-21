@@ -11,12 +11,6 @@ export const metadata: Metadata = {
  * AEPERION — Herramientas Page
  *
  * Catálogo completo de 39 herramientas con filtro por categoría.
- *
- * HANDOFF-FRONTEND:
- *   - ToolsGridClient: contiene toda la lógica interactiva
- *   - Agregar animaciones de filtro (transición de grilla)
- *   - Cards: hover effects, stagger reveal
- *   - Badges de categoría: animación de selección
  */
 export default function HerramientasPage() {
   return <ToolsGridClient />;

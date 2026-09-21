@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ChevronDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FAQItem } from "@/types";
@@ -158,7 +158,7 @@ export function FAQSection() {
             )}
           >
             {activeCategory === cat.id && (
-              <motion.span
+              <m.span
                 layoutId="faq-pill"
                 className="absolute inset-0 rounded-full bg-ae-green-500"
                 transition={{ type: "spring", stiffness: 320, damping: 30 }}
@@ -169,12 +169,12 @@ export function FAQSection() {
         ))}
       </div>
 
-      <motion.div layout className="space-y-3">
+      <m.div layout className="space-y-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((item) => {
             const isOpen = openId === item.question;
             return (
-              <motion.div
+              <m.div
                 key={item.question}
                 layout
                 initial={{ opacity: 0, y: 10 }}
@@ -196,7 +196,7 @@ export function FAQSection() {
                   <span className="text-sm md:text-base font-semibold text-fg pr-4">
                     {item.question}
                   </span>
-                  <motion.span
+                  <m.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     className="shrink-0"
@@ -207,11 +207,11 @@ export function FAQSection() {
                         isOpen ? "text-ae-green-500" : "text-fg-subtle"
                       )}
                     />
-                  </motion.span>
+                  </m.span>
                 </button>
                 <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.div
+                    <m.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -221,10 +221,10 @@ export function FAQSection() {
                       <p className="px-5 pb-5 text-sm text-fg-muted leading-relaxed">
                         {item.answer}
                       </p>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
             );
           })}
         </AnimatePresence>
@@ -234,7 +234,7 @@ export function FAQSection() {
             No encontramos preguntas para “{query}”.
           </p>
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description Animated number count-up/down that triggers when scrolled into view */
@@ -68,7 +68,7 @@ export function CounterAnimation({
       : Math.round(count).toLocaleString();
 
   return (
-    <motion.span
+    <m.span
       ref={ref}
       className={cn("tabular-nums", className)}
       initial={{ opacity: 0, y: 10 }}
@@ -76,6 +76,6 @@ export function CounterAnimation({
       transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {prefix}{displayValue}{suffix}
-    </motion.span>
+    </m.span>
   );
 }

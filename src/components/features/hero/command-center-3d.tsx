@@ -60,6 +60,20 @@ function getPalette(theme: HeroTheme): Palette {
 /* ============================================================
    CANVAS HELPERS
    ============================================================ */
+let resolvedFont: string | null = null;
+function FONT() {
+  if (resolvedFont) return resolvedFont;
+  if (typeof window !== "undefined") {
+    const v = getComputedStyle(document.documentElement)
+      .getPropertyValue("--font-montserrat")
+      .trim();
+    resolvedFont = v ? `${v}, system-ui, sans-serif` : "system-ui, sans-serif";
+  } else {
+    resolvedFont = "system-ui, sans-serif";
+  }
+  return resolvedFont;
+}
+
 function roundRect(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -118,12 +132,12 @@ function drawKpiPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: Pa
   ctx.beginPath();
   ctx.arc(pad + 7, pad + 10, 6, 0, Math.PI * 2);
   ctx.fill();
-  ctx.font = `600 ${h * 0.058}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `600 ${h * 0.058}px ${FONT()}`;
   ctx.fillStyle = p.text;
   ctx.textBaseline = "middle";
   ctx.fillText("Aeperion · Panel de operación", pad + 24, pad + 11);
 
-  ctx.font = `600 ${h * 0.048}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `600 ${h * 0.048}px ${FONT()}`;
   ctx.fillStyle = p.green;
   ctx.textAlign = "right";
   ctx.fillText("● EN VIVO", w - pad, pad + 11);
@@ -156,15 +170,15 @@ function drawKpiPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: Pa
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    ctx.font = `500 ${h * 0.042}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `500 ${h * 0.042}px ${FONT()}`;
     ctx.fillStyle = p.muted;
     ctx.fillText(k.label, x + 14, tileY + 22);
 
-    ctx.font = `700 ${h * 0.085}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `700 ${h * 0.085}px ${FONT()}`;
     ctx.fillStyle = p.text;
     ctx.fillText(k.value, x + 14, tileY + 22 + h * 0.095);
 
-    ctx.font = `600 ${h * 0.04}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `600 ${h * 0.04}px ${FONT()}`;
     ctx.fillStyle = p.green;
     ctx.fillText(k.delta, x + 14, tileY + tileH - 16);
   });
@@ -212,11 +226,11 @@ function drawBarPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: Pa
   ctx.stroke();
 
   const pad = w * 0.06;
-  ctx.font = `700 ${h * 0.075}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `700 ${h * 0.075}px ${FONT()}`;
   ctx.fillStyle = p.text;
   ctx.textBaseline = "middle";
   ctx.fillText("Ventas por canal", pad, pad + 6);
-  ctx.font = `500 ${h * 0.05}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `500 ${h * 0.05}px ${FONT()}`;
   ctx.fillStyle = p.muted;
   ctx.fillText("Últimos 7 días", pad, pad + 6 + h * 0.085);
 
@@ -250,7 +264,7 @@ function drawBarPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: Pa
     ctx.fillStyle = g;
     ctx.fill();
 
-    ctx.font = `600 ${h * 0.05}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `600 ${h * 0.05}px ${FONT()}`;
     ctx.fillStyle = p.muted;
     ctx.textAlign = "center";
     ctx.fillText(labels[i], x + bw / 2, h - pad * 0.4);
@@ -272,7 +286,7 @@ function drawChatPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: P
   ctx.beginPath();
   ctx.arc(pad + 6, pad + 8, 5, 0, Math.PI * 2);
   ctx.fill();
-  ctx.font = `700 ${h * 0.078}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `700 ${h * 0.078}px ${FONT()}`;
   ctx.fillStyle = p.text;
   ctx.fillText("Asistente IA", pad + 20, pad + 9);
 
@@ -288,7 +302,7 @@ function drawChatPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: P
     roundRect(ctx, x, y, bw, bh, 12);
     ctx.fillStyle = fill;
     ctx.fill();
-    ctx.font = `500 ${h * 0.052}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `500 ${h * 0.052}px ${FONT()}`;
     ctx.fillStyle = align === "right" ? p.text : p.muted;
     ctx.textAlign = "left";
     ctx.fillText(text, x + 12, y + bh / 2);
@@ -319,7 +333,7 @@ function drawFlowPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: P
 
   const pad = w * 0.06;
   ctx.textBaseline = "middle";
-  ctx.font = `700 ${h * 0.075}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `700 ${h * 0.075}px ${FONT()}`;
   ctx.fillStyle = p.text;
   ctx.fillText("Automatización activa", pad, pad + 6);
 
@@ -343,7 +357,7 @@ function drawFlowPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: P
     ctx.arc(x + 11, ny + nh / 2, 4, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.font = `600 ${h * 0.05}px Montserrat, system-ui, sans-serif`;
+    ctx.font = `600 ${h * 0.05}px ${FONT()}`;
     ctx.fillStyle = p.text;
     ctx.textAlign = "center";
     ctx.fillText(n, x + nw / 2 + 4, ny + nh / 2);
@@ -367,7 +381,7 @@ function drawFlowPanel(ctx: CanvasRenderingContext2D, w: number, h: number, p: P
   ctx.globalAlpha = 1;
 
   // status footer
-  ctx.font = `600 ${h * 0.048}px Montserrat, system-ui, sans-serif`;
+  ctx.font = `600 ${h * 0.048}px ${FONT()}`;
   ctx.fillStyle = p.green;
   ctx.fillText("✓ 3 flujos ejecutándose", pad, h * 0.82);
 }

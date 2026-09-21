@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CounterAnimation } from "@/components/animations/counter-animation";
 import type { Tool } from "@/types";
@@ -72,7 +72,7 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
     <div className={cn("space-y-6", className)}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {kpis.map((kpi, i) => (
-          <motion.div
+          <m.div
             key={kpi.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,11 +89,11 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
                 formatFn={kpi.format}
               />
             </p>
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.4 }}
@@ -122,26 +122,26 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
         </div>
         <div className="flex items-end gap-2 h-32">
           {days.map((d, i) => (
-            <motion.div
+            <m.div
               key={`${filter}-${i}`}
               className="flex-1 flex flex-col items-center gap-1"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 + i * 0.05 }}
             >
-              <motion.div
+              <m.div
                 initial={{ height: 0 }}
                 animate={{ height: `${(d.ventas / maxVentas) * 100}%` }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full max-w-[40px] rounded-t-md bg-gradient-to-t from-ae-green-500 to-ae-green-300"
               />
               <span className="text-[10px] text-fg-subtle capitalize">{d.date}</span>
-            </motion.div>
+            </m.div>
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.4 }}
@@ -169,7 +169,7 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
             </thead>
             <tbody>
               {RECENT_CLIENTS.map((client, i) => (
-                <motion.tr
+                <m.tr
                   key={client.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -196,12 +196,12 @@ export function DemoDashboard({ tool, className }: DemoDashboardProps) {
                   <td className="px-5 py-3 text-right text-fg-subtle text-xs">
                     {client.time}
                   </td>
-                </motion.tr>
+                </m.tr>
               ))}
             </tbody>
           </table>
         </div>
-      </motion.div>
+      </m.div>
 
       <p className="text-center text-xs text-fg-subtle">
         Demo interactiva de {tool.name} — datos simulados

@@ -5,8 +5,6 @@
    Themes: Light + Dark (class-based) with glassmorphism
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-
 @import "tailwindcss";
 
 /* Class-based dark mode */
@@ -110,9 +108,9 @@
   --color-brand-hover: var(--color-ae-green-500);
   --color-brand-dark: var(--color-ae-green-700);
 
-  /* === Typography — Todo Montserrat === */
-  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Montserrat', system-ui, -apple-system, sans-serif;
+  /* === Typography — Todo Montserrat (self-hosted) === */
+  --font-sans: var(--font-montserrat), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-montserrat), system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* === Spacing === */
   --spacing-section: 80px;
@@ -231,44 +229,45 @@
 @utility text-balance { text-wrap: balance; }
 @utility text-pretty { text-wrap: pretty; }
 
-/* === Glassmorphism === */
+/* === Glassmorphism (blur acotado + contención para reducir coste de composición) === */
 @utility glass {
   background-color: var(--glass-bg);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
+  transform: translateZ(0);
 }
 
 @utility glass-strong {
   background-color: var(--glass-strong);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
+  transform: translateZ(0);
 }
 
 @utility glass-nav {
   background-color: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
   border-bottom: 1px solid var(--border);
 }
 
 @utility glass-card {
   background: linear-gradient(150deg, var(--glass-strong), var(--glass-bg));
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
+  transform: translateZ(0);
 }
 
-@utility glow-green {
-  box-shadow: 0 0 24px var(--glow);
-}
-
-@utility glow-green-lg {
-  box-shadow: 0 0 60px var(--glow);
+/* Salta render de secciones fuera de pantalla hasta que se acercan */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 2400px;
 }
 
 @utility text-gradient-green {
@@ -285,44 +284,12 @@
     radial-gradient(60% 60% at 70% 90%, var(--mesh-3) 0%, transparent 60%);
 }
 
-@utility marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-
 /* ============================================================
    ANIMATIONS — Keyframes
    ============================================================ */
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(110, 196, 94, 0.4); }
   50% { box-shadow: 0 0 0 14px rgba(110, 196, 94, 0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes shimmer {
@@ -342,37 +309,14 @@
   100% { transform: translateX(260%) skewX(-14deg); opacity: 0; }
 }
 
-@keyframes draw-line {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-@keyframes grid-pan {
-  from { background-position: 0 0; }
-  to { background-position: 0 -80px; }
-}
-
 @keyframes aurora {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
   33% { transform: translate3d(6%, -4%, 0) scale(1.15); opacity: 1; }
   66% { transform: translate3d(-5%, 5%, 0) scale(1.05); opacity: 0.85; }
 }
 
-@keyframes blob {
-  0%, 100% { border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; }
-  50% { border-radius: 58% 42% 40% 60% / 55% 60% 40% 45%; }
-}
-
-.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
-.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
 .animate-pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
-.animate-float { animation: float 3.5s ease-in-out infinite; }
-.animate-gradient {
-  animation: gradient-shift 8s ease-in-out infinite;
-  background-size: 200% 200%;
-}
 .animate-aurora { animation: aurora 18s ease-in-out infinite; }
-.animate-blob { animation: blob 12s ease-in-out infinite; }
 
 .animate-sheen {
   animation: sheen 2.6s cubic-bezier(0.16, 1, 0.3, 1) 1.3s 1 both;

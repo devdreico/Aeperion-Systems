@@ -5,12 +5,6 @@ import type { Tool, ToolCategoryInfo } from "@/types";
  *
  * Cada herramienta puede adquirirse de forma separada.
  * Los planes incluyen una selección de estas herramientas.
- *
- * HANDOFF-FRONTEND:
- *   - cards: usar <StaggerReveal> para animación de grilla
- *   - filter: animación de transición entre categorías
- *   - icons: usar lucide-react con animación de hover
- *   - hasDemo: las herramientas con demo=true tienen <DemoButton>
  */
 
 export const TOOL_CATEGORIES: ToolCategoryInfo[] = [
@@ -89,7 +83,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 120000,
     icon: "layout-dashboard",
-    image: "/images/tools/landing-page.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -116,7 +109,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 250000,
     icon: "building",
-    image: "/images/tools/web-corporativa.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -144,7 +136,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 350000,
     icon: "shopping-cart",
-    image: "/images/tools/ecommerce.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -171,7 +162,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 150000,
     icon: "image",
-    image: "/images/tools/portafolio.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -198,7 +188,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 180000,
     icon: "pen-tool",
-    image: "/images/tools/blog.jpg",
     hasDemo: false,
     features: [
       "Editor visual (WYSIWYG)",
@@ -224,7 +213,6 @@ export const TOOLS: Tool[] = [
     category: "web-presencia",
     price: 450000,
     icon: "code",
-    image: "/images/tools/webapp.jpg",
     hasDemo: false,
     features: [
       "Desarrollo a medida",
@@ -252,7 +240,6 @@ export const TOOLS: Tool[] = [
     category: "automatizacion",
     price: 90000,
     icon: "message-circle",
-    image: "/images/tools/whatsapp-basico.jpg",
     hasDemo: true,
     demoType: "terminal",
     features: [
@@ -278,7 +265,6 @@ export const TOOLS: Tool[] = [
     category: "automatizacion",
     price: 180000,
     icon: "git-branch",
-    image: "/images/tools/whatsapp-flow.jpg",
     hasDemo: true,
     demoType: "terminal",
     features: [
@@ -305,7 +291,6 @@ export const TOOLS: Tool[] = [
     category: "automatizacion",
     price: 280000,
     icon: "api",
-    image: "/images/tools/whatsapp-api.jpg",
     hasDemo: false,
     features: [
       "API oficial WhatsApp Business",
@@ -331,7 +316,6 @@ export const TOOLS: Tool[] = [
     category: "automatizacion",
     price: 120000,
     icon: "mail",
-    image: "/images/tools/email-auto.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -358,7 +342,6 @@ export const TOOLS: Tool[] = [
     category: "automatizacion",
     price: 200000,
     icon: "bot",
-    image: "/images/tools/chatbot.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -387,7 +370,6 @@ export const TOOLS: Tool[] = [
     category: "crm-ventas",
     price: 200000,
     icon: "users",
-    image: "/images/tools/crm-basico.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -414,7 +396,6 @@ export const TOOLS: Tool[] = [
     category: "crm-ventas",
     price: 350000,
     icon: "bar-chart-3",
-    image: "/images/tools/crm-avanzado.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -442,7 +423,6 @@ export const TOOLS: Tool[] = [
     category: "crm-ventas",
     price: 150000,
     icon: "funnel",
-    image: "/images/tools/funnel.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -469,7 +449,6 @@ export const TOOLS: Tool[] = [
     category: "crm-ventas",
     price: 120000,
     icon: "calculator",
-    image: "/images/tools/cotizador.jpg",
     hasDemo: true,
     demoType: "form",
     features: [
@@ -496,7 +475,6 @@ export const TOOLS: Tool[] = [
     category: "crm-ventas",
     price: 100000,
     icon: "repeat",
-    image: "/images/tools/seguimiento.jpg",
     hasDemo: false,
     features: [
       "Encuestas automáticas",
@@ -524,7 +502,6 @@ export const TOOLS: Tool[] = [
     category: "facturacion",
     price: 200000,
     icon: "file-text",
-    image: "/images/tools/factura-electronica.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -551,7 +528,6 @@ export const TOOLS: Tool[] = [
     category: "facturacion",
     price: 300000,
     icon: "archive",
-    image: "/images/tools/invoice-pro.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -578,7 +554,6 @@ export const TOOLS: Tool[] = [
     category: "facturacion",
     price: 100000,
     icon: "file-text",
-    image: "/images/tools/presupuestos.jpg",
     hasDemo: true,
     demoType: "form",
     features: [
@@ -605,7 +580,6 @@ export const TOOLS: Tool[] = [
     category: "facturacion",
     price: 150000,
     icon: "book-open",
-    image: "/images/tools/contabilidad.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -634,7 +608,6 @@ export const TOOLS: Tool[] = [
     category: "pos-pagos",
     price: 250000,
     icon: "credit-card",
-    image: "/images/tools/pos-basico.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -661,7 +634,6 @@ export const TOOLS: Tool[] = [
     category: "pos-pagos",
     price: 400000,
     icon: "monitor",
-    image: "/images/tools/pos-avanzado.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -688,7 +660,6 @@ export const TOOLS: Tool[] = [
     category: "pos-pagos",
     price: 180000,
     icon: "banknote",
-    image: "/images/tools/pasarela.jpg",
     hasDemo: false,
     features: [
       "Checkout personalizado",
@@ -714,7 +685,6 @@ export const TOOLS: Tool[] = [
     category: "pos-pagos",
     price: 350000,
     icon: "combine",
-    image: "/images/tools/factura-pos.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -743,7 +713,6 @@ export const TOOLS: Tool[] = [
     category: "redes-sociales",
     price: 80000,
     icon: "calendar",
-    image: "/images/tools/social-scheduler.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -770,7 +739,6 @@ export const TOOLS: Tool[] = [
     category: "redes-sociales",
     price: 120000,
     icon: "bar-chart-4",
-    image: "/images/tools/social-analytics.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -797,7 +765,6 @@ export const TOOLS: Tool[] = [
     category: "redes-sociales",
     price: 150000,
     icon: "palette",
-    image: "/images/tools/content-creator.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -824,7 +791,6 @@ export const TOOLS: Tool[] = [
     category: "redes-sociales",
     price: 180000,
     icon: "message-square",
-    image: "/images/tools/social-crm.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -853,7 +819,6 @@ export const TOOLS: Tool[] = [
     category: "administracion",
     price: 150000,
     icon: "briefcase",
-    image: "/images/tools/hr.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -880,7 +845,6 @@ export const TOOLS: Tool[] = [
     category: "administracion",
     price: 200000,
     icon: "package",
-    image: "/images/tools/inventarios.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -907,7 +871,6 @@ export const TOOLS: Tool[] = [
     category: "administracion",
     price: 80000,
     icon: "calendar-check",
-    image: "/images/tools/agenda.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -934,7 +897,6 @@ export const TOOLS: Tool[] = [
     category: "administracion",
     price: 250000,
     icon: "layout-dashboard",
-    image: "/images/tools/dashboard-admin.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -963,7 +925,6 @@ export const TOOLS: Tool[] = [
     category: "analitica",
     price: 100000,
     icon: "area-chart",
-    image: "/images/tools/analytics.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -990,7 +951,6 @@ export const TOOLS: Tool[] = [
     category: "analitica",
     price: 120000,
     icon: "file-bar-chart",
-    image: "/images/tools/reportes.jpg",
     hasDemo: false,
     features: [
       "Reportes programados",
@@ -1016,7 +976,6 @@ export const TOOLS: Tool[] = [
     category: "analitica",
     price: 200000,
     icon: "gauge",
-    image: "/images/tools/kpi-dashboard.jpg",
     hasDemo: true,
     demoType: "dashboard",
     features: [
@@ -1045,7 +1004,6 @@ export const TOOLS: Tool[] = [
     category: "comunicacion",
     price: 80000,
     icon: "message-circle",
-    image: "/images/tools/chat-vivo.jpg",
     hasDemo: true,
     demoType: "visual",
     features: [
@@ -1072,7 +1030,6 @@ export const TOOLS: Tool[] = [
     category: "comunicacion",
     price: 100000,
     icon: "bell",
-    image: "/images/tools/notificaciones.jpg",
     hasDemo: false,
     features: [
       "Multi-canal (email/WhatsApp/SMS)",
@@ -1100,7 +1057,6 @@ export const TOOLS: Tool[] = [
     category: "diseno",
     price: 120000,
     icon: "image",
-    image: "/images/tools/brand-kit.jpg",
     hasDemo: false,
     features: [
       "Logo en múltiples formatos",
@@ -1126,7 +1082,6 @@ export const TOOLS: Tool[] = [
     category: "diseno",
     price: 250000,
     icon: "brush",
-    image: "/images/tools/identidad.jpg",
     hasDemo: false,
     features: [
       "Logo principal + variantes",

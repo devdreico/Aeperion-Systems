@@ -8,12 +8,6 @@ import type { Plan } from "@/types";
  *   2. Plan Standart     → $200,000 COP
  *   3. Plan Fullpack     → $450,000 COP ←★ RECOMENDADO
  *   4. Plan Syspack      → $1,000,000 COP
- *
- * HANDOFF-FRONTEND:
- *   - prices: usar <CounterAnimation> para efecto de conteo
- *   - highlight: el Fullpack debe tener animación de glow/badge pulsante
- *   - cards: usar <StaggerReveal> para entrada en cascada
- *   - CTAs: usar <MagneticButton> para efecto magnético
  */
 
 export const PLANS: Plan[] = [
@@ -137,33 +131,6 @@ export const PLANS: Plan[] = [
     supportMonths: 6,
     color: "ae-black",
     icon: "building2",
-  },
-];
-
-export const PLAN_BENEFITS = [
-  {
-    icon: "zap",
-    title: "Implementación Rápida",
-    description:
-      "Entregas en tiempo récord. Desde 7 días hábiles para el plan básico.",
-  },
-  {
-    icon: "headphones",
-    title: "Soporte Dedicado",
-    description:
-      "Acompañamiento continuo con tiempos de respuesta garantizados.",
-  },
-  {
-    icon: "puzzle",
-    title: "Soluciones a Medida",
-    description:
-      "Cada herramienta se adapta a la operación real de tu negocio.",
-  },
-  {
-    icon: "trending-up",
-    title: "Escalabilidad Garantizada",
-    description:
-      "Soluciones que crecen contigo. De negocio local a empresa digital.",
   },
 ];
 

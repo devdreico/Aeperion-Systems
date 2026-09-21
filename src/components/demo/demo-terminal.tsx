@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types";
 
@@ -21,19 +21,19 @@ const WHATSAPP_MOCK: { commands: string[]; outputs: Record<string, string[]> } =
   commands: ["diagnóstico", "recomendar", "presupuesto", "ayuda"],
   outputs: {
       diagnóstico: [
-        "🔍 INICIANDO DIAGNÓSTICO...",
+        "INICIANDO DIAGNÓSTICO...",
         "✓ Analizando procesos actuales...",
         "✓ Identificando cuellos de botella...",
         "✓ Evaluando stack tecnológico...",
         "",
-        "📊 RESULTADOS DEL DIAGNÓSTICO:",
+        "RESULTADOS DEL DIAGNÓSTICO:",
         "  • Madurez digital: 35%",
         "  • Procesos manuales: 8/12",
         "  • Oportunidades: Automatización WhatsApp, CRM",
         "  • ROI estimado: 240% en 6 meses",
       ],
       recomendar: [
-        "🎯 RECOMENDACIONES PERSONALIZADAS:",
+        "RECOMENDACIONES PERSONALIZADAS:",
         "",
         "1. Plan Standart ($200K COP)",
         "   → Sitio web + WhatsApp Automation",
@@ -47,14 +47,14 @@ const WHATSAPP_MOCK: { commands: string[]; outputs: Record<string, string[]> } =
         "   → Solución enterprise con todo incluido",
       ],
       presupuesto: [
-        "💰 PRESUPUESTO ESTIMADO:",
+        "PRESUPUESTO ESTIMADO:",
         "",
         "  • Diagnóstico inicial: GRATIS",
         "  • Plan básico: $200.000 COP",
         "  • Plan completo: $450.000 COP",
         "  • Plan enterprise: $1.000.000 COP",
         "",
-        "📅 Tiempo de implementación:",
+        "Tiempo de implementación:",
         "  • Desde 7 días hábiles",
         "  • Soporte incluido 1-6 meses",
       ],
@@ -65,7 +65,7 @@ const WHATSAPP_MOCK: { commands: string[]; outputs: Record<string, string[]> } =
         "  • presupuesto  → Calcula costos",
         "  • ayuda        → Muestra este mensaje",
         "",
-        "💡 Tip: Escribe 'diagnóstico' para empezar",
+        "Tip: Escribe 'diagnóstico' para empezar",
       ],
     },
 };
@@ -85,14 +85,14 @@ const DEFAULT_OUTPUTS: Record<string, string[]> = {
     "  • clear  → Limpia la terminal",
   ],
   status: [
-    "📡 ESTADO DEL SISTEMA:",
+    "ESTADO DEL SISTEMA:",
     "  • Demo activa: ✓",
     "  • Datos mock: ✓",
     "  • Conexión API: Simulada",
     "  • Latencia: 0ms (local)",
   ],
   info: [
-    "ℹ️ INFORMACIÓN DE LA DEMO:",
+    "INFORMACIÓN DE LA DEMO:",
     "  • Herramienta: Simulación interactiva",
     "  • Tipo: Terminal",
     "  • Datos: Mock (no reales)",
@@ -102,8 +102,8 @@ const DEFAULT_OUTPUTS: Record<string, string[]> = {
 
 export function DemoTerminal({ tool, className }: DemoTerminalProps) {
   const [lines, setLines] = useState<TerminalLine[]>([
-    { type: "system", text: "⚡ AEPERION TERMINAL v1.0", delay: 0 },
-    { type: "system", text: `🔧 Demo: ${tool.name}`, delay: 0.3 },
+    { type: "system", text: "AEPERION TERMINAL v1.0", delay: 0 },
+    { type: "system", text: `Demo: ${tool.name}`, delay: 0.3 },
     { type: "system", text: "Sistema listo. Escribe un comando para empezar.", delay: 0.6 },
   ]);
   const [input, setInput] = useState("");
@@ -146,15 +146,15 @@ export function DemoTerminal({ tool, className }: DemoTerminalProps) {
     const outputs = mockResponses.outputs[trimmed];
     if (outputs) {
       for (const line of outputs) {
-        const type = line.startsWith("✓") || line.startsWith("📊") || line.startsWith("🎯") || line.startsWith("💰") ? "output" :
+        const type = line.startsWith("✓") || line.startsWith("") || line.startsWith("") || line.startsWith("") ? "output" :
                      line.startsWith("•") || line.startsWith("  ") ? "output" :
-                     line.startsWith("❌") ? "error" : "output";
+                     line.startsWith("") ? "error" : "output";
         await addLine({ type, text: line, delay: 0.08 });
       }
     } else {
       await addLine({
         type: "error",
-        text: `❌ Comando no reconocido: "${trimmed}". Escribe "ayuda" o "help" para ver comandos disponibles.`,
+        text: `Comando no reconocido: "${trimmed}". Escribe "ayuda" o "help" para ver comandos disponibles.`,
         delay: 0.1,
       });
     }
@@ -190,7 +190,7 @@ export function DemoTerminal({ tool, className }: DemoTerminalProps) {
       <div className="p-4 md:p-6 font-mono text-sm max-h-[500px] overflow-y-auto">
         <AnimatePresence mode="popLayout">
           {lines.map((line, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
@@ -205,13 +205,13 @@ export function DemoTerminal({ tool, className }: DemoTerminalProps) {
               )}
             >
               {line.text || "\u00A0"}
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
 
         {/* Input Line */}
         {!isTyping && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex items-center gap-2 mt-2"
@@ -227,7 +227,7 @@ export function DemoTerminal({ tool, className }: DemoTerminalProps) {
               placeholder={isTyping ? "" : "Escribe un comando..."}
               autoFocus
             />
-          </motion.div>
+          </m.div>
         )}
 
         {/* Quick Commands */}

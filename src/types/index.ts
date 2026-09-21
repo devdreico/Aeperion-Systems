@@ -59,7 +59,6 @@ export interface Tool {
   category: ToolCategory;
   price: number;
   icon: string;
-  image: string;
   hasDemo: boolean;
   demoType?: "terminal" | "visual" | "form" | "dashboard";
   features: string[];
@@ -98,58 +97,12 @@ export interface LeadFormData {
 }
 
 // ============================================================
-// DEMO
-// ============================================================
-
-export type DemoType = "terminal" | "visual" | "form" | "dashboard";
-
-export interface DemoConfig {
-  toolId: string;
-  type: DemoType;
-  title: string;
-  description: string;
-  duration: number;
-  steps: DemoStep[];
-  ctaText: string;
-  ctaRoute: string;
-  theme: "light" | "dark" | "auto";
-}
-
-export interface DemoStep {
-  id: string;
-  instruction: string;
-  component: string;
-  animation: "fade" | "slide" | "typewriter" | "scale";
-  duration: number;
-  nextLabel?: string;
-}
-
-// ============================================================
-// BLOG
-// ============================================================
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  authorRole: string;
-  publishedAt: string;
-  readingTime: number;
-  category: string;
-  tags: string[];
-  image: string;
-}
-
-// ============================================================
 // COMPANY / ABOUT
 // ============================================================
 
 export interface TeamMember {
   name: string;
   role: string;
-  photo: string;
   bio: string;
 }
 
@@ -166,7 +119,6 @@ export interface CaseStudy {
   testimonial: string;
   testimonialAuthor: string;
   testimonialRole: string;
-  image: string;
   accent: string;
   tags: string[];
 }
@@ -196,15 +148,4 @@ export interface FAQItem {
   question: string;
   answer: string;
   category: "planes" | "proceso" | "pagos" | "soporte" | "general";
-}
-
-// ============================================================
-// METADATA HELPERS
-// ============================================================
-
-export interface SEOProps {
-  title: string;
-  description: string;
-  path: string;
-  image?: string;
 }

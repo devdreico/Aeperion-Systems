@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types";
 
@@ -35,18 +35,18 @@ export function DemoForm({ tool, className }: DemoFormProps) {
 
   if (isSuccess) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className={cn("rounded-3xl glass-card p-8 text-center", className)}
       >
-        <motion.div
+        <m.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
           className="h-16 w-16 rounded-full bg-ae-green-400/15 flex items-center justify-center mx-auto mb-4"
         >
-          <motion.svg
+          <m.svg
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -58,14 +58,14 @@ export function DemoForm({ tool, className }: DemoFormProps) {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <motion.path
+            <m.path
               d="M5 13l4 4L19 7"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             />
-          </motion.svg>
-        </motion.div>
+          </m.svg>
+        </m.div>
         <h3 className="text-xl font-bold text-fg mb-2">¡Solicitud enviada!</h3>
         <p className="text-sm text-fg-muted mb-6">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
         <button
@@ -74,7 +74,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
         >
           Volver a empezar
         </button>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -95,7 +95,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={step}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -126,13 +126,13 @@ export function DemoForm({ tool, className }: DemoFormProps) {
                 )}
               </div>
             ))}
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         {/* Progress */}
         <div className="flex items-center gap-2 mt-6">
           {fields.map((_, i) => (
-            <motion.div
+            <m.div
               key={i}
               className={cn(
                 "h-1.5 flex-1 rounded-full",
@@ -168,7 +168,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
             >
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
-                  <motion.span
+                  <m.span
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     className="h-4 w-4 border-2 border-white border-t-transparent rounded-full inline-block"

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -77,7 +77,7 @@ export function ToolsGridClient() {
 
           <AnimatePresence mode="wait">
             {filteredTools.length === 0 ? (
-              <motion.div
+              <m.div
                 key="empty"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -85,21 +85,21 @@ export function ToolsGridClient() {
                 className="text-center py-16"
               >
                 <p className="text-fg-muted">No hay soluciones en esta categoría.</p>
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.div
+              <m.div
                 key={selectedCategory || "all"}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                className="cv-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
               >
                 {filteredTools.map((tool) => {
                   const Icon = CATEGORY_ICONS[tool.category];
                   const color = CATEGORY_COLORS[tool.category] ?? "text-ae-green-500";
                   return (
-                    <motion.div key={tool.id} variants={cardVariants} layout>
+                    <m.div key={tool.id} variants={cardVariants} layout>
                       <Link href={`/herramientas/${tool.id}`} className="block h-full">
                         <article className="group h-full rounded-2xl glass-card p-5 hover:border-ae-green-400/40 transition-colors">
                           <div className="flex items-start justify-between mb-3">
@@ -127,10 +127,10 @@ export function ToolsGridClient() {
                           )}
                         </article>
                       </Link>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
 
@@ -172,7 +172,7 @@ function FilterPill({
       )}
     >
       {active && (
-        <motion.span
+        <m.span
           layoutId="tools-pill"
           className="absolute inset-0 rounded-full bg-ae-green-500"
           transition={{ type: "spring", stiffness: 320, damping: 30 }}

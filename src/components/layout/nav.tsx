@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, NAV_LINKS_SECONDARY } from "@/lib/constants";
 import { Logo } from "@/components/shared/logo";
@@ -73,7 +73,7 @@ export function Nav() {
               >
                 {link.label}
                 {active && (
-                  <motion.span
+                  <m.span
                     layoutId="nav-indicator"
                     className="absolute bottom-0 left-3 right-3 h-0.5 bg-ae-green-400 rounded-full"
                     transition={{ type: "spring", stiffness: 320, damping: 30 }}
@@ -107,7 +107,7 @@ export function Nav() {
             </button>
             <AnimatePresence>
               {moreOpen && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 8, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -131,7 +131,7 @@ export function Nav() {
                       {link.label}
                     </Link>
                   ))}
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>
@@ -162,14 +162,14 @@ export function Nav() {
       <AnimatePresence>
         {isOpen && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 top-16 z-30 bg-black/30 backdrop-blur-sm md:hidden"
               onClick={() => setIsOpen(false)}
             />
-            <motion.div
+            <m.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -180,7 +180,7 @@ export function Nav() {
                 {[...NAV_LINKS, ...NAV_LINKS_SECONDARY].map((link, i) => {
                   const active = isActivePath(pathname, link.href);
                   return (
-                    <motion.div
+                    <m.div
                       key={link.href}
                       initial={{ opacity: 0, x: 24 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -198,11 +198,11 @@ export function Nav() {
                       >
                         {link.label}
                       </Link>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
 
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -214,9 +214,9 @@ export function Nav() {
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                </motion.div>
+                </m.div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

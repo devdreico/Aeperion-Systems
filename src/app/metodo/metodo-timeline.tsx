@@ -1,7 +1,7 @@
 "use client";
 
 import { Search, PenTool, Code, Rocket, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const phases = [
   {
@@ -90,7 +90,7 @@ export function MetodoTimeline() {
   return (
     <div className="relative">
       {/* Animated connector */}
-      <motion.div
+      <m.div
         initial={{ scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -102,7 +102,7 @@ export function MetodoTimeline() {
         {phases.map((phase) => {
           const Icon = phase.icon;
           return (
-            <motion.div
+            <m.div
               key={phase.number}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export function MetodoTimeline() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

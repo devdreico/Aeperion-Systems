@@ -13,6 +13,12 @@ const CONTACT_EMAIL =
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aesystems.com";
 
+const INSTAGRAM_URL =
+  process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com/aeperion.systems";
+
+const LINKEDIN_URL =
+  process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com/company/aeperion-systems";
+
 export const SITE_CONFIG = {
   name: "Aeperion Systems",
   shortName: "Aeperion",
@@ -21,7 +27,6 @@ export const SITE_CONFIG = {
     "Startup fintech de desarrollo de software impulsado por IA. Automatizamos procesos y creamos sistemas digitales que dan eficiencia a las empresas. Desde 2017 en Bogotá, Colombia.",
   url: SITE_URL,
   domain: "aesystems.com",
-  ogImage: "/opengraph-image",
   valueProp:
     "Deja de operar a mano. Diseñamos sistemas con IA que venden, automatizan, organizan y hacen crecer tu negocio.",
   foundedYear: 2017,
@@ -30,8 +35,8 @@ export const SITE_CONFIG = {
   links: {
     whatsapp: `https://wa.me/${WHATSAPP_NUMBER}`,
     email: CONTACT_EMAIL,
-    instagram: "https://instagram.com/aeperion.systems",
-    linkedin: "https://linkedin.com/company/aeperion-systems",
+    instagram: INSTAGRAM_URL,
+    linkedin: LINKEDIN_URL,
     mercadoPago:
       process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
     wompi: process.env.NEXT_PUBLIC_WOMPI_LINK ?? "https://checkout.wompi.co/",

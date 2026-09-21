@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
 import { ParticleSystem } from "@/components/animations/particle-system";
 
@@ -17,7 +17,7 @@ export default function NotFound() {
       />
 
       <div className="text-center max-w-md px-6 relative z-10">
-        <motion.div
+        <m.div
           animate={{ y: [0, -15, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           className="relative mb-2"
@@ -25,35 +25,35 @@ export default function NotFound() {
           <span className="text-[120px] md:text-[160px] font-extrabold text-fg/5 leading-none select-none">
             404
           </span>
-          <motion.span
+          <m.span
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 flex items-center justify-center text-[110px] md:text-[150px] font-extrabold text-gradient-green leading-none select-none -mt-1"
           >
             404
-          </motion.span>
-        </motion.div>
+          </m.span>
+        </m.div>
 
-        <motion.h1
+        <m.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="text-2xl md:text-3xl font-extrabold text-fg mb-3"
         >
           Página no encontrada
-        </motion.h1>
+        </m.h1>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
           className="text-fg-muted mb-8"
         >
           La página que buscas no existe o fue movida. Revisa la URL o vuelve al inicio.
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
@@ -73,7 +73,7 @@ export default function NotFound() {
             <ArrowLeft className="h-4 w-4" />
             Contactar soporte
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

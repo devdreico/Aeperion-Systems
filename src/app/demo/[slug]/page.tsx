@@ -20,12 +20,6 @@ export function generateStaticParams() {
 
 /**
  * AEPERION — Demo Interactiva Page
- *
- * HANDOFF-FRONTEND (CRÍTICO):
- *   - DemoContainer: implementar la demo interactiva según demoType
- *   - CTA flotante siempre visible: "Comprar" o "Asesoría"
- *   - Animaciones de transición entre estados de la demo
- *   - Tooltips informativos en cada sección de la demo
  */
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

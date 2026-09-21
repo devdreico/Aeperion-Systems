@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { m, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface AuroraBackgroundProps {
@@ -36,11 +36,11 @@ export function AuroraBackground({
         className
       )}
     >
-      <motion.div
+      <m.div
         style={shouldReduceMotion ? undefined : { y: y1 }}
         className="absolute -top-40 -left-32 h-[42rem] w-[42rem] rounded-full bg-ae-green-400/20 blur-[140px] animate-aurora"
       />
-      <motion.div
+      <m.div
         style={shouldReduceMotion ? undefined : { y: y2 }}
         className="absolute top-1/3 -right-40 h-[38rem] w-[38rem] rounded-full bg-ae-green-500/15 blur-[150px] animate-aurora [animation-delay:-6s]"
       />

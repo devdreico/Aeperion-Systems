@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
+import { m, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollProgressProps {
@@ -23,7 +23,7 @@ export function ScrollProgress({
   if (shouldReduceMotion) return null;
 
   return (
-    <motion.div
+    <m.div
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] h-[3px] origin-left rounded-r-full",
         color,

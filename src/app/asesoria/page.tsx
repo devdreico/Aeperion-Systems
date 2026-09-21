@@ -16,12 +16,6 @@ export const metadata: Metadata = {
  *   3. Resultado con recomendación de plan
  *   4. Calendario de agendamiento
  *   5. Confirmación + email
- *
- * HANDOFF-FRONTEND:
- *   - El componente AsesoriaClient contiene la lógica interactiva
- *   - Agregar transiciones suaves entre pasos del quiz
- *   - Animaciones de entrada para cada pregunta
- *   - Confetti o celebración al completar
  */
 export default function AsesoriaPage() {
   return <AsesoriaClient />;

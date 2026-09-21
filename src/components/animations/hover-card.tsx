@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description 3D tilt effect on hover with optional glare overlay */
@@ -63,7 +63,7 @@ export function HoverCard({
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={cn("relative perspective-[1000px]", className)}
       onMouseMove={handleMouseMove}
@@ -88,6 +88,6 @@ export function HoverCard({
           }}
         />
       )}
-    </motion.div>
+    </m.div>
   );
 }

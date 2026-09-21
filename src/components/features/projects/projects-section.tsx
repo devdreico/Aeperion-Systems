@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { PROJECTS } from "@/lib/projects-data";
 import { HoverCard } from "@/components/animations/hover-card";
@@ -34,7 +34,7 @@ export function ProjectsSection({
           align="center"
         />
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
@@ -48,7 +48,7 @@ export function ProjectsSection({
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
         >
           {projects.map((project) => (
-            <motion.div
+            <m.div
               key={project.id}
               variants={{
                 hidden: { opacity: 0, y: 40 },
@@ -107,12 +107,12 @@ export function ProjectsSection({
                   </article>
                 </Link>
               </HoverCard>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
 
         {showCta && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -125,7 +125,7 @@ export function ProjectsSection({
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Button>
             </Link>
-          </motion.div>
+          </m.div>
         )}
       </Container>
     </section>

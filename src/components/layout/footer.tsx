@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { SITE_CONFIG, SOCIAL_LINKS, PAYMENT_METHODS } from "@/lib/constants";
 import { Logo } from "@/components/shared/logo";
 import { Input } from "@/components/ui/input";
@@ -52,7 +52,7 @@ export function Footer() {
       <div className="pointer-events-none absolute -top-32 right-0 h-72 w-72 rounded-full bg-ae-green-400/10 blur-[120px]" />
 
       <div className="container-ae relative py-16">
-        <motion.div
+        <m.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -60,7 +60,7 @@ export function Footer() {
           className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8"
         >
           {/* Brand */}
-          <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
+          <m.div variants={itemVariants} className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-block group">
               <Logo />
             </Link>
@@ -83,11 +83,11 @@ export function Footer() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Link Groups */}
           {Object.entries(footerLinks).map(([title, links]) => (
-            <motion.div key={title} variants={itemVariants}>
+            <m.div key={title} variants={itemVariants}>
               <h4 className="text-sm font-bold text-fg mb-4">{title}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
@@ -102,12 +102,12 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Newsletter + Payments */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -138,7 +138,7 @@ export function Footer() {
               Suscribirme
             </Button>
           </form>
-        </motion.div>
+        </m.div>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <span className="text-xs font-semibold text-fg-subtle uppercase tracking-wider">

@@ -4,25 +4,21 @@ export const TEAM: TeamMember[] = [
   {
     name: "Felipe Aeperion",
     role: "CEO & Fundador",
-    photo: "",
     bio: "Estrategia de producto y negocio. Lleva 9 años ayudando a empresas colombianas a digitalizar su operación con foco en eficiencia.",
   },
   {
     name: "Sofía Martínez",
     role: "CTO",
-    photo: "",
     bio: "Arquitectura de software e inteligencia artificial. Lidera el desarrollo de automatizaciones y modelos aplicados a operaciones reales.",
   },
   {
     name: "Tomás Rivera",
     role: "Head of Design",
-    photo: "",
     bio: "Diseño de producto e interfaces. Traduce procesos complejos en experiencias simples para el equipo de cada cliente.",
   },
   {
     name: "Gabriela Torres",
     role: "Head of Customer Success",
-    photo: "",
     bio: "Acompaña a cada cliente desde el diagnóstico hasta la adopción. Garantiza que la solución se use y genere resultados.",
   },
 ];

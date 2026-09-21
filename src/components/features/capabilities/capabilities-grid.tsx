@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { HoverCard } from "@/components/animations/hover-card";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -72,7 +72,7 @@ export function CapabilitiesGrid({ className }: CapabilitiesGridProps) {
             align="center"
           />
 
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -82,7 +82,7 @@ export function CapabilitiesGrid({ className }: CapabilitiesGridProps) {
             {capabilities.map((cap) => {
               const Icon = cap.icon;
               return (
-                <motion.div key={cap.title} variants={cardVariants}>
+                <m.div key={cap.title} variants={cardVariants}>
                   <HoverCard tiltDegree={6} scale={1.03} glare glareColor="rgba(110, 196, 94, 0.1)">
                     <div className="relative h-full p-8 rounded-3xl glass-card group transition-colors hover:border-ae-green-400/40">
                       <div className="relative z-10">
@@ -104,10 +104,10 @@ export function CapabilitiesGrid({ className }: CapabilitiesGridProps) {
                       </div>
                     </div>
                   </HoverCard>
-                </motion.div>
+                </m.div>
               );
             })}
-          </motion.div>
+          </m.div>
         </Container>
       </CursorSpotlight>
     </section>

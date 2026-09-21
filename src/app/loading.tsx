@@ -1,24 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Container } from "@/components/layout/container";
 
 export default function Loading() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-surface mesh-bg">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="relative mb-8"
       >
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.25, 1], opacity: [0.35, 0.1, 0.35] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 rounded-full bg-ae-green-400/25 blur-2xl"
         />
         <svg width="64" height="64" viewBox="0 0 100 100" className="relative">
-          <motion.path
+          <m.path
             d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z"
             fill="none"
             stroke="#6EC45E"
@@ -27,7 +27,7 @@ export default function Loading() {
             animate={{ pathLength: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           />
-          <motion.text
+          <m.text
             x="50"
             y="62"
             textAnchor="middle"
@@ -39,22 +39,22 @@ export default function Loading() {
             transition={{ duration: 0.5, delay: 1 }}
           >
             A
-          </motion.text>
+          </m.text>
         </svg>
-      </motion.div>
+      </m.div>
 
-      <motion.p
+      <m.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
         className="text-sm text-fg-muted mb-6"
       >
         Cargando...
-      </motion.p>
+      </m.p>
 
       <div className="flex gap-1.5">
         {[0, 1, 2].map((i) => (
-          <motion.div
+          <m.div
             key={i}
             className="h-2 w-2 rounded-full bg-ae-green-400"
             animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
@@ -74,7 +74,7 @@ export default function Loading() {
           <div className="h-4 shimmer rounded w-1/2 mx-auto" />
           <div className="grid grid-cols-3 gap-4 mt-8">
             {[0, 1, 2].map((i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

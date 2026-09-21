@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Check,
@@ -184,7 +184,7 @@ export function AsesoriaClient() {
       <Container variant="narrow">
         <div className="mb-8">
           <div className="h-1.5 bg-surface-3 rounded-full overflow-hidden">
-            <motion.div
+            <m.div
               className="h-full bg-gradient-to-r from-ae-green-400 to-ae-green-600 rounded-full"
               initial={{ width: "0%" }}
               animate={{ width: `${progress[step]}%` }}
@@ -206,7 +206,7 @@ export function AsesoriaClient() {
 
         <AnimatePresence mode="wait">
           {step === "welcome" && (
-            <motion.div
+            <m.div
               key="welcome"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -245,11 +245,11 @@ export function AsesoriaClient() {
                 Comenzar diagnóstico
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
               </Button>
-            </motion.div>
+            </m.div>
           )}
 
           {currentQuestion && (
-            <motion.div
+            <m.div
               key={step}
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -267,7 +267,7 @@ export function AsesoriaClient() {
 
               <div className="space-y-3">
                 {currentQuestion.options.map((option) => (
-                  <motion.button
+                  <m.button
                     key={option.value}
                     onClick={() => handleAnswer(currentQuestion.key, option.value)}
                     whileHover={{ scale: 1.01, x: 4 }}
@@ -282,14 +282,14 @@ export function AsesoriaClient() {
                         {option.description}
                       </span>
                     )}
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {step === "result" && planInfo && (
-            <motion.div
+            <m.div
               key="result"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -297,14 +297,14 @@ export function AsesoriaClient() {
               transition={{ duration: 0.35, ease: EASE }}
               className="pt-8 text-center"
             >
-              <motion.div
+              <m.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 className="h-16 w-16 rounded-2xl bg-ae-green-400/15 flex items-center justify-center mx-auto mb-6"
               >
                 <Sparkles className="h-8 w-8 text-ae-green-500" />
-              </motion.div>
+              </m.div>
               <Badge variant="default" className="mb-4">
                 DIAGNÓSTICO COMPLETO
               </Badge>
@@ -326,11 +326,11 @@ export function AsesoriaClient() {
                 Agendar mi asesoría gratuita
                 <Calendar className="h-5 w-5" />
               </Button>
-            </motion.div>
+            </m.div>
           )}
 
           {step === "calendar" && (
-            <motion.div
+            <m.div
               key="calendar"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -424,11 +424,11 @@ export function AsesoriaClient() {
                   )}
                 </Button>
               </form>
-            </motion.div>
+            </m.div>
           )}
 
           {step === "confirm" && (
-            <motion.div
+            <m.div
               key="confirm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -439,7 +439,7 @@ export function AsesoriaClient() {
               {/* Confetti sparks */}
               <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 {Array.from({ length: 14 }).map((_, i) => (
-                  <motion.span
+                  <m.span
                     key={i}
                     initial={{ opacity: 0, y: 0, x: 0, scale: 0 }}
                     animate={{
@@ -454,14 +454,14 @@ export function AsesoriaClient() {
                 ))}
               </div>
 
-              <motion.div
+              <m.div
                 initial={{ scale: 0 }}
                 animate={{ scale: [0, 1.15, 1] }}
                 transition={{ duration: 0.5 }}
                 className="h-16 w-16 rounded-full bg-ae-green-400/15 flex items-center justify-center mx-auto mb-6"
               >
                 <Check className="h-8 w-8 text-ae-green-500" />
-              </motion.div>
+              </m.div>
               <h2 className="text-2xl md:text-3xl font-extrabold text-fg mb-4">
                 ¡Todo listo!
               </h2>
@@ -486,7 +486,7 @@ export function AsesoriaClient() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </Container>

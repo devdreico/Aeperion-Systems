@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { PLANS } from "@/lib/plans-data";
 import { CounterAnimation } from "@/components/animations/counter-animation";
@@ -42,7 +42,7 @@ export function PricingSection({
 
         <div className="grid md:grid-cols-3 gap-6 mt-16 max-w-5xl mx-auto">
           {paidPlans.map((plan, index) => (
-            <motion.div
+            <m.div
               key={plan.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export function PricingSection({
                   )}
                 >
                   {plan.highlight && (
-                    <motion.div
+                    <m.div
                       animate={{ opacity: [0.25, 0.5, 0.25] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute -inset-px rounded-3xl bg-gradient-to-r from-ae-green-400/25 via-ae-green-400/10 to-ae-green-400/25 blur-sm -z-10"
@@ -135,11 +135,11 @@ export function PricingSection({
                   )}
                 </div>
               </HoverCard>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -155,7 +155,7 @@ export function PricingSection({
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </Link>
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

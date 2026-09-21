@@ -4,10 +4,6 @@ import { cn } from "@/lib/utils";
  * AEPERION — Container Layout Component
  *
  * Contenedor de contenido con max-width y padding consistente.
- *
- * HANDOFF-FRONTEND:
- *   - Este componente es estructural. No agregar animaciones aquí.
- *   - Las animaciones de entrada van en los children.
  */
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {

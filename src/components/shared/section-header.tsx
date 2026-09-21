@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SectionHeaderProps {
@@ -21,7 +21,7 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
@@ -37,7 +37,7 @@ export function SectionHeader({
       )}
     >
       {badge && (
-        <motion.span
+        <m.span
           variants={{
             hidden: { opacity: 0, scale: 0.8, y: 8 },
             visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
@@ -46,9 +46,9 @@ export function SectionHeader({
         >
           <span className="h-1.5 w-1.5 rounded-full bg-ae-green-400" />
           {badge}
-        </motion.span>
+        </m.span>
       )}
-      <motion.h2
+      <m.h2
         variants={{
           hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
           visible: {
@@ -61,9 +61,9 @@ export function SectionHeader({
         className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-fg tracking-tight text-balance"
       >
         {title}
-      </motion.h2>
+      </m.h2>
       {description && (
-        <motion.p
+        <m.p
           variants={{
             hidden: { opacity: 0, y: 18 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
@@ -74,8 +74,8 @@ export function SectionHeader({
           )}
         >
           {description}
-        </motion.p>
+        </m.p>
       )}
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagneticButtonProps {
@@ -46,7 +46,7 @@ export function MagneticButton({
   }, []);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={cn("inline-block", className)}
       animate={{ x: position.x, y: position.y }}
@@ -55,6 +55,6 @@ export function MagneticButton({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

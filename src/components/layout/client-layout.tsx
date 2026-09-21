@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 interface ClientLayoutProps {
@@ -18,7 +18,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.main
+      <m.main
         key={pathname}
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         className="flex-1"
       >
         {children}
-      </motion.main>
+      </m.main>
     </AnimatePresence>
   );
 }

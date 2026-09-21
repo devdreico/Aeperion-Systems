@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { TOOL_CATEGORIES, TOOLS } from "@/lib/tools-data";
 import { CATEGORY_ICONS } from "@/components/features/tools/category-icons";
@@ -26,7 +26,7 @@ export function ToolsShowcase({ className }: ToolsShowcaseProps) {
           align="center"
         />
 
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -43,7 +43,7 @@ export function ToolsShowcase({ className }: ToolsShowcaseProps) {
             const count = TOOLS.filter((t) => t.category === cat.id).length;
             const Icon = CATEGORY_ICONS[cat.id] ?? Zap;
             return (
-              <motion.div
+              <m.div
                 key={cat.id}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
@@ -66,12 +66,12 @@ export function ToolsShowcase({ className }: ToolsShowcaseProps) {
                     <p className="text-[10px] text-fg-subtle">{count} soluciones</p>
                   </Link>
                 </HoverCard>
-              </motion.div>
+              </m.div>
             );
           })}
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -84,7 +84,7 @@ export function ToolsShowcase({ className }: ToolsShowcaseProps) {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </Link>
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Send, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +44,7 @@ export function ContactForm() {
     <div className="rounded-3xl glass-card p-6 md:p-8">
       <AnimatePresence mode="wait">
         {status === "success" ? (
-          <motion.div
+          <m.div
             key="success"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -52,21 +52,21 @@ export function ContactForm() {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center justify-center text-center min-h-[420px]"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0 }}
               animate={{ scale: [0, 1.15, 1] }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="h-16 w-16 rounded-full bg-ae-green-400/15 flex items-center justify-center mb-4"
             >
               <Check className="h-8 w-8 text-ae-green-500" />
-            </motion.div>
+            </m.div>
             <h3 className="text-xl font-bold text-fg mb-2">¡Mensaje enviado!</h3>
             <p className="text-sm text-fg-muted max-w-xs">
               Te responderemos en menos de 24 horas. Revisa tu correo y WhatsApp.
             </p>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.form
+          <m.form
             key="form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +131,7 @@ export function ContactForm() {
               </p>
             )}
 
-            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
+            <m.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
               <Button
                 type="submit"
                 variant="primary"
@@ -151,8 +151,8 @@ export function ContactForm() {
                   </>
                 )}
               </Button>
-            </motion.div>
-          </motion.form>
+            </m.div>
+          </m.form>
         )}
       </AnimatePresence>
     </div>

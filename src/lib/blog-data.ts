@@ -1,10 +1,5 @@
 /**
  * AEPERION — Blog Posts Data
- *
- * HANDOFF-FRONTEND:
- *   - Los posts son estáticos (no hay CMS)
- *   - Para añadir más posts, solo agregar al array POSTS
- *   - Content está en HTML para usar con dangerouslySetInnerHTML
  */
 
 export interface BlogPostData {
@@ -18,7 +13,6 @@ export interface BlogPostData {
   readingTime: number;
   category: string;
   tags: string[];
-  image: string;
 }
 
 export const BLOG_POSTS: BlogPostData[] = [
@@ -42,7 +36,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 8,
     category: "Transformación Digital",
     tags: ["pymes", "digitalización", "colombia"],
-    image: "/images/blog/digital-transform.jpg",
   },
   {
     slug: "automatizacion-whatsapp-ventas",
@@ -65,7 +58,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 12,
     category: "Automatización",
     tags: ["whatsapp", "ventas", "automatización"],
-    image: "/images/blog/whatsapp-sales.jpg",
   },
   {
     slug: "facturacion-electronica-dian-2026",
@@ -88,7 +80,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 10,
     category: "Facturación",
     tags: ["dian", "facturación", "colombia", "legal"],
-    image: "/images/blog/invoicing.jpg",
   },
   {
     slug: "crm-para-pequenos-negocios",
@@ -109,7 +100,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 7,
     category: "CRM",
     tags: ["crm", "ventas", "pequeños-negocios"],
-    image: "/images/blog/crm-small-business.jpg",
   },
   {
     slug: "errores-comunes-presencia-digital",
@@ -134,7 +124,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 6,
     category: "Presencia Web",
     tags: ["web", "errores", "marketing"],
-    image: "/images/blog/web-mistakes.jpg",
   },
   {
     slug: "pos-sistema-ventas-restaurante",
@@ -155,7 +144,6 @@ export const BLOG_POSTS: BlogPostData[] = [
     readingTime: 9,
     category: "POS",
     tags: ["pos", "restaurantes", "ventas"],
-    image: "/images/blog/pos-restaurant.jpg",
   },
 ];
 

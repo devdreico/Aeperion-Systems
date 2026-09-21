@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Activity, BarChart3, Bot, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
       <div className="absolute inset-0 mesh-bg opacity-70" />
 
       {/* KPI main */}
-      <motion.div
+      <m.div
         {...from(-40, 30, 0.1)}
         className={cn(card, "left-[6%] top-[18%] w-[62%]")}
       >
@@ -54,7 +54,7 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
         </div>
         <div className="mt-3 flex h-12 items-end gap-1.5">
           {[35, 55, 42, 70, 58, 88, 76].map((v, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ height: 0 }}
               animate={{ height: `${v}%` }}
@@ -63,10 +63,10 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
             />
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Chat */}
-      <motion.div
+      <m.div
         {...from(50, -30, 0.4)}
         className={cn(card, "right-[4%] top-[6%] w-[36%]")}
       >
@@ -91,10 +91,10 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
             ))}
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Bars */}
-      <motion.div
+      <m.div
         {...from(-60, 20, 0.65)}
         className={cn(card, "bottom-[6%] left-[2%] w-[42%]")}
       >
@@ -106,7 +106,7 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
         </div>
         <div className="flex h-14 items-end gap-1.5">
           {[45, 70, 52, 88, 64, 96, 80].map((v, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ height: 0 }}
               animate={{ height: `${v}%` }}
@@ -115,10 +115,10 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
             />
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Flow */}
-      <motion.div
+      <m.div
         {...from(60, 30, 0.85)}
         className={cn(card, "bottom-[10%] right-[6%] w-[40%]")}
       >
@@ -142,7 +142,7 @@ export function HeroVisualFallback({ className }: HeroVisualFallbackProps) {
           <Wallet className="h-3 w-3" />
           3 flujos ejecutándose
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

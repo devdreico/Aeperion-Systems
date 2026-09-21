@@ -7,11 +7,6 @@ import { cn } from "@/lib/utils";
 
 /**
  * AEPERION — Dialog UI Primitive (Modal)
- *
- * HANDOFF-FRONTEND:
- *   - Animar entrada con fade + scale
- *   - Overlay: animar opacidad
- *   - Close button: hover effect
  */
 
 const Dialog = DialogPrimitive.Root;

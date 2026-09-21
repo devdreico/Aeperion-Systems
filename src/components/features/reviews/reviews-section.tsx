@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TESTIMONIALS, REVIEW_SUMMARY } from "@/lib/reviews-data";
@@ -62,7 +62,7 @@ export function ReviewsSection({ className, limit }: ReviewsSectionProps) {
                 <span className="w-3 text-fg-muted">{row.stars}</span>
                 <Star className="h-3 w-3 fill-ae-green-400 text-ae-green-400" />
                 <div className="h-1.5 flex-1 rounded-full bg-surface-3 overflow-hidden">
-                  <motion.div
+                  <m.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${row.percent}%` }}
                     viewport={{ once: true }}
@@ -77,7 +77,7 @@ export function ReviewsSection({ className, limit }: ReviewsSectionProps) {
         </div>
 
         {/* Reviews grid */}
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
@@ -91,7 +91,7 @@ export function ReviewsSection({ className, limit }: ReviewsSectionProps) {
           className="columns-1 md:columns-2 lg:columns-3 gap-5 [column-fill:_balance]"
         >
           {reviews.map((review) => (
-            <motion.figure
+            <m.figure
               key={review.id}
               variants={{
                 hidden: { opacity: 0, y: 30 },
@@ -130,9 +130,9 @@ export function ReviewsSection({ className, limit }: ReviewsSectionProps) {
                   </span>
                 </span>
               </figcaption>
-            </motion.figure>
+            </m.figure>
           ))}
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

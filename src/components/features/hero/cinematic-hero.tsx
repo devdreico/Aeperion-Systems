@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ArrowRight, Sparkles, MapPin, Layers } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "@/components/animations/magnetic-button";
@@ -35,9 +35,69 @@ const stats = [
 
 export function CinematicHero({ className }: CinematicHeroProps) {
   const [webglFailed, setWebglFailed] = useState(false);
+  const [mount3d, setMount3d] = useState(false);
+  const visualRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
   const shouldReduceMotion = useReducedMotion() ?? false;
   const heroTheme = resolvedTheme === "light" ? "light" : "dark";
+
+  // Monta el WebGL sólo si el equipo puede con ello y el hero está por entrar en pantalla.
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    if (typeof navigator !== "undefined") {
+      const nav = navigator as Navigator & {
+        deviceMemory?: number;
+        connection?: { saveData?: boolean };
+      };
+      const lowMemory = typeof nav.deviceMemory === "number" && nav.deviceMemory < 4;
+      const lowCores =
+        typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency < 4;
+      const saveData = nav.connection?.saveData === true;
+      if (lowMemory || lowCores || saveData) return;
+    }
+
+    const start = () => setMount3d(true);
+    const el = visualRef.current;
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const schedule = () => {
+      const ric = (
+        window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }
+      ).requestIdleCallback;
+      if (ric) {
+        idleId = ric(start, { timeout: 1500 });
+      } else {
+        timeoutId = setTimeout(start, 500);
+      }
+    };
+
+    if (el && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            schedule();
+            io.disconnect();
+          }
+        },
+        { rootMargin: "300px" }
+      );
+      io.observe(el);
+      return () => {
+        io.disconnect();
+        if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+        if (timeoutId) clearTimeout(timeoutId);
+      };
+    }
+
+    schedule();
+    return () => {
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [shouldReduceMotion]);
+
+  const showFallback = webglFailed || !mount3d;
 
   return (
     <section
@@ -52,8 +112,8 @@ export function CinematicHero({ className }: CinematicHeroProps) {
       <div className="hero-vignette pointer-events-none absolute inset-0" />
 
       {/* WebGL command center */}
-      <div className="absolute inset-0 z-0">
-        {webglFailed ? (
+      <div ref={visualRef} className="absolute inset-0 z-0">
+        {showFallback ? (
           <HeroVisualFallback />
         ) : (
           <CommandCenter3D
@@ -71,7 +131,7 @@ export function CinematicHero({ className }: CinematicHeroProps) {
       {/* Copy */}
       <Container className="relative z-10 pb-44 pt-28 md:pt-32 md:pb-48">
         <div className="max-w-xl">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
@@ -84,7 +144,7 @@ export function CinematicHero({ className }: CinematicHeroProps) {
             <span className="text-sm font-medium text-fg">
               Desde {SITE_CONFIG.foundedYear} · {SITE_CONFIG.city} · IA aplicada a la operación
             </span>
-          </motion.div>
+          </m.div>
 
           <h1 className="relative overflow-hidden text-4xl font-extrabold leading-[1.05] tracking-tight text-fg sm:text-5xl md:text-6xl lg:text-7xl">
             {[
@@ -92,14 +152,14 @@ export function CinematicHero({ className }: CinematicHeroProps) {
               { text: "en piloto automático.", gradient: true, delay: 0.45 },
             ].map((line) => (
               <span key={line.text} className="block overflow-hidden pb-[0.12em]">
-                <motion.span
+                <m.span
                   initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.9, delay: line.delay, ease }}
                   className={cn("block", line.gradient && "text-gradient-green")}
                 >
                   {line.text}
-                </motion.span>
+                </m.span>
               </span>
             ))}
             {/* One-time light sheen */}
@@ -109,7 +169,7 @@ export function CinematicHero({ className }: CinematicHeroProps) {
             />
           </h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.4, ease }}
@@ -117,9 +177,9 @@ export function CinematicHero({ className }: CinematicHeroProps) {
           >
             Aeperion diseña software e IA que atienden, venden y organizan por
             ti. Menos tareas manuales, más crecimiento medible.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.6, ease }}
@@ -145,9 +205,9 @@ export function CinematicHero({ className }: CinematicHeroProps) {
                 Explorar soluciones
               </Link>
             </MagneticButton>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.9 }}
@@ -155,12 +215,12 @@ export function CinematicHero({ className }: CinematicHeroProps) {
           >
             <Sparkles className="h-3.5 w-3.5 text-ae-green-500" />
             Diagnóstico gratuito · Sin compromiso · Respuesta en menos de 1 hora
-          </motion.div>
+          </m.div>
         </div>
       </Container>
 
       {/* HUD */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 2.1, ease }}
@@ -192,18 +252,18 @@ export function CinematicHero({ className }: CinematicHeroProps) {
               <span className="h-4 w-px bg-border" />
               <span className="inline-flex items-center gap-2">
                 Desliza para explorar
-                <motion.span
+                <m.span
                   animate={shouldReduceMotion ? {} : { y: [0, 5, 0] }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
                   className="inline-flex h-6 w-4 items-start justify-center rounded-full border border-border pt-1"
                 >
                   <span className="h-1.5 w-1 rounded-full bg-ae-green-400" />
-                </motion.span>
+                </m.span>
               </span>
             </div>
           </div>
         </Container>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

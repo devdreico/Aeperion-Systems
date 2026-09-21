@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Plan } from "@/types";
 import { AuroraBackground } from "@/components/animations/aurora-background";
 import { CounterAnimation } from "@/components/animations/counter-animation";
@@ -21,7 +21,7 @@ export function PlanHero({ plan }: { plan: Plan }) {
     >
       <AuroraBackground />
       <Container className="relative z-10">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -62,7 +62,7 @@ export function PlanHero({ plan }: { plan: Plan }) {
               </span>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

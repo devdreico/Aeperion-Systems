@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { CaseStudy } from "@/types";
 import { HoverCard } from "@/components/animations/hover-card";
@@ -40,10 +40,10 @@ export function ProjectsGridClient({ projects, industries }: ProjectsGridClientP
         ))}
       </div>
 
-      <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <m.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <AnimatePresence mode="popLayout">
           {filtered.map((project) => (
-            <motion.div
+            <m.div
               key={project.id}
               layout
               initial={{ opacity: 0, scale: 0.96 }}
@@ -95,10 +95,10 @@ export function ProjectsGridClient({ projects, industries }: ProjectsGridClientP
                   </article>
                 </Link>
               </HoverCard>
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

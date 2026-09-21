@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -24,7 +24,7 @@ export function WhatsAppButton({ className }: WhatsAppButtonProps) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.5, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 24 }}
@@ -33,7 +33,7 @@ export function WhatsAppButton({ className }: WhatsAppButtonProps) {
         >
           <AnimatePresence>
             {hovered && (
-              <motion.span
+              <m.span
                 initial={{ opacity: 0, x: 10, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 10, scale: 0.9 }}
@@ -41,11 +41,11 @@ export function WhatsAppButton({ className }: WhatsAppButtonProps) {
                 className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap glass-strong rounded-xl px-3.5 py-2 text-xs font-semibold text-fg shadow-lg"
               >
                 {SITE_CONFIG.contact.whatsappLabel}
-              </motion.span>
+              </m.span>
             )}
           </AnimatePresence>
 
-          <motion.a
+          <m.a
             href={SITE_CONFIG.links.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
@@ -60,8 +60,8 @@ export function WhatsAppButton({ className }: WhatsAppButtonProps) {
           >
             <MessageCircle className="h-6 w-6" />
             <span className="absolute inset-0 rounded-full bg-ae-green-400 animate-ping opacity-20" />
-          </motion.a>
-        </motion.div>
+          </m.a>
+        </m.div>
       )}
     </AnimatePresence>
   );

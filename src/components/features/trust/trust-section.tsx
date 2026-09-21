@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CounterAnimation } from "@/components/animations/counter-animation";
 import { SectionTransition } from "@/components/animations/section-transition";
@@ -44,7 +44,7 @@ export function TrustSection({ className }: TrustSectionProps) {
         {/* Metrics */}
         <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {metrics.map((metric, i) => (
-            <motion.div
+            <m.div
               key={metric.label}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -61,7 +61,7 @@ export function TrustSection({ className }: TrustSectionProps) {
                 {metric.suffix}
               </div>
               <p className="text-sm text-fg-muted">{metric.label}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

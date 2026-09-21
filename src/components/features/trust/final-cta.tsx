@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ParticleSystem } from "@/components/animations/particle-system";
 import { MagneticButton } from "@/components/animations/magnetic-button";
@@ -35,7 +35,7 @@ export function FinalCTA({ className }: FinalCTAProps) {
       <div className="absolute -bottom-40 -left-40 w-[440px] h-[440px] rounded-full bg-ae-green-500/10 blur-[110px] animate-aurora [animation-delay:-7s]" />
 
       <Container className="relative z-10 text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -83,7 +83,7 @@ export function FinalCTA({ className }: FinalCTAProps) {
           <p className="text-xs text-ae-gray-500 mt-6">
             Sin compromiso · Diagnóstico gratuito · Respuesta en menos de 1 hora
           </p>
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   );

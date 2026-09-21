@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { MotionProvider } from "@/components/layout/motion-provider";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
@@ -8,6 +9,7 @@ import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { ClientLayout } from "@/components/layout/client-layout";
 import { JsonLd } from "@/components/shared/json-ld";
 import { SITE_CONFIG } from "@/lib/constants";
+import { montserrat } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -58,16 +60,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="h-full" suppressHydrationWarning>
+    <html
+      lang="es"
+      className={`h-full ${montserrat.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen flex flex-col bg-surface text-fg antialiased">
-        <ThemeProvider>
-          <JsonLd />
-          <ScrollProgress />
-          <Nav />
-          <ClientLayout>{children}</ClientLayout>
-          <Footer />
-          <WhatsAppButton />
-        </ThemeProvider>
+        <MotionProvider>
+          <ThemeProvider>
+            <JsonLd />
+            <ScrollProgress />
+            <Nav />
+            <ClientLayout>{children}</ClientLayout>
+            <Footer />
+            <WhatsAppButton />
+          </ThemeProvider>
+        </MotionProvider>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import type { Tool } from "@/types";
 import { DemoTerminal } from "./demo-terminal";
@@ -25,7 +25,7 @@ export function DemoContainer({ tool }: DemoContainerProps) {
     return (
       <div className="min-h-[60vh] rounded-3xl glass-card flex items-center justify-center">
         <div className="text-center">
-          <motion.div
+          <m.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
             className="h-8 w-8 rounded-full border-2 border-ae-green-400 border-t-transparent mx-auto mb-4"
@@ -38,7 +38,7 @@ export function DemoContainer({ tool }: DemoContainerProps) {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div
+      <m.div
         key={tool.id}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export function DemoContainer({ tool }: DemoContainerProps) {
             </div>
           </div>
         )}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }
