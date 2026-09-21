@@ -335,6 +335,23 @@
   to { transform: translateX(-50%); }
 }
 
+@keyframes sheen {
+  0% { transform: translateX(-140%) skewX(-14deg); opacity: 0; }
+  12% { opacity: 0.85; }
+  60% { opacity: 0.85; }
+  100% { transform: translateX(260%) skewX(-14deg); opacity: 0; }
+}
+
+@keyframes draw-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes grid-pan {
+  from { background-position: 0 0; }
+  to { background-position: 0 -80px; }
+}
+
 @keyframes aurora {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
   33% { transform: translate3d(6%, -4%, 0) scale(1.15); opacity: 1; }
@@ -356,6 +373,45 @@
 }
 .animate-aurora { animation: aurora 18s ease-in-out infinite; }
 .animate-blob { animation: blob 12s ease-in-out infinite; }
+
+.animate-sheen {
+  animation: sheen 2.6s cubic-bezier(0.16, 1, 0.3, 1) 1.3s 1 both;
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(120% 90% at 75% 15%, transparent 35%, var(--surface) 92%),
+    radial-gradient(90% 70% at 10% 50%, var(--surface) 0%, transparent 55%);
+}
+
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    color-mix(in srgb, var(--surface) 82%, transparent) 45%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 1023px) {
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      var(--surface) 0%,
+      color-mix(in srgb, var(--surface) 88%, transparent) 55%,
+      transparent 100%
+    );
+  }
+}
+
+.hero-grid-overlay {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(100% 70% at 60% 30%, black 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(100% 70% at 60% 30%, black 10%, transparent 75%);
+}
 
 .shimmer {
   background: linear-gradient(

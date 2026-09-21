@@ -1,21 +1,30 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { ArrowRight, Sparkles, MapPin, Layers } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-import { ParticleSystem } from "@/components/animations/particle-system";
 import { MagneticButton } from "@/components/animations/magnetic-button";
-import { TextReveal } from "@/components/animations/text-reveal";
 import { NoiseTexture } from "@/components/animations/noise-texture";
 import { AuroraBackground } from "@/components/animations/aurora-background";
 import { CounterAnimation } from "@/components/animations/counter-animation";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, TRUST_METRICS } from "@/lib/constants";
+import { HeroVisualFallback } from "./hero-visual-fallback";
+
+const CommandCenter3D = dynamic(
+  () => import("./command-center-3d").then((m) => ({ default: m.CommandCenter3D })),
+  { ssr: false, loading: () => <HeroVisualFallback /> }
+);
 
 interface CinematicHeroProps {
   className?: string;
 }
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const stats = [
   { to: TRUST_METRICS.clientsServed, suffix: "+", label: "Clientes" },
@@ -25,99 +34,115 @@ const stats = [
 ];
 
 export function CinematicHero({ className }: CinematicHeroProps) {
+  const [webglFailed, setWebglFailed] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const shouldReduceMotion = useReducedMotion() ?? false;
+  const heroTheme = resolvedTheme === "light" ? "light" : "dark";
+
   return (
     <section
       className={cn(
-        "relative min-h-[92vh] flex items-center overflow-hidden mesh-bg bg-surface",
+        "relative flex min-h-[100svh] items-center overflow-hidden bg-surface",
         className
       )}
     >
-      <AuroraBackground />
-      <ParticleSystem
-        count={55}
-        color="rgba(110, 196, 94, 0.4)"
-        speed={0.2}
-        interactive={true}
-        maxDistance={150}
-      />
-      <NoiseTexture opacity={0.02} />
+      {/* Ambient layers */}
+      <AuroraBackground parallax={40} />
+      <div className="hero-grid-overlay pointer-events-none absolute inset-0 opacity-70" />
+      <div className="hero-vignette pointer-events-none absolute inset-0" />
 
-      <Container className="relative z-10 py-24 md:py-32">
-        <div className="max-w-4xl">
+      {/* WebGL command center */}
+      <div className="absolute inset-0 z-0">
+        {webglFailed ? (
+          <HeroVisualFallback />
+        ) : (
+          <CommandCenter3D
+            theme={heroTheme}
+            reducedMotion={shouldReduceMotion}
+            onFail={() => setWebglFailed(true)}
+          />
+        )}
+        <NoiseTexture opacity={0.03} />
+      </div>
+
+      {/* Legibility scrim */}
+      <div className="hero-scrim pointer-events-none absolute inset-0 z-[1]" />
+
+      {/* Copy */}
+      <Container className="relative z-10 pb-44 pt-28 md:pt-32 md:pb-48">
+        <div className="max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+            transition={{ duration: 0.5, ease }}
+            className="mb-7 inline-flex items-center gap-2 rounded-full glass px-4 py-2"
           >
-            <Sparkles className="h-4 w-4 text-ae-green-500" />
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ae-green-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-ae-green-500" />
+            </span>
             <span className="text-sm font-medium text-fg">
-              IA aplicada a la operación de tu empresa
+              Desde {SITE_CONFIG.foundedYear} · {SITE_CONFIG.city} · IA aplicada a la operación
             </span>
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-fg tracking-tight leading-[1.04] mb-6">
-            <TextReveal
-              text="Automatizamos tu operación"
-              as="span"
-              mode="chars"
-              stagger={0.018}
-              delay={0.25}
-              className="block"
+          <h1 className="relative overflow-hidden text-4xl font-extrabold leading-[1.05] tracking-tight text-fg sm:text-5xl md:text-6xl lg:text-7xl">
+            {[
+              { text: "Tu operación,", gradient: false, delay: 0.25 },
+              { text: "en piloto automático.", gradient: true, delay: 0.45 },
+            ].map((line) => (
+              <span key={line.text} className="block overflow-hidden pb-[0.12em]">
+                <motion.span
+                  initial={shouldReduceMotion ? { y: 0 } : { y: "115%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.9, delay: line.delay, ease }}
+                  className={cn("block", line.gradient && "text-gradient-green")}
+                >
+                  {line.text}
+                </motion.span>
+              </span>
+            ))}
+            {/* One-time light sheen */}
+            <span
+              aria-hidden
+              className="animate-sheen pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/45 to-transparent dark:via-white/25"
             />
-            <TextReveal
-              text="con software e IA a la"
-              as="span"
-              mode="chars"
-              stagger={0.018}
-              delay={0.7}
-              className="block"
-            />
-            <span className="relative inline-block mt-2">
-              <TextReveal
-                text="medida de tu negocio"
-                as="span"
-                mode="chars"
-                stagger={0.018}
-                delay={1.15}
-                className="relative text-gradient-green"
-              />
-            </span>
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-fg-muted max-w-2xl mb-10 leading-relaxed"
+            transition={{ duration: 0.5, delay: 1.4, ease }}
+            className="mb-9 mt-6 max-w-lg text-base leading-relaxed text-fg-muted md:text-lg"
           >
-            Startup fintech de desarrollo de software con IA. Diseñamos sistemas
-            que venden, automatizan y organizan, para que tu equipo se dedique a
-            crecer. Desde {SITE_CONFIG.foundedYear} en {SITE_CONFIG.city}.
+            Aeperion diseña software e IA que atienden, venden y organizan por
+            ti. Menos tareas manuales, más crecimiento medible.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-4"
+            transition={{ duration: 0.5, delay: 1.6, ease }}
+            className="flex flex-col gap-4 sm:flex-row"
           >
             <MagneticButton strength={25}>
               <Link
                 href="/asesoria"
-                className="group relative inline-flex items-center gap-2 px-8 py-4 bg-ae-green-500 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:bg-ae-green-600 hover:shadow-glow"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-ae-green-500 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-ae-green-600 hover:shadow-glow"
               >
                 <span className="relative z-10">Asesoría Gratuita</span>
                 <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-ae-green-400 to-ae-green-600 transition-transform duration-500 group-hover:translate-x-0" />
               </Link>
             </MagneticButton>
 
             <MagneticButton strength={15}>
               <Link
                 href="/herramientas"
-                className="inline-flex items-center gap-2 px-8 py-4 glass text-fg font-semibold rounded-2xl hover:border-ae-green-400/50 transition-all duration-300"
+                className="inline-flex items-center gap-2 rounded-2xl glass px-8 py-4 font-semibold text-fg transition-all duration-300 hover:border-ae-green-400/50"
               >
-                Ver soluciones
+                <Layers className="h-4 w-4 text-ae-green-500" />
+                Explorar soluciones
               </Link>
             </MagneticButton>
           </motion.div>
@@ -125,43 +150,60 @@ export function CinematicHero({ className }: CinematicHeroProps) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.3 }}
-            className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-8 gap-y-4 mt-12 pt-8 border-t border-border"
+            transition={{ duration: 0.5, delay: 1.9 }}
+            className="mt-7 flex items-center gap-2 text-xs text-fg-subtle"
           >
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-fg">
-                  <CounterAnimation to={stat.to} suffix={stat.suffix} duration={1.8} delay={2.5} />
-                </span>
-                <span className="text-sm text-fg-muted">{stat.label}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.8 }}
-            className="hidden md:flex items-center gap-4 mt-16 text-xs text-fg-subtle"
-          >
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-5 h-8 rounded-full border border-border flex items-start justify-center pt-1.5"
-            >
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-1 h-2 rounded-full bg-ae-green-400"
-              />
-            </motion.div>
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
-              {SITE_CONFIG.city}, {SITE_CONFIG.country} · Scroll para explorar
-            </span>
+            <Sparkles className="h-3.5 w-3.5 text-ae-green-500" />
+            Diagnóstico gratuito · Sin compromiso · Respuesta en menos de 1 hora
           </motion.div>
         </div>
       </Container>
+
+      {/* HUD */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 2.1, ease }}
+        className="absolute inset-x-0 bottom-0 z-10"
+      >
+        <Container>
+          <div className="mb-6 flex flex-col gap-4 rounded-3xl glass p-4 sm:flex-row sm:items-center sm:justify-between md:mb-8 md:p-5">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:flex sm:items-center sm:gap-10">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex items-baseline gap-2">
+                  <span className="text-xl font-bold text-fg md:text-2xl">
+                    <CounterAnimation
+                      to={stat.to}
+                      suffix={stat.suffix}
+                      duration={1.8}
+                      delay={2.4}
+                    />
+                  </span>
+                  <span className="text-xs text-fg-muted">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hidden items-center gap-3 text-xs text-fg-subtle md:flex">
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5" />
+                {SITE_CONFIG.city}
+              </span>
+              <span className="h-4 w-px bg-border" />
+              <span className="inline-flex items-center gap-2">
+                Desliza para explorar
+                <motion.span
+                  animate={shouldReduceMotion ? {} : { y: [0, 5, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex h-6 w-4 items-start justify-center rounded-full border border-border pt-1"
+                >
+                  <span className="h-1.5 w-1 rounded-full bg-ae-green-400" />
+                </motion.span>
+              </span>
+            </div>
+          </div>
+        </Container>
+      </motion.div>
     </section>
   );
 }
