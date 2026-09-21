@@ -1,41 +1,63 @@
 /**
  * AEPERION — Global Constants
  *
- * HANDOFF-FRONTEND:
- *   - SITE_URL usado para SEO metadata
- *   - SOCIAL_LINKS usado en footer y botón WhatsApp
- *   - NAV_LINKS usado en Nav component
+ * Domain: aesystems.com · Brand: Aeperion Systems
+ * Founded 2017 · Bogotá, Colombia
  */
+
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "573001234567";
+
+const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "contacto@aesystems.com";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aesystems.com";
 
 export const SITE_CONFIG = {
   name: "Aeperion Systems",
-  tagline: "Transformamos problemas operativos en sistemas que trabajan para ti",
+  shortName: "Aeperion",
+  tagline: "Automatización e inteligencia artificial para empresas que quieren crecer",
   description:
-    "Empresa de desarrollo de software enfocada en analizar, categorizar y brindar soluciones digitales a negocios que presentan problemas operativos o falta de estructura digital.",
-  url: "https://aeperion.com",
-  ogImage: "/images/og-image.png",
+    "Startup fintech de desarrollo de software impulsado por IA. Automatizamos procesos y creamos sistemas digitales que dan eficiencia a las empresas. Desde 2017 en Bogotá, Colombia.",
+  url: SITE_URL,
+  domain: "aesystems.com",
+  ogImage: "/opengraph-image",
   valueProp:
-    "Deja de operar a mano. Diseñamos sistemas digitales que venden, automatizan, organizan y hacen crecer tu negocio.",
+    "Deja de operar a mano. Diseñamos sistemas con IA que venden, automatizan, organizan y hacen crecer tu negocio.",
+  foundedYear: 2017,
+  city: "Bogotá",
+  country: "Colombia",
   links: {
-    whatsapp: "https://wa.me/573001234567",
-    email: "contacto@aeperion.com",
-    instagram: "https://instagram.com/aeperion",
-    linkedin: "https://linkedin.com/company/aeperion",
-    mercadoPago: "https://www.mercadopago.com.co/",
+    whatsapp: `https://wa.me/${WHATSAPP_NUMBER}`,
+    email: CONTACT_EMAIL,
+    instagram: "https://instagram.com/aeperion.systems",
+    linkedin: "https://linkedin.com/company/aeperion-systems",
+    mercadoPago:
+      process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
+    wompi: process.env.NEXT_PUBLIC_WOMPI_LINK ?? "https://checkout.wompi.co/",
   },
   contact: {
-    phoneDisplay: "+57 300 123 4567",
-    phoneCleansed: "573001234567",
+    phoneDisplay: `+${WHATSAPP_NUMBER.slice(0, 2)} ${WHATSAPP_NUMBER.slice(2, 5)} ${WHATSAPP_NUMBER.slice(5, 8)} ${WHATSAPP_NUMBER.slice(8)}`,
+    phoneCleansed: WHATSAPP_NUMBER,
     responseTime: "Respuesta en menos de 1 hora",
     businessHours: "Lunes a viernes: 8:00 - 18:00",
     whatsappLabel: "WhatsApp directo",
   },
   payments: {
     mercadoPago: {
-      enabled: false,
+      enabled: true,
       label: "Mercado Pago",
-      description: "Pago seguro para planes y herramientas. Configura tu access token en variables de entorno.",
-      publicKey: "",
+      description: "Tarjetas, PSE y efectivo. Checkout seguro.",
+      link:
+        process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
+      publicKey: process.env.NEXT_PUBLIC_MP_PUBLIC_KEY ?? "",
+    },
+    wompi: {
+      enabled: true,
+      label: "Wompi",
+      description: "Tarjetas, PSE, Nequi y Bancolombia. Pago seguro.",
+      link: process.env.NEXT_PUBLIC_WOMPI_LINK ?? "https://checkout.wompi.co/",
+      publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY ?? "",
     },
   },
 } as const;
@@ -43,13 +65,19 @@ export const SITE_CONFIG = {
 export const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/planes", label: "Planes" },
-  { href: "/herramientas", label: "Herramientas" },
+  { href: "/herramientas", label: "Soluciones" },
+  { href: "/proyectos", label: "Proyectos" },
   { href: "/metodo", label: "Método" },
   { href: "/about", label: "Nosotros" },
+] as const;
+
+export const NAV_LINKS_SECONDARY = [
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
+
+export const NAV_LINKS_ALL = [...NAV_LINKS, ...NAV_LINKS_SECONDARY] as const;
 
 export const SOCIAL_LINKS = {
   whatsapp: {
@@ -82,16 +110,16 @@ export const COMPANY_VALUES = [
     icon: "search",
   },
   {
+    title: "IA con Propósito",
+    description:
+      "Aplicamos inteligencia artificial donde genera eficiencia real: atención, ventas, datos y decisiones.",
+    icon: "bot",
+  },
+  {
     title: "Soluciones Reales",
     description:
       "No vendemos software genérico. Identificamos problemas específicos y construimos herramientas que los resuelven.",
     icon: "target",
-  },
-  {
-    title: "Expansión Digital",
-    description:
-      "Ayudamos a las empresas a dar el salto digital de forma ordenada, escalable y sostenible.",
-    icon: "trending-up",
   },
   {
     title: "Acompañamiento Continuo",
@@ -105,7 +133,24 @@ export const TRUST_METRICS = {
   toolsOffered: 39,
   plansDelivered: 3,
   avgDeliveryDays: 12,
-  satisfactionRate: 97,
-  clientsServed: 150,
-  yearsActive: 4,
+  satisfactionRate: 98,
+  clientsServed: 240,
+  yearsActive: new Date().getFullYear() - SITE_CONFIG.foundedYear,
 } as const;
+
+export const PAYMENT_METHODS = [
+  {
+    id: "mercadopago",
+    name: "Mercado Pago",
+    description: "Tarjetas, PSE, efectivo y cuotas sin interés.",
+    href: SITE_CONFIG.payments.mercadoPago.link,
+    enabled: SITE_CONFIG.payments.mercadoPago.enabled,
+  },
+  {
+    id: "wompi",
+    name: "Wompi",
+    description: "Tarjetas, PSE, Nequi y Bancolombia.",
+    href: SITE_CONFIG.payments.wompi.link,
+    enabled: SITE_CONFIG.payments.wompi.enabled,
+  },
+] as const;

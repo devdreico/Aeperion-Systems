@@ -17,10 +17,9 @@ interface DemoTerminalProps {
 }
 
 // Mock responses for different tools
-const MOCK_RESPONSES: Record<string, { commands: string[]; outputs: Record<string, string[]> }> = {
-  "asesor-ia": {
-    commands: ["diagnóstico", "recomendar", "presupuesto", "ayuda"],
-    outputs: {
+const WHATSAPP_MOCK: { commands: string[]; outputs: Record<string, string[]> } = {
+  commands: ["diagnóstico", "recomendar", "presupuesto", "ayuda"],
+  outputs: {
       diagnóstico: [
         "🔍 INICIANDO DIAGNÓSTICO...",
         "✓ Analizando procesos actuales...",
@@ -69,7 +68,11 @@ const MOCK_RESPONSES: Record<string, { commands: string[]; outputs: Record<strin
         "💡 Tip: Escribe 'diagnóstico' para empezar",
       ],
     },
-  },
+};
+
+const MOCK_RESPONSES: Record<string, { commands: string[]; outputs: Record<string, string[]> }> = {
+  "whatsapp-basico": WHATSAPP_MOCK,
+  "whatsapp-flow": WHATSAPP_MOCK,
 };
 
 const DEFAULT_COMMANDS = ["help", "status", "info", "clear"];

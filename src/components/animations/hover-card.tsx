@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description 3D tilt effect on hover with optional glare overlay */
@@ -29,9 +29,7 @@ export function HoverCard({
   const [glareY, setGlareY] = useState(50);
   const [isHovered, setIsHovered] = useState(false);
 
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   if (prefersReducedMotion) {
     return <div className={className}>{children}</div>;

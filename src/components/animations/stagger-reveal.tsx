@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface StaggerRevealProps {
@@ -9,8 +9,6 @@ interface StaggerRevealProps {
   className?: string;
   staggerDelay?: number;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
-  distance?: number;
   once?: boolean;
   as?: "div" | "section";
 }
@@ -20,22 +18,10 @@ export function StaggerReveal({
   className,
   staggerDelay = 0.08,
   delay = 0,
-  direction = "up",
-  distance = 30,
   once = true,
   as: Tag = "div",
 }: StaggerRevealProps) {
-  const offsets = {
-    up: { y: distance },
-    down: { y: -distance },
-    left: { x: distance },
-    right: { x: -distance },
-    none: {},
-  };
-
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,19 +30,6 @@ export function StaggerReveal({
       transition: {
         staggerChildren: prefersReducedMotion ? 0 : staggerDelay,
         delayChildren: delay,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, ...offsets[direction] },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
       },
     },
   };

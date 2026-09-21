@@ -38,13 +38,13 @@ export function DemoForm({ tool, className }: DemoFormProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className={cn("bg-white rounded-2xl border border-ae-gray-200 p-8 text-center", className)}
+        className={cn("rounded-3xl glass-card p-8 text-center", className)}
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-          className="h-16 w-16 rounded-full bg-ae-green-100 flex items-center justify-center mx-auto mb-4"
+          className="h-16 w-16 rounded-full bg-ae-green-400/15 flex items-center justify-center mx-auto mb-4"
         >
           <motion.svg
             initial={{ pathLength: 0 }}
@@ -66,8 +66,8 @@ export function DemoForm({ tool, className }: DemoFormProps) {
             />
           </motion.svg>
         </motion.div>
-        <h3 className="text-xl font-bold text-ae-gray-900 mb-2">¡Solicitud enviada!</h3>
-        <p className="text-sm text-ae-gray-500 mb-6">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+        <h3 className="text-xl font-bold text-fg mb-2">¡Solicitud enviada!</h3>
+        <p className="text-sm text-fg-muted mb-6">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
         <button
           onClick={() => { setStep(0); setIsSuccess(false); setFormData({ name: "", email: "", phone: "", business: "", message: "" }); }}
           className="text-sm text-ae-green-600 hover:underline"
@@ -87,11 +87,11 @@ export function DemoForm({ tool, className }: DemoFormProps) {
   ];
 
   return (
-    <div className={cn("bg-white rounded-2xl border border-ae-gray-200 overflow-hidden", className)}>
+    <div className={cn("rounded-3xl glass-card overflow-hidden", className)}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-bold text-ae-gray-900">Solicitar información</h3>
-          <span className="text-xs text-ae-gray-500">Demo: {tool.name}</span>
+          <h3 className="text-lg font-bold text-fg">Solicitar información</h3>
+          <span className="text-xs text-fg-muted">Demo: {tool.name}</span>
         </div>
 
         <AnimatePresence mode="wait">
@@ -104,7 +104,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
           >
             {fields.slice(step, step + 1).map((field) => (
               <div key={field.name} className="space-y-2">
-                <label className="block text-sm font-medium text-ae-gray-700">{field.label}</label>
+                <label className="block text-sm font-medium text-fg-muted">{field.label}</label>
                 {field.type === "textarea" ? (
                   <textarea
                     name={field.name}
@@ -112,7 +112,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
                     onChange={handleChange}
                     placeholder={field.placeholder}
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-ae-gray-200 text-sm focus:border-ae-green-400 focus:ring-2 focus:ring-ae-green-100 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-border text-sm focus:border-ae-green-400 focus:ring-2 focus:ring-ae-green-400/20 outline-none transition-all"
                   />
                 ) : (
                   <input
@@ -121,7 +121,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
                     value={formData[field.name as keyof typeof formData]}
                     onChange={handleChange}
                     placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-xl border border-ae-gray-200 text-sm focus:border-ae-green-400 focus:ring-2 focus:ring-ae-green-100 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-border text-sm focus:border-ae-green-400 focus:ring-2 focus:ring-ae-green-400/20 outline-none transition-all"
                   />
                 )}
               </div>
@@ -136,7 +136,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
               key={i}
               className={cn(
                 "h-1.5 flex-1 rounded-full",
-                i <= step ? "bg-ae-green-400" : "bg-ae-gray-200"
+                i <= step ? "bg-ae-green-400" : "bg-surface-3"
               )}
               layout
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -149,7 +149,7 @@ export function DemoForm({ tool, className }: DemoFormProps) {
           <button
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             disabled={step === 0}
-            className="text-sm text-ae-gray-500 hover:text-ae-gray-700 disabled:opacity-30 transition-colors"
+            className="text-sm text-fg-muted hover:text-fg-muted disabled:opacity-30 transition-colors"
           >
             Anterior
           </button>

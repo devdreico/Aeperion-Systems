@@ -155,15 +155,37 @@ export interface TeamMember {
 
 export interface CaseStudy {
   id: string;
+  slug: string;
   clientName: string;
   industry: string;
+  year: number;
   challenge: string;
   solution: string;
   results: string[];
+  metrics: { label: string; value: string }[];
   testimonial: string;
   testimonialAuthor: string;
   testimonialRole: string;
   image: string;
+  accent: string;
+  tags: string[];
+}
+
+// ============================================================
+// TESTIMONIALS / REVIEWS
+// ============================================================
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  city: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  quote: string;
+  plan: string;
+  featured?: boolean;
+  date: string;
 }
 
 // ============================================================

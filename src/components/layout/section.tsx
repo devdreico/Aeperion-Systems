@@ -1,19 +1,7 @@
 import { cn } from "@/lib/utils";
 
-/**
- * AEPERION — Section Layout Component
- *
- * Sección estándar con padding vertical y layout consistente.
- *
- * HANDOFF-FRONTEND:
- *   - Envolver content en <FadeInView> para animación al scroll
- *   - Agregar <SectionTransition> entre secciones
- *   - variant=hero: ocupa viewport completo
- *   - variant=alt: fondo alterno (gray-50)
- */
-
-interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "alt" | "hero" | "dark" | "green";
+interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  variant?: "default" | "alt" | "hero" | "dark" | "green" | "glass";
   size?: "default" | "sm" | "md" | "lg" | "xl";
 }
 
@@ -29,10 +17,11 @@ export function Section({
       className={cn(
         "relative",
         {
-          "bg-white": variant === "default" || variant === "hero",
-          "bg-ae-gray-50": variant === "alt",
+          "bg-surface": variant === "default" || variant === "hero",
+          "bg-surface-1": variant === "alt",
           "bg-ae-gray-900 text-white": variant === "dark",
-          "bg-ae-green-50": variant === "green",
+          "bg-ae-green-400/5": variant === "green",
+          "mesh-bg bg-surface": variant === "glass",
         },
         {
           "py-12 md:py-16": size === "sm",

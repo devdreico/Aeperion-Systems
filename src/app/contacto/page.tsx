@@ -1,103 +1,122 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { MessageCircle, Mail, Clock, CreditCard } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SectionHeader } from "@/components/shared/section-header";
+import { PAYMENT_METHODS, SITE_CONFIG } from "@/lib/constants";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Contáctanos por WhatsApp, email o nuestro formulario online. Estamos listos para escuchar tu proyecto.",
+    "Contáctanos por WhatsApp, email o formulario. Paga con Mercado Pago o Wompi. Respuesta en menos de 1 hora.",
 };
 
-/**
- * AEPERION — Contacto Page
- *
- * HANDOFF-FRONTEND:
- *   - Form: focus animations en inputs
- *   - Submit: loading state animado
- *   - Success: checkmark animado + confetti
- *   - Contact cards: stagger reveal
- */
 export default function ContactoPage() {
   return (
     <div className="pt-20">
-      <Section variant="default" size="lg">
-        <Container variant="narrow">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-ae-gray-900 tracking-tight mb-4">
-              Contáctanos
-            </h1>
-            <p className="text-lg text-ae-gray-500 max-w-xl mx-auto">
-          Estamos listos para escuchar tu proyecto. Responde en menos de 1 hora en horario laboral.
-            </p>
-          </div>
+      <Section variant="glass" size="lg">
+        <Container>
+          <SectionHeader
+            badge="Contacto"
+            title="Hablemos de tu proyecto"
+            description="Estamos listos para escuchar tu operación y proponerte una solución. Respondemos en menos de 1 hora en horario laboral."
+          />
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl border border-ae-gray-200 hover:border-ae-green-200 transition-colors">
-                <h3 className="font-semibold text-ae-gray-900 mb-2">WhatsApp</h3>
-                <p className="text-sm text-ae-gray-500 mb-3">{SITE_CONFIG.contact.responseTime}</p>
-                <a
-                  href={SITE_CONFIG.links.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ae-green-600 font-medium hover:underline text-sm"
-                >
-                  {SITE_CONFIG.contact.phoneDisplay}
-                </a>
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            <div className="space-y-4">
+              <a
+                href={SITE_CONFIG.links.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-6 rounded-3xl glass-card hover:border-ae-green-400/40 transition-colors"
+              >
+                <span className="h-11 w-11 rounded-2xl bg-ae-green-400/15 flex items-center justify-center shrink-0">
+                  <MessageCircle className="h-5 w-5 text-ae-green-500" />
+                </span>
+                <span>
+                  <span className="block font-bold text-fg">WhatsApp</span>
+                  <span className="block text-sm text-fg-muted mb-1">
+                    {SITE_CONFIG.contact.responseTime}
+                  </span>
+                  <span className="text-sm font-semibold text-ae-green-600 dark:text-ae-green-300">
+                    {SITE_CONFIG.contact.phoneDisplay}
+                  </span>
+                </span>
+              </a>
+
+              <a
+                href={`mailto:${SITE_CONFIG.links.email}`}
+                className="flex items-start gap-4 p-6 rounded-3xl glass-card hover:border-ae-green-400/40 transition-colors"
+              >
+                <span className="h-11 w-11 rounded-2xl bg-ae-green-400/15 flex items-center justify-center shrink-0">
+                  <Mail className="h-5 w-5 text-ae-green-500" />
+                </span>
+                <span>
+                  <span className="block font-bold text-fg">Email</span>
+                  <span className="block text-sm text-fg-muted mb-1">
+                    Respuesta en menos de 24 horas
+                  </span>
+                  <span className="text-sm font-semibold text-ae-green-600 dark:text-ae-green-300">
+                    {SITE_CONFIG.links.email}
+                  </span>
+                </span>
+              </a>
+
+              <div className="flex items-start gap-4 p-6 rounded-3xl glass-card">
+                <span className="h-11 w-11 rounded-2xl bg-ae-green-400/15 flex items-center justify-center shrink-0">
+                  <Clock className="h-5 w-5 text-ae-green-500" />
+                </span>
+                <span>
+                  <span className="block font-bold text-fg">Horario</span>
+                  <span className="block text-sm text-fg-muted">
+                    {SITE_CONFIG.contact.businessHours}
+                    <br />
+                    Sábados: 9:00 - 13:00
+                  </span>
+                </span>
               </div>
 
-              <div className="p-6 rounded-2xl border border-ae-gray-200 hover:border-ae-green-200 transition-colors">
-                <h3 className="font-semibold text-ae-gray-900 mb-2">Email</h3>
-                <p className="text-sm text-ae-gray-500 mb-3">Respuesta en menos de 24 horas</p>
-                <a
-                  href={`mailto:${SITE_CONFIG.links.email}`}
-                  className="text-ae-green-600 font-medium hover:underline text-sm"
-                >
-                  {SITE_CONFIG.links.email}
-                </a>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-ae-gray-200 hover:border-ae-green-200 transition-colors">
-                <h3 className="font-semibold text-ae-gray-900 mb-2">Horario</h3>
-                <p className="text-sm text-ae-gray-500">
-                  {SITE_CONFIG.contact.businessHours}<br />
-                  Sábados: 9:00 - 13:00
+              <div className="p-6 rounded-3xl glass-card">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="h-11 w-11 rounded-2xl bg-ae-green-400/15 flex items-center justify-center">
+                    <CreditCard className="h-5 w-5 text-ae-green-500" />
+                  </span>
+                  <span className="font-bold text-fg">Pago seguro</span>
+                </div>
+                <p className="text-sm text-fg-muted mb-4">
+                  Paga tu plan o solución con los medios que prefieras.
                 </p>
+                <div className="flex flex-wrap gap-2">
+                  {PAYMENT_METHODS.map((method) => (
+                    <a
+                      key={method.id}
+                      href={method.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold rounded-full border border-border px-3.5 py-2 text-fg-muted hover:text-ae-green-600 dark:hover:text-ae-green-300 hover:border-ae-green-400/40 transition-colors"
+                    >
+                      {method.name}
+                    </a>
+                  ))}
+                </div>
               </div>
 
-              <div className="p-6 rounded-2xl border border-ae-green-200 bg-ae-green-50/60">
-                <h3 className="font-semibold text-ae-gray-900 mb-2">Pago seguro</h3>
-                <p className="text-sm text-ae-gray-600 mb-4">
-                  Paga por tu plan o herramienta con Mercado Pago, de forma segura y rápida.
-                </p>
-                <a
-                  href={SITE_CONFIG.links.mercadoPago}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-ae-green-600 hover:underline"
-                >
-                  Ir a Mercado Pago →
-                </a>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-ae-green-50 border border-ae-green-200">
-                <h3 className="font-semibold text-ae-gray-900 mb-2">¿Primera vez?</h3>
-                <p className="text-sm text-ae-gray-600 mb-4">
+              <div className="p-6 rounded-3xl border border-ae-green-400/30 bg-ae-green-400/5">
+                <h3 className="font-bold text-fg mb-2">¿Primera vez?</h3>
+                <p className="text-sm text-fg-muted mb-4">
                   Agenda una asesoría gratuita de 30 minutos. Sin compromiso.
                 </p>
-                <a
+                <Link
                   href="/asesoria"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-ae-green-600 hover:underline"
+                  className="text-sm font-semibold text-ae-green-600 dark:text-ae-green-300 hover:underline"
                 >
                   Agendar asesoría gratuita →
-                </a>
+                </Link>
               </div>
             </div>
 
-            {/* Form */}
             <ContactForm />
           </div>
         </Container>

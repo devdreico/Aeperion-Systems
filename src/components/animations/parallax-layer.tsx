@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description Creates a parallax scroll effect using Framer Motion's useScroll + useTransform */
@@ -24,9 +24,7 @@ export function ParallaxLayer({
 }: ParallaxLayerProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: ref,

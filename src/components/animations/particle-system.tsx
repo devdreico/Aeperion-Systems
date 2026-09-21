@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
+import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface Particle3D {
@@ -39,6 +40,7 @@ export function ParticleSystem({
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
   const animFrameRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
+  const shouldReduceMotion = useReducedMotion();
 
   const initParticles = useCallback((width: number, height: number, particleCount: number) => {
     return Array.from({ length: particleCount }, () => {
@@ -64,6 +66,7 @@ export function ParticleSystem({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (shouldReduceMotion) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -219,7 +222,7 @@ export function ParticleSystem({
         canvas.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
-  }, [count, color, speed, interactive, maxDistance, initParticles]);
+  }, [count, color, speed, interactive, maxDistance, initParticles, shouldReduceMotion]);
 
   return (
     <canvas

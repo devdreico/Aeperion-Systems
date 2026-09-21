@@ -2,30 +2,22 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-/**
- * AEPERION — Badge UI Primitive
- *
- * Usado para: badges de planes, categorías, etiquetas blog.
- *
- * HANDOFF-FRONTEND:
- *   - El badge "MÁS POPULAR" y "GRATIS" deben tener animación pulse
- *   - Usar <motion.div> para animación de entrada
- */
-
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-200",
+  "inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-200",
   {
     variants: {
       variant: {
         default:
-          "border-ae-green-200 bg-ae-green-50 text-ae-green-700",
+          "border-ae-green-400/30 bg-ae-green-400/10 text-ae-green-700 dark:text-ae-green-300",
         secondary:
-          "border-ae-gray-200 bg-ae-gray-100 text-ae-gray-700",
+          "border-border bg-surface-2 text-fg-muted",
         destructive:
-          "border-red-200 bg-red-50 text-red-700",
-        outline: "border-ae-gray-300 text-ae-gray-600",
-        success: "border-ae-green-200 bg-ae-green-100 text-ae-green-800",
-        premium: "border-ae-gray-800 bg-ae-gray-900 text-white",
+          "border-red-400/30 bg-red-400/10 text-red-600 dark:text-red-400",
+        outline: "border-border-strong text-fg-muted",
+        success:
+          "border-ae-green-400/40 bg-ae-green-400/15 text-ae-green-700 dark:text-ae-green-300",
+        premium: "border-fg/10 bg-fg text-surface",
+        glass: "glass text-fg-muted",
       },
     },
     defaultVariants: {

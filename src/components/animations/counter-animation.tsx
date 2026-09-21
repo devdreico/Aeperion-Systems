@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description Animated number count-up/down that triggers when scrolled into view */
@@ -29,15 +29,10 @@ export function CounterAnimation({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(from);
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (!isInView || prefersReducedMotion) {
-      setCount(to);
-      return;
-    }
+    if (!isInView || prefersReducedMotion) return;
 
     const startTime = Date.now() + delay * 1000;
     const startValue = from;
@@ -66,7 +61,11 @@ export function CounterAnimation({
     requestAnimationFrame(animate);
   }, [isInView, from, to, duration, delay, prefersReducedMotion]);
 
-  const displayValue = formatFn ? formatFn(count) : Math.round(count).toLocaleString();
+  const displayValue = prefersReducedMotion
+    ? (formatFn ? formatFn(to) : Math.round(to).toLocaleString())
+    : formatFn
+      ? formatFn(count)
+      : Math.round(count).toLocaleString();
 
   return (
     <motion.span

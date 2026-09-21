@@ -1,142 +1,97 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Target, Search, HeartHandshake, TrendingUp } from "lucide-react";
+import { ArrowRight, Target, Search, HeartHandshake, Bot } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
-import { COMPANY_VALUES } from "@/lib/constants";
+import { COMPANY_VALUES, SITE_CONFIG } from "@/lib/constants";
+import { MILESTONES, TEAM } from "@/lib/team-data";
 
 export const metadata: Metadata = {
   title: "Sobre Aeperion Systems",
   description:
-    "Somos una empresa de desarrollo de software enfocada en analizar, categorizar y brindar soluciones digitales a negocios con problemas operativos.",
+    "Startup fintech de desarrollo de software con IA. Desde 2017 en Bogotá, automatizamos y damos eficiencia a las empresas colombianas.",
 };
 
-/**
- * AEPERION — About Page
- *
- * HANDOFF-FRONTEND:
- *   - Manifiesto: text-reveal en frases clave
- *   - Values cards: stagger reveal
- *   - Fotos de equipo: hover zoom (placeholder por ahora)
- */
-
 const values = [
-  {
-    icon: Search,
-    title: COMPANY_VALUES[0].title,
-    description: COMPANY_VALUES[0].description,
-  },
-  {
-    icon: Target,
-    title: COMPANY_VALUES[1].title,
-    description: COMPANY_VALUES[1].description,
-  },
-  {
-    icon: TrendingUp,
-    title: COMPANY_VALUES[2].title,
-    description: COMPANY_VALUES[2].description,
-  },
-  {
-    icon: HeartHandshake,
-    title: COMPANY_VALUES[3].title,
-    description: COMPANY_VALUES[3].description,
-  },
-];
-
-const timeline = [
-  {
-    year: "2022",
-    title: "Fundación",
-    description: "Aeperion nace con la idea de que los problemas operativos de las empresas pueden resolverse con tecnología a medida.",
-  },
-  {
-    year: "2023",
-    title: "Primeros 20 clientes",
-    description: "Validamos el modelo de negocio con clientes reales en Bogotá. Descubrimos que el análisis previo es más valioso que el software mismo.",
-  },
-  {
-    year: "2024",
-    title: "Expansión a 39 herramientas",
-    description: "Pasamos de soluciones genéricas a un catálogo de 39 herramientas individuales que resuelven problemas específicos.",
-  },
-  {
-    year: "2025",
-    title: "Crecimiento nacional",
-    description: "Clientes en 5 ciudades de Colombia. Consolidamos los 3 planes de ejecución y el modelo de asesoría gratuita como puerta de entrada.",
-  },
-  {
-    year: "2026",
-    title: "Plataforma digital",
-    description: "Lanzamiento de nuestra plataforma web con demos interactivas, compra de herramientas individuales y sistema de asesorías automatizado.",
-  },
+  { icon: Search, title: COMPANY_VALUES[0].title, description: COMPANY_VALUES[0].description },
+  { icon: Bot, title: COMPANY_VALUES[1].title, description: COMPANY_VALUES[1].description },
+  { icon: Target, title: COMPANY_VALUES[2].title, description: COMPANY_VALUES[2].description },
+  { icon: HeartHandshake, title: COMPANY_VALUES[3].title, description: COMPANY_VALUES[3].description },
 ];
 
 export default function AboutPage() {
   return (
     <div className="pt-20">
-      {/* Hero */}
-      <Section variant="default" size="lg">
+      <Section variant="glass" size="lg">
         <Container variant="narrow" className="text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ae-gray-900 tracking-tight mb-6">
+          <span className="inline-block px-3.5 py-1.5 rounded-full glass text-xs font-semibold text-ae-green-700 dark:text-ae-green-300 mb-6">
+            Desde {SITE_CONFIG.foundedYear} · {SITE_CONFIG.city}, {SITE_CONFIG.country}
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-fg tracking-tight mb-6">
             No solo vendemos
             <br />
-            <span className="text-ae-green-500">software</span>
+            <span className="text-gradient-green">software</span>
           </h1>
-          <p className="text-lg md:text-xl text-ae-gray-500 leading-relaxed max-w-2xl mx-auto">
-            Identificamos problemas reales dentro de tu empresa y construimos soluciones digitales
-            que mejoran tu funcionamiento, crecimiento y capacidad de expansión.
+          <p className="text-lg md:text-xl text-fg-muted leading-relaxed max-w-2xl mx-auto">
+            Startup fintech que aplica inteligencia artificial para identificar
+            problemas reales y construir soluciones que dan eficiencia,
+            crecimiento y capacidad de expansión a cada empresa.
           </p>
         </Container>
       </Section>
 
-      {/* Manifest */}
       <Section variant="alt" size="lg">
         <Container variant="narrow">
-          <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 mb-8 text-center">
-            Nuestra filosofía
-          </h2>
-          <div className="space-y-6 text-base md:text-lg text-ae-gray-600 leading-relaxed">
+          <SectionHeader
+            badge="Filosofía"
+            title="Análisis primero, tecnología después"
+            align="center"
+          />
+          <div className="space-y-6 text-base md:text-lg text-fg-muted leading-relaxed">
             <p>
-              Muchos negocios todavía operan de forma manual o no cuentan con herramientas digitales
-              básicas como páginas web, automatizaciones con WhatsApp, sistemas CRM, facturación
-              electrónica o sistemas POS adaptados a su operación.
+              Muchos negocios todavía operan de forma manual o no cuentan con
+              herramientas digitales básicas: automatizaciones con WhatsApp,
+              CRM, facturación electrónica o sistemas POS adaptados a su
+              operación.
             </p>
             <p>
-              En Aeperion no creemos en vender software por vender. Creemos en <strong>identificar
-              primero el problema</strong>. Por eso nuestro proceso empieza con un análisis profundo
-              de la operación de cada empresa.
+              En Aeperion no creemos en vender software por vender. Creemos en{" "}
+              <strong className="text-fg">identificar primero el problema</strong>.
+              Por eso nuestro proceso empieza con un análisis profundo de la
+              operación de cada empresa, potenciado con datos e IA.
             </p>
             <p>
-              Detectamos huecos en áreas como ventas, atención al cliente, automatización,
-              administración interna, presencia digital y captación de nuevos clientes. Una vez
-              identificados, construimos la solución exacta que los resuelve.
+              Detectamos brechas en ventas, atención al cliente, automatización,
+              administración y captación. Una vez identificadas, construimos la
+              solución exacta que las resuelve.
             </p>
-            <p className="font-medium text-ae-gray-900">
-              La idea principal de Aeperion no es solo vender software, sino identificar problemas
-              reales y construir soluciones digitales que mejoren el funcionamiento, crecimiento y
-              capacidad de expansión de cada negocio.
+            <p className="font-semibold text-fg">
+              Nuestro propósito es construir soluciones digitales que mejoren el
+              funcionamiento, el crecimiento y la capacidad de expansión de cada
+              negocio.
             </p>
           </div>
         </Container>
       </Section>
 
-      {/* Values */}
       <Section variant="default" size="lg">
         <Container>
-          <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 mb-12 text-center">
-            Cómo trabajamos
-          </h2>
+          <SectionHeader badge="Valores" title="Cómo trabajamos" align="center" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v, i) => {
+            {values.map((v) => {
               const Icon = v.icon;
               return (
-                <div key={i} className="p-6 rounded-2xl border border-ae-gray-100 hover:border-ae-green-200 hover:shadow-md transition-all duration-300">
-                  <div className="h-10 w-10 rounded-xl bg-ae-green-50 flex items-center justify-center text-ae-green-500 mb-4">
+                <div
+                  key={v.title}
+                  className="p-6 rounded-3xl glass-card hover:border-ae-green-400/40 transition-all duration-300"
+                >
+                  <div className="h-11 w-11 rounded-2xl bg-ae-green-400/15 flex items-center justify-center text-ae-green-500 mb-4">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="text-lg font-semibold text-ae-gray-900 mb-2">{v.title}</h3>
-                  <p className="text-sm text-ae-gray-500 leading-relaxed">{v.description}</p>
+                  <h3 className="text-lg font-bold text-fg mb-2">{v.title}</h3>
+                  <p className="text-sm text-fg-muted leading-relaxed">{v.description}</p>
                 </div>
               );
             })}
@@ -144,38 +99,65 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Timeline */}
       <Section variant="alt" size="lg">
         <Container variant="narrow">
-          <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 mb-12 text-center">
-            Nuestra historia
-          </h2>
+          <SectionHeader badge="Historia" title="Nuestra trayectoria" align="center" />
           <div className="space-y-8">
-            {timeline.map((item, i) => (
-              <div key={i} className="relative pl-8 border-l-2 border-ae-green-200">
-                <div className="absolute left-[-9px] top-0 h-4 w-4 rounded-full bg-ae-green-400 border-2 border-white" />
-                <span className="text-xs font-bold text-ae-green-600">{item.year}</span>
-                <h3 className="text-lg font-semibold text-ae-gray-900 mt-1">{item.title}</h3>
-                <p className="text-sm text-ae-gray-500 mt-1">{item.description}</p>
+            {MILESTONES.map((item) => (
+              <div key={item.year} className="relative pl-8 border-l-2 border-ae-green-400/30">
+                <div className="absolute left-[-9px] top-0 h-4 w-4 rounded-full bg-ae-green-400 border-2 border-surface" />
+                <span className="text-xs font-bold text-ae-green-600 dark:text-ae-green-300">
+                  {item.year}
+                </span>
+                <h3 className="text-lg font-bold text-fg mt-1">{item.title}</h3>
+                <p className="text-sm text-fg-muted mt-1">{item.description}</p>
               </div>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* CTA */}
+      <Section variant="default" size="lg">
+        <Container>
+          <SectionHeader
+            badge="Equipo"
+            title="Las personas detrás de Aeperion"
+            description="Un equipo compacto de producto, ingeniería, diseño y éxito del cliente."
+            align="center"
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {TEAM.map((member) => (
+              <div key={member.name} className="rounded-3xl glass-card p-6 text-center">
+                <div className="mx-auto h-16 w-16 rounded-full bg-ae-green-400/15 text-ae-green-600 dark:text-ae-green-300 font-extrabold text-xl flex items-center justify-center mb-4">
+                  {member.name
+                    .split(" ")
+                    .slice(0, 2)
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+                <h3 className="text-base font-bold text-fg">{member.name}</h3>
+                <p className="text-xs font-semibold text-ae-green-600 dark:text-ae-green-300 mb-2">
+                  {member.role}
+                </p>
+                <p className="text-xs text-fg-muted leading-relaxed">{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
       <Section variant="default" size="md">
         <Container className="text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-fg mb-4">
             ¿Quieres ser parte de nuestra historia?
           </h2>
-          <p className="text-ae-gray-500 mb-8 max-w-md mx-auto">
-            Agenda una asesoría gratuita y descubre cómo podemos ayudarte a transformar tu negocio.
+          <p className="text-fg-muted mb-8 max-w-md mx-auto">
+            Agenda una asesoría gratuita y descubre cómo podemos transformar tu negocio.
           </p>
           <Link href="/asesoria">
-            <Button variant="primary" size="xl">
+            <Button variant="primary" size="xl" className="group">
               Asesoría Gratuita
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </Link>
         </Container>

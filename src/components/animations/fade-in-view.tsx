@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface FadeInViewProps {
@@ -28,9 +28,7 @@ export function FadeInView({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-60px" });
 
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   const offsets = {
     up: { y: distance },

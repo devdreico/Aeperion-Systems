@@ -12,9 +12,10 @@ interface WhatsAppButtonProps {
 
 export function WhatsAppButton({ className }: WhatsAppButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsVisible(window.scrollY > 300);
+    const handleScroll = () => setIsVisible(window.scrollY > 320);
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -23,34 +24,44 @@ export function WhatsAppButton({ className }: WhatsAppButtonProps) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.a
-          href={SITE_CONFIG.links.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20,
-          }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className={cn(
-            "fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full bg-ae-green-500 text-white flex items-center justify-center shadow-lg shadow-ae-green-500/30 hover:bg-ae-green-600 transition-colors",
-            className
-          )}
-          aria-label="Contactar por WhatsApp"
+          exit={{ opacity: 0, scale: 0.5, y: 24 }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
+          className={cn("fixed bottom-6 right-6 z-40", className)}
         >
-          <MessageCircle className="h-6 w-6" />
-          {/* Pulse ring */}
-          <motion.span
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0, 0.3] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 rounded-full bg-ae-green-400"
-          />
-        </motion.a>
+          <AnimatePresence>
+            {hovered && (
+              <motion.span
+                initial={{ opacity: 0, x: 10, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 10, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap glass-strong rounded-xl px-3.5 py-2 text-xs font-semibold text-fg shadow-lg"
+              >
+                {SITE_CONFIG.contact.whatsappLabel}
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          <motion.a
+            href={SITE_CONFIG.links.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            className="relative flex h-14 w-14 items-center justify-center rounded-full bg-ae-green-500 text-white shadow-lg shadow-ae-green-500/30 hover:bg-ae-green-600 transition-colors"
+            aria-label="Contactar por WhatsApp"
+          >
+            <MessageCircle className="h-6 w-6" />
+            <span className="absolute inset-0 rounded-full bg-ae-green-400 animate-ping opacity-20" />
+          </motion.a>
+        </motion.div>
       )}
     </AnimatePresence>
   );

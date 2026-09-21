@@ -1,18 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * AEPERION — Card UI Primitive
- *
- * Componente base para cards en pricing, tools, capabilities, blog.
- * Usar composición: <Card> <CardHeader> <CardContent> <CardFooter>
- *
- * HANDOFF-FRONTEND:
- *   - Cards en pricing/tools: animar con <StaggerReveal>
- *   - Hover: agregar elevación sutil con framer-motion
- *   - highlight: la card destacada (Fullpack) debe tener glow animado
- */
-
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -20,13 +8,28 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-2xl border border-ae-gray-200 bg-white shadow-sm transition-all duration-200",
+      "rounded-2xl border border-border bg-card text-fg shadow-ae-sm transition-all duration-300",
       className
     )}
     {...props}
   />
 ));
 Card.displayName = "Card";
+
+const GlassCard = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "relative rounded-2xl glass-card text-fg transition-all duration-300",
+      className
+    )}
+    {...props}
+  />
+));
+GlassCard.displayName = "GlassCard";
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
@@ -47,7 +50,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-xl font-semibold leading-none tracking-tight text-ae-gray-900",
+      "text-xl font-bold leading-none tracking-tight text-fg",
       className
     )}
     {...props}
@@ -61,7 +64,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-ae-gray-500 leading-relaxed", className)}
+    className={cn("text-sm text-fg-muted leading-relaxed", className)}
     {...props}
   />
 ));
@@ -89,6 +92,7 @@ CardFooter.displayName = "CardFooter";
 
 export {
   Card,
+  GlassCard,
   CardHeader,
   CardFooter,
   CardTitle,

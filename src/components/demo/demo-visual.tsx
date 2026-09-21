@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BarChart3 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types";
 
@@ -37,16 +38,18 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-ae-gray-50 rounded-lg p-4 text-center"
+                className="relative bg-surface-2 rounded-xl p-4 text-center"
                 onMouseEnter={() => setTooltipVisible(i)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
-                <p className="text-2xl font-bold text-ae-gray-900">{stat.value}</p>
-                <p className="text-xs text-ae-gray-500 mt-1">{stat.label}</p>
-                <span className={cn(
-                  "text-[10px] font-medium",
-                  stat.change.startsWith("+") ? "text-ae-success" : "text-ae-error"
-                )}>
+                <p className="text-2xl font-extrabold text-fg">{stat.value}</p>
+                <p className="text-xs text-fg-muted mt-1">{stat.label}</p>
+                <span
+                  className={cn(
+                    "text-[10px] font-semibold",
+                    stat.change.startsWith("+") ? "text-ae-success" : "text-ae-error"
+                  )}
+                >
                   {stat.change}
                 </span>
                 <AnimatePresence>
@@ -55,7 +58,7 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 5 }}
-                      className="absolute -top-8 left-1/2 -translate-x-1/2 bg-ae-gray-900 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap"
+                      className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 glass-strong text-fg text-[10px] px-2.5 py-1 rounded-lg whitespace-nowrap"
                     >
                       Dato simulado para demo
                     </motion.div>
@@ -64,17 +67,19 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
               </motion.div>
             ))}
           </div>
-          <div className="bg-ae-gray-50 rounded-lg p-6 flex items-center justify-center text-ae-gray-400 text-sm min-h-[150px]">
+          <div className="bg-surface-2 rounded-xl p-6 flex items-center justify-center text-fg-subtle text-sm min-h-[150px]">
             <motion.div
-              animate={{ opacity: [0.5, 1, 0.5] }}
+              animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="text-center"
             >
-              <div className="h-12 w-12 mx-auto mb-3 rounded-xl bg-ae-green-100 flex items-center justify-center">
-                <span className="text-ae-green-500 text-lg">📊</span>
+              <div className="h-12 w-12 mx-auto mb-3 rounded-xl bg-ae-green-400/15 flex items-center justify-center">
+                <BarChart3 className="h-5 w-5 text-ae-green-500" />
               </div>
               <p>Gráfico interactivo (demo visual)</p>
-              <p className="text-xs text-ae-gray-400 mt-1">Los datos mostrados son simulados</p>
+              <p className="text-xs text-fg-subtle mt-1">
+                Los datos mostrados son simulados
+              </p>
             </motion.div>
           </div>
         </div>
@@ -84,23 +89,25 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
       id: "config",
       label: "Configuración",
       content: (
-        <div className="p-6 space-y-4">
-          {["Notificaciones", "Integración WhatsApp", "Reportes automáticos", "Usuarios"].map((item, i) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.08 }}
-              className="flex items-center justify-between p-3 bg-ae-gray-50 rounded-lg"
-            >
-              <span className="text-sm text-ae-gray-700">{item}</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" defaultChecked={i < 2} className="sr-only peer" />
-                <div className="w-8 h-4 bg-ae-gray-300 peer-checked:bg-ae-green-400 rounded-full transition-colors" />
-                <div className="absolute top-0.5 left-0.5 h-3 w-3 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform" />
-              </label>
-            </motion.div>
-          ))}
+        <div className="p-6 space-y-3">
+          {["Notificaciones", "Integración WhatsApp", "Reportes automáticos", "Usuarios"].map(
+            (item, i) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.08 }}
+                className="flex items-center justify-between p-3 bg-surface-2 rounded-xl"
+              >
+                <span className="text-sm text-fg-muted">{item}</span>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" defaultChecked={i < 2} className="sr-only peer" />
+                  <div className="w-9 h-5 bg-surface-3 peer-checked:bg-ae-green-400 rounded-full transition-colors" />
+                  <div className="absolute top-0.5 left-0.5 h-4 w-4 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform" />
+                </label>
+              </motion.div>
+            )
+          )}
         </div>
       ),
     },
@@ -120,16 +127,18 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-3 py-3 border-b border-ae-gray-100 last:border-0"
+              className="flex items-center gap-3 py-3 border-b border-border last:border-0"
             >
-              <div className={cn(
-                "h-2 w-2 rounded-full",
-                item.type === "success" && "bg-ae-success",
-                item.type === "info" && "bg-ae-info",
-                item.type === "warning" && "bg-ae-warning"
-              )} />
-              <span className="flex-1 text-sm text-ae-gray-700">{item.action}</span>
-              <span className="text-xs text-ae-gray-400">{item.time}</span>
+              <div
+                className={cn(
+                  "h-2 w-2 rounded-full",
+                  item.type === "success" && "bg-ae-success",
+                  item.type === "info" && "bg-ae-info",
+                  item.type === "warning" && "bg-ae-warning"
+                )}
+              />
+              <span className="flex-1 text-sm text-fg-muted">{item.action}</span>
+              <span className="text-xs text-fg-subtle">{item.time}</span>
             </motion.div>
           ))}
         </div>
@@ -138,22 +147,23 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
   ];
 
   return (
-    <div className={cn("bg-white rounded-2xl border border-ae-gray-200 overflow-hidden shadow-sm", className)}>
-      {/* Tabs */}
-      <div className="flex border-b border-ae-gray-100 bg-ae-gray-50/50">
+    <div className={cn("rounded-3xl glass-card overflow-hidden", className)}>
+      <div className="flex border-b border-border bg-surface-2/40">
         {tabs.map((tab, i) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(i)}
             className={cn(
-              "relative px-5 py-3 text-sm font-medium transition-colors",
-              activeTab === i ? "text-ae-green-600" : "text-ae-gray-500 hover:text-ae-gray-700"
+              "relative px-5 py-3 text-sm font-semibold transition-colors",
+              activeTab === i
+                ? "text-ae-green-600 dark:text-ae-green-300"
+                : "text-fg-muted hover:text-fg"
             )}
           >
             {tab.label}
             {activeTab === i && (
               <motion.div
-                layoutId="tab-indicator"
+                layoutId="demo-tab-indicator"
                 className="absolute bottom-0 left-0 right-0 h-0.5 bg-ae-green-400"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
@@ -162,7 +172,6 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
         ))}
       </div>
 
-      {/* Tab Content */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
@@ -175,10 +184,11 @@ export function DemoVisual({ tool, className }: DemoVisualProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Footer */}
-      <div className="px-6 py-3 bg-ae-gray-50 border-t border-ae-gray-100 flex items-center justify-between">
-        <span className="text-xs text-ae-gray-400">Demo interactiva — datos simulados</span>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-ae-green-100 text-ae-green-600 font-medium">
+      <div className="px-6 py-3 bg-surface-2/40 border-t border-border flex items-center justify-between">
+        <span className="text-xs text-fg-subtle">
+          Demo interactiva — datos simulados
+        </span>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-ae-green-400/15 text-ae-green-700 dark:text-ae-green-300 font-semibold">
           {tool.demoType}
         </span>
       </div>

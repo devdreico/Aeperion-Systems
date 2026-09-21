@@ -1,96 +1,107 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { PricingSection } from "@/components/features/pricing/pricing-section";
-import { MercadoPagoButton } from "@/components/shared/mercado-pago-button";
+import { PaymentButtons } from "@/components/shared/payment-buttons";
+import { SectionHeader } from "@/components/shared/section-header";
+import { Container } from "@/components/layout/container";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { PLAN_COMPARISON_HEADERS, PLAN_COMPARISON_ROWS } from "@/lib/plans-data";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Planes de Ejecución",
+  title: "Planes y precios",
   description:
-    "Elige el plan ideal para tu negocio: Standart ($200K), Fullpack ($450K) o Syspack ($1M). Todos incluyen asesoría gratuita.",
+    "Planes Standart ($200K), Fullpack ($450K) y Syspack ($1M). Todos incluyen diagnóstico gratuito. Paga con Mercado Pago o Wompi.",
 };
 
-/**
- * AEPERION — Planes Page
- *
- * Muestra todos los planes en grid + tabla comparativa.
- *
- * HANDOFF-FRONTEND:
- *   - PricingSection: mismas animaciones que en landing
- *   - FULL PAGE: agregar padding extra para scroll reveal desde el hero
- */
 export default function PlanesPage() {
   return (
     <div className="pt-20">
-      {/* HANDOFF-FRONTEND: Hero interno con fade-in */}
-      <section className="py-12 md:py-20 bg-gradient-to-b from-white to-ae-gray-50">
-        <div className="container-ae text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ae-green-600">
+      <section className="relative overflow-hidden mesh-bg bg-surface py-16 md:py-24">
+        <Container className="text-center relative z-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ae-green-600 dark:text-ae-green-300">
             Soluciones para negocios en crecimiento
           </p>
-          <h1 className="mt-4 text-4xl md:text-5xl font-bold text-ae-gray-900 tracking-tight">
-            Planes de Ejecución
+          <h1 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-extrabold text-fg tracking-tight">
+            Planes de ejecución
           </h1>
-          <p className="mt-4 text-lg text-ae-gray-500 max-w-3xl mx-auto">
+          <p className="mt-4 text-lg text-fg-muted max-w-3xl mx-auto">
             {SITE_CONFIG.valueProp}
           </p>
+
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <MercadoPagoButton
-              planName="Plan Fullpack"
-              amount={450000}
-              customerEmail="contacto@aeperion.com"
-              className="min-w-[220px]"
-            />
-            <a
-              href="/asesoria"
-              className="inline-flex items-center justify-center rounded-xl border border-ae-gray-200 bg-white px-6 py-3 text-sm font-semibold text-ae-gray-700 hover:border-ae-green-300 hover:text-ae-green-700 transition-colors"
-            >
-              Agendar diagnóstico gratuito
-            </a>
+            <Link href="/asesoria">
+              <Button variant="primary" size="xl" className="group">
+                Agendar diagnóstico gratuito
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+            </Link>
+            <Badge variant="glass" className="px-4 py-2">
+              <Sparkles className="h-3.5 w-3.5 text-ae-green-500" />
+              Diagnóstico y asesoría 100% gratis
+            </Badge>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <PricingSection />
+      <PricingSection showHeader={false} showPayments />
 
-      {/* Comparison Table */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container-ae">
-          <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 text-center mb-12">
-            Comparativa completa
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+      <section className="py-16 md:py-24 bg-surface-1">
+        <Container>
+          <SectionHeader
+            badge="Comparativa"
+            title="Compara los planes en detalle"
+            description="La asesoría gratuita aplica para cualquier negocio, sin compromiso de compra."
+          />
+
+          <div className="overflow-x-auto rounded-3xl glass-card">
+            <table className="w-full min-w-[640px] text-sm">
               <thead>
-                <tr className="border-b border-ae-gray-200">
-                  <th className="text-left py-4 pr-8 font-semibold text-ae-gray-900">Característica</th>
-                  <th className="text-center py-4 px-4 font-semibold text-ae-gray-600">Standart</th>
-                  <th className="text-center py-4 px-4 font-semibold text-ae-green-600 bg-ae-green-50/50">Fullpack</th>
-                  <th className="text-center py-4 px-4 font-semibold text-ae-gray-900">Syspack</th>
+                <tr className="border-b border-border">
+                  {PLAN_COMPARISON_HEADERS.map((header, i) => (
+                    <th
+                      key={header.key}
+                      className={`py-4 px-4 font-bold ${
+                        i === 0
+                          ? "text-left text-fg"
+                          : i === 2
+                            ? "text-center text-ae-green-600 dark:text-ae-green-300 bg-ae-green-400/5"
+                            : "text-center text-fg-muted"
+                      }`}
+                    >
+                      {header.label}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { f: "Páginas web", s: "1 página", f_: "5 páginas", sy: "10+ / app" },
-                  { f: "WhatsApp Automation", s: "Básico", f_: "Completo", sy: "Avanzado + API" },
-                  { f: "CRM", s: "—", f_: "Básico", sy: "Completo + POS" },
-                  { f: "Facturación electrónica", s: "—", f_: "✓", sy: "✓ + Contabilidad" },
-                  { f: "Herramientas incluidas", s: "1", f_: "3", sy: "10" },
-                  { f: "Capacitación", s: "—", f_: "Equipo", sy: "Completa" },
-                  { f: "Soporte", s: "1 mes", f_: "3 meses", sy: "6 meses + mtto" },
-                  { f: "Dashboard KPIs", s: "—", f_: "—", sy: "✓" },
-                  { f: "Redes sociales", s: "—", f_: "—", sy: "✓" },
-                ].map((row, i) => (
-                  <tr key={i} className="border-b border-ae-gray-100 hover:bg-ae-gray-50 transition-colors">
-                    <td className="py-3 pr-8 text-ae-gray-700">{row.f}</td>
-                    <td className="text-center py-3 px-4 text-ae-gray-500">{row.s}</td>
-                    <td className="text-center py-3 px-4 text-ae-green-700 bg-ae-green-50/30 font-medium">{row.f_}</td>
-                    <td className="text-center py-3 px-4 text-ae-gray-700">{row.sy}</td>
+                {PLAN_COMPARISON_ROWS.map((row) => (
+                  <tr
+                    key={row.feature}
+                    className="border-b border-border last:border-0 hover:bg-surface-2/60 transition-colors"
+                  >
+                    <td className="py-3.5 px-4 text-fg-muted">{row.feature}</td>
+                    <td className="text-center py-3.5 px-4 text-fg-muted">{row.standart}</td>
+                    <td className="text-center py-3.5 px-4 text-ae-green-700 dark:text-ae-green-300 bg-ae-green-400/5 font-semibold">
+                      {row.fullpack}
+                    </td>
+                    <td className="text-center py-3.5 px-4 text-fg-muted">{row.syspack}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
+            <PaymentButtons planName="Plan Fullpack" amount={450000} showNote={false} />
+            <p className="text-xs text-fg-subtle text-center sm:text-left self-center">
+              Elige tu plan y paga en línea. También puedes agendar una asesoría
+              y te acompañamos en la decisión.
+            </p>
+          </div>
+        </Container>
       </section>
     </div>
   );

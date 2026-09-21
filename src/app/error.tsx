@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { AlertTriangle, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Error({
   error,
@@ -20,12 +21,10 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-ae-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-surface mesh-bg">
       <div className="text-center max-w-md px-6">
         <motion.div
-          animate={isShaking ? {
-            x: [0, -8, 8, -6, 6, -3, 3, 0],
-          } : {}}
+          animate={isShaking ? { x: [0, -8, 8, -6, 6, -3, 3, 0] } : {}}
           transition={{ duration: 0.5 }}
           className="h-16 w-16 rounded-2xl bg-ae-error/10 flex items-center justify-center mx-auto mb-6"
         >
@@ -42,7 +41,7 @@ export default function Error({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-2xl font-bold text-ae-gray-900 mb-3"
+          className="text-2xl font-extrabold text-fg mb-3"
         >
           Algo salió mal
         </motion.h1>
@@ -51,31 +50,33 @@ export default function Error({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="text-ae-gray-500 mb-8"
+          className="text-fg-muted mb-8"
         >
-          Ha ocurrido un error inesperado. Nuestro equipo ha sido notificado.
-          Por favor, intenta de nuevo.
+          Ha ocurrido un error inesperado. Intenta de nuevo o contáctanos si persiste.
         </motion.p>
 
-        <motion.button
-          onClick={reset}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-ae-green-500 text-white font-medium rounded-xl hover:bg-ae-green-600 transition-colors shadow-lg shadow-ae-green-500/20"
         >
-          <RefreshCw className="h-4 w-4" />
-          Intentar de nuevo
-        </motion.button>
+          <Button
+            onClick={reset}
+            variant="primary"
+            size="lg"
+            className="animate-pulse-glow"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Intentar de nuevo
+          </Button>
+        </motion.div>
 
         {error.digest && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-xs text-ae-gray-400 mt-8 font-mono"
+            className="text-xs text-fg-subtle mt-8 break-all"
           >
             Error ID: {error.digest}
           </motion.p>

@@ -1,98 +1,112 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { SectionTransition } from "@/components/animations/section-transition";
 import { BLOG_POSTS } from "@/lib/blog-data";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Artículos sobre transformación digital, automatización, CRM, facturación electrónica y más para tu negocio.",
+    "Artículos sobre automatización con IA, transformación digital, CRM, facturación electrónica y crecimiento para tu negocio.",
 };
 
-/**
- * AEPERION — Blog Page
- *
- * HANDOFF-FRONTEND:
- *   - Cards: stagger reveal con Framer Motion
- *   - Featured post: hero reveal animation
- *   - Reading time badges: subtle hover effect
- *   - Category badges: color-coding by category
- */
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  "Transformación Digital": "from-ae-green-400 to-emerald-600",
+  Automatización: "from-sky-400 to-blue-600",
+  Facturación: "from-amber-400 to-orange-600",
+  CRM: "from-violet-400 to-purple-600",
+  Web: "from-rose-400 to-red-600",
+  POS: "from-teal-400 to-cyan-600",
+};
+
+function gradientFor(category: string) {
+  return CATEGORY_GRADIENTS[category] ?? "from-ae-green-400 to-ae-green-700";
+}
 
 export default function BlogPage() {
-  const featured = BLOG_POSTS[0];
-  const rest = BLOG_POSTS.slice(1);
+  const [featured, ...rest] = BLOG_POSTS;
 
   return (
     <div className="pt-20">
-      <Section variant="default" size="lg">
+      <Section variant="glass" size="lg">
         <Container>
           <div className="text-center mb-12">
-            {/* HANDOFF-FRONTEND: Animar headline con fade-in-up */}
-            <h1 className="text-4xl md:text-5xl font-bold text-ae-gray-900 tracking-tight mb-4">
+            <Badge variant="default" className="mb-4">
+              Recursos
+            </Badge>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-fg tracking-tight mb-4">
               Blog
             </h1>
-            <p className="text-lg text-ae-gray-500 max-w-xl mx-auto">
-              Artículos, guías y recursos sobre transformación digital, automatización y herramientas para tu negocio.
+            <p className="text-lg text-fg-muted max-w-xl mx-auto">
+              Guías y recursos sobre automatización, IA y crecimiento digital
+              para empresas.
             </p>
           </div>
 
-          {/* HANDOFF-FRONTEND: Featured post — animar con fade-in + slide-up */}
-          <Link href={`/blog/${featured.slug}`}>
-            <div className="group relative overflow-hidden rounded-2xl border border-ae-gray-200 bg-gradient-to-br from-ae-gray-50 to-white p-8 mb-12 transition-all duration-300">
-              {/* HANDOFF-FRONTEND: Agregar hover glow effect con Framer Motion, background parallax sutil */}
-              <Badge variant="default" className="mb-4">{featured.category}</Badge>
-              <h2 className="text-2xl md:text-3xl font-bold text-ae-gray-900 mb-3 group-hover:text-ae-green-600 transition-colors">
-                {featured.title}
-              </h2>
-              <p className="text-ae-gray-500 mb-4 max-w-2xl">{featured.excerpt}</p>
-              <div className="flex items-center gap-4 text-xs text-ae-gray-400">
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-3 w-3" />
-                  {featured.publishedAt}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {featured.readingTime} min
-                </span>
-              </div>
-            </div>
-          </Link>
+          <SectionTransition>
+            <Link href={`/blog/${featured.slug}`} className="block group mb-12">
+              <article className="relative overflow-hidden rounded-3xl glass-card">
+                <div className={`h-44 md:h-56 bg-gradient-to-br ${gradientFor(featured.category)}`} />
+                <div className="p-8">
+                  <Badge variant="secondary" className="mb-4">
+                    {featured.category}
+                  </Badge>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-fg mb-3 group-hover:text-ae-green-600 dark:group-hover:text-ae-green-300 transition-colors">
+                    {featured.title}
+                  </h2>
+                  <p className="text-fg-muted mb-4 max-w-2xl">{featured.excerpt}</p>
+                  <div className="flex items-center gap-4 text-xs text-fg-subtle">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3" />
+                      {featured.publishedAt}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      {featured.readingTime} min
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-ae-green-600 dark:text-ae-green-300 font-semibold">
+                      Leer artículo
+                      <ArrowUpRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          </SectionTransition>
 
-          {/* HANDOFF-FRONTEND: Posts grid — animar con StaggerReveal */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((post, index) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                {/* HANDOFF-FRONTEND: Wrap en motion.div con stagger index delay */}
-                <Card className="group h-full border-ae-gray-100 hover:border-ae-green-200 hover:shadow-md transition-all duration-300">
-                  <CardContent className="p-6">
-                    <Badge variant="secondary" className="mb-3 text-[10px]">
-                      {post.category}
-                    </Badge>
-                    <h3 className="text-base font-semibold text-ae-gray-900 mb-2 group-hover:text-ae-green-600 transition-colors line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-ae-gray-500 mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3 text-[10px] text-ae-gray-400">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {post.publishedAt}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {post.readingTime} min
-                      </span>
+              <SectionTransition key={post.slug} delay={index * 0.08}>
+                <Link href={`/blog/${post.slug}`} className="block h-full group">
+                  <article className="h-full rounded-3xl glass-card overflow-hidden hover:border-ae-green-400/40 transition-colors">
+                    <div className={`h-28 bg-gradient-to-br ${gradientFor(post.category)}`} />
+                    <div className="p-6">
+                      <Badge variant="secondary" className="mb-3 text-[10px]">
+                        {post.category}
+                      </Badge>
+                      <h3 className="text-base font-bold text-fg mb-2 group-hover:text-ae-green-600 dark:group-hover:text-ae-green-300 transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-xs text-fg-muted mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center gap-3 text-[10px] text-fg-subtle">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {post.publishedAt}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {post.readingTime} min
+                        </span>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                  </article>
+                </Link>
+              </SectionTransition>
             ))}
           </div>
         </Container>

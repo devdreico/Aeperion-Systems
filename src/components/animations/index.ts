@@ -1,6 +1,6 @@
 /**
  * AEPERION — Animation Components Barrel
- * 
+ *
  * Todos los componentes de animación reutilizables.
  * Cada componente acepta className y respeta prefers-reduced-motion.
  */
@@ -17,3 +17,6 @@ export { MorphingShape } from "./morphing-shape";
 export { ScrollProgress } from "./scroll-progress";
 export { FadeInView } from "./fade-in-view";
 export { StaggerReveal } from "./stagger-reveal";
+export { AuroraBackground } from "./aurora-background";
+export { CursorSpotlight } from "./cursor-spotlight";
+export { Marquee } from "./marquee";

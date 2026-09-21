@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** @description Wraps sections to reveal on scroll with fade-in-up/down/left/right animation */
@@ -24,14 +24,11 @@ export function SectionTransition({
   duration = 0.6,
   once = true,
   distance = 40,
-  as: Tag = "div",
 }: SectionTransitionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
 
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  const prefersReducedMotion = useReducedMotion();
 
   const directionOffset = {
     up: { y: distance },

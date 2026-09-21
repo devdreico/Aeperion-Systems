@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollProgressProps {
@@ -10,27 +10,26 @@ interface ScrollProgressProps {
 
 export function ScrollProgress({
   className,
-  color = "bg-ae-green-400",
+  color = "bg-gradient-to-r from-ae-green-400 to-ae-green-600",
 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
+    stiffness: 120,
     damping: 30,
     restDelta: 0.001,
   });
+  const shouldReduceMotion = useReducedMotion();
 
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
+  if (shouldReduceMotion) return null;
 
   return (
     <motion.div
       className={cn(
-        "fixed top-0 left-0 right-0 z-[100] h-[3px] origin-left",
+        "fixed top-0 left-0 right-0 z-[100] h-[3px] origin-left rounded-r-full",
         color,
         className
       )}
-      style={{ scaleX: prefersReducedMotion ? 1 : scaleX }}
+      style={{ scaleX }}
       aria-hidden="true"
     />
   );
