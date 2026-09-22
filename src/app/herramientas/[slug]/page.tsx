@@ -6,9 +6,9 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data";
-import { TOOL_SALES_FORM_URL } from "@/lib/constants";
 import { CATEGORY_ICONS } from "@/components/features/tools/category-icons";
 import { formatCOP } from "@/lib/utils";
+import { ToolPurchaseForm } from "./tool-purchase-form";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -83,7 +83,7 @@ export default async function ToolDetailPage({ params }: Props) {
                 </Button>
               </Link>
             )}
-            <a href={TOOL_SALES_FORM_URL} target="_blank" rel="noopener noreferrer">
+            <a href="#tool-request">
               <Button variant="primary" size="lg" className="group">
                 Solicitar esta solución
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -129,17 +129,7 @@ export default async function ToolDetailPage({ params }: Props) {
             <p className="text-sm text-fg-muted mb-5">
               Déjanos tus datos y te contactaremos para activar esta solución.
             </p>
-            <a
-              href={TOOL_SALES_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <Button variant="primary" size="lg" className="w-full group">
-                Solicitar esta solución
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Button>
-            </a>
+            <ToolPurchaseForm toolName={tool.name} />
           </div>
 
           {relatedTools.length > 0 && (
