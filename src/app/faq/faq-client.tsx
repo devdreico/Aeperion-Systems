@@ -23,7 +23,7 @@ const faqData: FAQItem[] = [
     category: "planes",
     question: "¿Los precios son en pesos colombianos?",
     answer:
-      "Sí, todos nuestros precios están en pesos colombianos (COP). Aceptamos tarjetas, PSE, Nequi y Bancolombia a través de Mercado Pago y Wompi.",
+      "Sí, todos nuestros precios están en pesos colombianos (COP). Aceptamos tarjetas, PSE, efectivo y cuotas a través de Mercado Pago.",
   },
   {
     category: "planes",
@@ -71,13 +71,13 @@ const faqData: FAQItem[] = [
     category: "pagos",
     question: "¿Qué métodos de pago aceptan?",
     answer:
-      "Aceptamos Mercado Pago (tarjetas, PSE, efectivo y cuotas) y Wompi (tarjetas, PSE, Nequi y Bancolombia). Todos los pagos se procesan en plataformas seguras certificadas.",
+      "Aceptamos Mercado Pago con tarjetas, PSE, efectivo y cuotas. Todos los pagos se procesan en una plataforma segura certificada.",
   },
   {
     category: "pagos",
     question: "¿Es seguro pagar en línea?",
     answer:
-      "Sí. No almacenamos datos de tarjetas; el procesamiento lo hacen Mercado Pago y Wompi bajo estándares de seguridad bancaria. Recibirás confirmación y factura electrónica.",
+      "Sí. No almacenamos datos de tarjetas; el procesamiento lo hace Mercado Pago bajo estándares de seguridad bancaria. Recibirás confirmación y factura electrónica.",
   },
   {
     category: "pagos",

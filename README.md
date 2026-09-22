@@ -42,8 +42,7 @@ Todas son opcionales: si no se definen, el sitio usa los valores por defecto de
 | `NEXT_PUBLIC_LINKEDIN_URL` | URL de la página de LinkedIn. |
 | `NEXT_PUBLIC_MP_LINK` | Link de pago de Mercado Pago. |
 | `NEXT_PUBLIC_MP_PUBLIC_KEY` | Public key de Mercado Pago (uso futuro). |
-| `NEXT_PUBLIC_WOMPI_LINK` | Link de checkout de Wompi. |
-| `NEXT_PUBLIC_WOMPI_PUBLIC_KEY` | Public key de Wompi (uso futuro). |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Token opcional de verificación de Google Search Console. |
 | `NEXT_PUBLIC_CONTACT_ENDPOINT` | Endpoint del formulario de contacto. |
 | `NEXT_PUBLIC_ADVISORY_ENDPOINT` | Endpoint del formulario de asesoría. |
 

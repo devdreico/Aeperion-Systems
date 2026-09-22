@@ -2,7 +2,6 @@
 
 import { ShieldCheck } from "lucide-react";
 import { MercadoPagoButton } from "@/components/shared/mercado-pago-button";
-import { WompiButton } from "@/components/shared/wompi-button";
 import { cn } from "@/lib/utils";
 
 interface PaymentButtonsProps {
@@ -23,7 +22,6 @@ export function PaymentButtons({
   return (
     <div className={cn("space-y-3", className)}>
       <div className="grid gap-3">
-        <WompiButton planName={planName} amount={amount} />
         <MercadoPagoButton
           planName={planName}
           amount={amount}

@@ -118,7 +118,7 @@ export const PROJECTS: CaseStudy[] = [
     challenge:
       "Pedidos por llamada y redes sociales sin control. Errores en domicilios, sin trazabilidad y sin datos de venta por producto.",
     solution:
-      "Menú digital, POS integrado, gestión de domicilios con seguimiento y facturación. App de pedidos con pago en línea vía Wompi y Mercado Pago.",
+      "Menú digital, POS integrado, gestión de domicilios con seguimiento y facturación. App de pedidos con pago en línea vía Mercado Pago.",
     results: [
       "Pedidos erróneos reducidos en 78%",
       "Ticket promedio +19% con ventas sugeridas",

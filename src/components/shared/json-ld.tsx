@@ -8,6 +8,7 @@ export function JsonLd() {
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
     logo: `${SITE_CONFIG.url}/images/logo/logo-aeperion.png`,
+    image: `${SITE_CONFIG.url}/images/logo/logo-aeperion.png`,
     description: SITE_CONFIG.description,
     foundingDate: String(SITE_CONFIG.foundedYear),
     founder: { "@type": "Organization", name: SITE_CONFIG.name },
@@ -28,6 +29,20 @@ export function JsonLd() {
       email: SITE_CONFIG.links.email,
       availableLanguage: ["es"],
     },
+    telephone: SITE_CONFIG.contact.phoneDisplay,
+    email: SITE_CONFIG.links.email,
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+      ],
+      opens: "08:00",
+      closes: "18:00",
+    },
   };
 
   const website = {
@@ -44,7 +59,12 @@ export function JsonLd() {
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
     description: SITE_CONFIG.description,
+    image: `${SITE_CONFIG.url}/images/logo/logo-aeperion.png`,
     priceRange: "$$",
+    areaServed: [
+      { "@type": "City", name: SITE_CONFIG.city },
+      { "@type": "Country", name: SITE_CONFIG.country },
+    ],
     provider: { "@id": `${SITE_CONFIG.url}/#organization` },
     makesOffer: [
       {

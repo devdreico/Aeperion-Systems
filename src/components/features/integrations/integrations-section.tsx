@@ -16,7 +16,6 @@ const INTEGRATIONS = [
   "WhatsApp Business",
   "DIAN",
   "Mercado Pago",
-  "Wompi",
   "Google Workspace",
   "Microsoft 365",
   "Stripe",

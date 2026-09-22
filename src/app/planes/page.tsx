@@ -17,7 +17,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Planes y precios",
   description:
-    "Planes Standart ($200K), Fullpack ($450K) y Syspack ($1M). Todos incluyen diagnóstico gratuito. Paga con Mercado Pago o Wompi.",
+    "Planes Standart ($200K), Fullpack ($450K) y Syspack ($1M). Todos incluyen diagnóstico gratuito. Paga con Mercado Pago.",
 };
 
 export default function PlanesPage() {

@@ -11,7 +11,7 @@ import { FAQSection } from "./faq-client";
 export const metadata: Metadata = {
   title: "Preguntas frecuentes",
   description:
-    "Respuestas sobre planes, precios, pagos con Mercado Pago y Wompi, proceso de trabajo, IA y soporte de Aeperion Systems.",
+    "Respuestas sobre planes, precios, pagos con Mercado Pago, proceso de trabajo, IA y soporte de Aeperion Systems.",
 };
 
 export default function FAQPage() {

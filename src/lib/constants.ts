@@ -19,6 +19,9 @@ const INSTAGRAM_URL =
 const LINKEDIN_URL =
   process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com/company/aeperion-systems";
 
+export const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
 export const TOOL_SALES_FORM_URL = "https://formspree.io/f/xljdbpdl";
 
 export const SITE_CONFIG = {
@@ -41,7 +44,6 @@ export const SITE_CONFIG = {
     linkedin: LINKEDIN_URL,
     mercadoPago:
       process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
-    wompi: process.env.NEXT_PUBLIC_WOMPI_LINK ?? "https://checkout.wompi.co/",
   },
   contact: {
     phoneDisplay: `+${WHATSAPP_NUMBER.slice(0, 2)} ${WHATSAPP_NUMBER.slice(2, 5)} ${WHATSAPP_NUMBER.slice(5, 8)} ${WHATSAPP_NUMBER.slice(8)}`,
@@ -58,13 +60,6 @@ export const SITE_CONFIG = {
       link:
         process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
       publicKey: process.env.NEXT_PUBLIC_MP_PUBLIC_KEY ?? "",
-    },
-    wompi: {
-      enabled: true,
-      label: "Wompi",
-      description: "Tarjetas, PSE, Nequi y Bancolombia. Pago seguro.",
-      link: process.env.NEXT_PUBLIC_WOMPI_LINK ?? "https://checkout.wompi.co/",
-      publicKey: process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY ?? "",
     },
   },
 } as const;
@@ -152,12 +147,5 @@ export const PAYMENT_METHODS = [
     description: "Tarjetas, PSE, efectivo y cuotas sin interés.",
     href: SITE_CONFIG.payments.mercadoPago.link,
     enabled: SITE_CONFIG.payments.mercadoPago.enabled,
-  },
-  {
-    id: "wompi",
-    name: "Wompi",
-    description: "Tarjetas, PSE, Nequi y Bancolombia.",
-    href: SITE_CONFIG.payments.wompi.link,
-    enabled: SITE_CONFIG.payments.wompi.enabled,
   },
 ] as const;

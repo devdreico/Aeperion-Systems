@@ -656,7 +656,7 @@ export const TOOLS: Tool[] = [
     description:
       "Integración de pagos online para recibir pagos con tarjeta, transferencia y más.",
     longDescription:
-      "Conexión con pasarelas de pago colombianas (Wompi, PayU, Epayco) para recibir pagos online de forma segura. Incluye checkout personalizado, notificaciones y conciliación.",
+      "Conexión con Mercado Pago para recibir pagos online de forma segura. Incluye checkout personalizado, notificaciones y conciliación.",
     category: "pos-pagos",
     price: 180000,
     icon: "banknote",

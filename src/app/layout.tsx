@@ -8,7 +8,7 @@ import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { ClientLayout } from "@/components/layout/client-layout";
 import { JsonLd } from "@/components/shared/json-ld";
-import { SITE_CONFIG } from "@/lib/constants";
+import { GOOGLE_SITE_VERIFICATION, SITE_CONFIG } from "@/lib/constants";
 import { montserrat } from "@/lib/fonts";
 
 export const metadata: Metadata = {
@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Aeperion Systems",
   },
   description: SITE_CONFIG.description,
+  applicationName: SITE_CONFIG.name,
   keywords: [
     "desarrollo de software",
     "automatización empresarial",
@@ -31,6 +32,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Aeperion Systems" }],
   creator: "Aeperion Systems",
+  publisher: "Aeperion Systems",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "es_CO",
@@ -38,13 +43,39 @@ export const metadata: Metadata = {
     title: "Aeperion Systems — Automatización e IA para empresas",
     description: SITE_CONFIG.valueProp,
     url: SITE_CONFIG.url,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Aeperion Systems — Automatización e IA para empresas",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Aeperion Systems — Automatización e IA para empresas",
     description: SITE_CONFIG.valueProp,
+    images: ["/opengraph-image"],
   },
-  robots: { index: true, follow: true },
+  icons: {
+    icon: "/images/logo/logo-aeperion.png",
+    apple: "/images/logo/logo-aeperion.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {

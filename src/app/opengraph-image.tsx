@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export const alt = "Aeperion Systems — Automatización e IA para empresas";
 export const size = { width: 1200, height: 630 };
@@ -25,16 +26,19 @@ export default async function OpengraphImage() {
               width: 72,
               height: 72,
               borderRadius: 20,
-              background: "linear-gradient(135deg, #6EC45E, #347026)",
+              background: "#F4F5F6",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 44,
-              fontWeight: 800,
-              color: "#0A0A0B",
             }}
           >
-            A
+            <img
+              src={`${SITE_CONFIG.url}/images/logo/logo-aeperion.png`}
+              width={58}
+              height={58}
+              alt="Aeperion Systems"
+              style={{ objectFit: "contain" }}
+            />
           </div>
           <div style={{ display: "flex", fontSize: 40, fontWeight: 700, color: "#F4F5F6" }}>
             Aeperion

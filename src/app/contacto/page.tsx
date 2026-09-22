@@ -10,7 +10,7 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Contáctanos por WhatsApp, email o formulario. Paga con Mercado Pago o Wompi. Respuesta en menos de 1 hora.",
+    "Contáctanos por WhatsApp, email o formulario. Paga con Mercado Pago. Respuesta en menos de 1 hora.",
 };
 
 export default function ContactoPage() {
