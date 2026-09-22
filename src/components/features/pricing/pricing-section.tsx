@@ -129,6 +129,7 @@ export function PricingSection({
                       <PaymentButtons
                         planName={plan.name}
                         amount={plan.price}
+                        mercadoPagoLink={plan.mercadoPagoLink}
                         showNote={false}
                       />
                     </div>

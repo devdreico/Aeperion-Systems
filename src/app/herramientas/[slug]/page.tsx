@@ -5,8 +5,8 @@ import { ArrowLeft, ArrowRight, Check, Sparkles } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PaymentButtons } from "@/components/shared/payment-buttons";
 import { TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data";
+import { TOOL_SALES_FORM_URL } from "@/lib/constants";
 import { CATEGORY_ICONS } from "@/components/features/tools/category-icons";
 import { formatCOP } from "@/lib/utils";
 
@@ -83,12 +83,12 @@ export default async function ToolDetailPage({ params }: Props) {
                 </Button>
               </Link>
             )}
-            <Link href="/asesoria">
+            <a href={TOOL_SALES_FORM_URL} target="_blank" rel="noopener noreferrer">
               <Button variant="primary" size="lg" className="group">
                 Solicitar esta solución
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
-            </Link>
+            </a>
           </div>
         </Container>
       </section>
@@ -127,10 +127,19 @@ export default async function ToolDetailPage({ params }: Props) {
               Adquiere {tool.name}
             </h2>
             <p className="text-sm text-fg-muted mb-5">
-              Paga en línea con Mercado Pago o Wompi. Activación sujeta a
-              diagnóstico previo.
+              Déjanos tus datos y te contactaremos para activar esta solución.
             </p>
-            <PaymentButtons planName={tool.name} amount={tool.price} />
+            <a
+              href={TOOL_SALES_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <Button variant="primary" size="lg" className="w-full group">
+                Solicitar esta solución
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+            </a>
           </div>
 
           {relatedTools.length > 0 && (

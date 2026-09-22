@@ -12,6 +12,7 @@ interface MercadoPagoButtonProps {
   className?: string;
   variant?: "primary" | "secondary" | "glass";
   size?: "md" | "lg" | "xl";
+  href?: string;
 }
 
 export function MercadoPagoButton({
@@ -21,12 +22,13 @@ export function MercadoPagoButton({
   className,
   variant = "secondary",
   size = "lg",
+  href,
 }: MercadoPagoButtonProps) {
-  const href = SITE_CONFIG.payments.mercadoPago.link;
+  const paymentHref = href ?? SITE_CONFIG.payments.mercadoPago.link;
 
   return (
     <a
-      href={href}
+      href={paymentHref}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} — ${planName} ${formatCOP(amount)}`}

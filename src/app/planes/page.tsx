@@ -7,7 +7,11 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PLAN_COMPARISON_HEADERS, PLAN_COMPARISON_ROWS } from "@/lib/plans-data";
+import {
+  PLAN_COMPARISON_HEADERS,
+  PLAN_COMPARISON_ROWS,
+  PLANS,
+} from "@/lib/plans-data";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -95,7 +99,12 @@ export default function PlanesPage() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
-            <PaymentButtons planName="Plan Fullpack" amount={450000} showNote={false} />
+            <PaymentButtons
+              planName="Plan Fullpack"
+              amount={450000}
+              mercadoPagoLink={PLANS.find((plan) => plan.id === "fullpack")?.mercadoPagoLink}
+              showNote={false}
+            />
             <p className="text-xs text-fg-subtle text-center sm:text-left self-center">
               Elige tu plan y paga en línea. También puedes agendar una asesoría
               y te acompañamos en la decisión.

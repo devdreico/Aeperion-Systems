@@ -135,7 +135,11 @@ export default async function PlanPage({ params }: PlanPageProps) {
             </div>
 
             <div className="mt-7">
-              <PaymentButtons planName={plan.name} amount={plan.price} />
+              <PaymentButtons
+                planName={plan.name}
+                amount={plan.price}
+                mercadoPagoLink={plan.mercadoPagoLink}
+              />
             </div>
 
             <Link href="/asesoria" className="block mt-4">

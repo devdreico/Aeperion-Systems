@@ -69,6 +69,7 @@ export const PLANS: Plan[] = [
     supportMonths: 1,
     color: "ae-green-500",
     icon: "rocket",
+    mercadoPagoLink: "https://mpago.li/18TdeXa",
   },
   {
     id: "fullpack",
@@ -100,6 +101,7 @@ export const PLANS: Plan[] = [
     supportMonths: 3,
     color: "ae-green-400",
     icon: "zap",
+    mercadoPagoLink: "https://mpago.li/2j7HV3G",
   },
   {
     id: "syspack",
@@ -131,6 +133,7 @@ export const PLANS: Plan[] = [
     supportMonths: 6,
     color: "ae-black",
     icon: "building2",
+    mercadoPagoLink: "https://mpago.li/1qxcgM4",
   },
 ];
 

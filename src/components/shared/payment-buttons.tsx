@@ -10,6 +10,7 @@ interface PaymentButtonsProps {
   amount: number;
   className?: string;
   showNote?: boolean;
+  mercadoPagoLink?: string;
 }
 
 export function PaymentButtons({
@@ -17,12 +18,17 @@ export function PaymentButtons({
   amount,
   className,
   showNote = true,
+  mercadoPagoLink,
 }: PaymentButtonsProps) {
   return (
     <div className={cn("space-y-3", className)}>
       <div className="grid gap-3">
         <WompiButton planName={planName} amount={amount} />
-        <MercadoPagoButton planName={planName} amount={amount} />
+        <MercadoPagoButton
+          planName={planName}
+          amount={amount}
+          href={mercadoPagoLink}
+        />
       </div>
       {showNote && (
         <p className="flex items-center justify-center gap-1.5 text-xs text-fg-subtle">

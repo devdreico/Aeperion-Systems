@@ -26,6 +26,7 @@ export interface Plan {
   highlight: boolean;
   ctaText: string;
   ctaRoute: string;
+  mercadoPagoLink?: string;
   features: PlanFeature[];
   deliveryDays: number;
   supportMonths: number;

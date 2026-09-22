@@ -19,6 +19,8 @@ const INSTAGRAM_URL =
 const LINKEDIN_URL =
   process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com/company/aeperion-systems";
 
+export const TOOL_SALES_FORM_URL = "https://formspree.io/f/xljdbpdl";
+
 export const SITE_CONFIG = {
   name: "Aeperion Systems",
   shortName: "Aeperion",
