@@ -13,12 +13,19 @@ import {
   PLANS,
 } from "@/lib/plans-data";
 import { SITE_CONFIG } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Planes y precios",
   description:
     "Planes Standart ($200K), Fullpack ($450K) y Syspack ($1M). Todos incluyen diagnóstico gratuito. Paga con Mercado Pago.",
-};
+  path: "/planes",
+  keywords: [
+    "precios desarrollo software Colombia",
+    "planes automatización empresarial",
+    "costo CRM facturación electrónica",
+  ],
+});
 
 export default function PlanesPage() {
   return (

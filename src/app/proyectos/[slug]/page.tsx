@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
+import { breadcrumbListJsonLd, pageMetadata } from "@/lib/seo";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -19,11 +21,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project) return { title: "Proyecto no encontrado" };
-  return {
+  if (!project) return { title: "Proyecto no encontrado", robots: { index: false } };
+  return pageMetadata({
     title: `${project.clientName} — ${project.industry}`,
     description: project.challenge,
-  };
+    path: `/proyectos/${project.slug}`,
+    keywords: [project.clientName, project.industry, ...project.tags],
+  });
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -31,8 +35,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
+  const jsonLd = breadcrumbListJsonLd([
+    { name: "Inicio", path: "/" },
+    { name: "Proyectos", path: "/proyectos" },
+    { name: project.clientName },
+  ]);
+
   return (
     <div className="pt-20">
+      <JsonLdScript data={jsonLd} />
       <section
         className={cn(
           "relative overflow-hidden bg-gradient-to-br py-20 md:py-28 text-white",

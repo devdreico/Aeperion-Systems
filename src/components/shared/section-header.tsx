@@ -9,6 +9,8 @@ interface SectionHeaderProps {
   description?: string;
   align?: "center" | "left";
   className?: string;
+  /** Nivel de encabezado: h1 solo en títulos principales de página. */
+  level?: "h1" | "h2";
 }
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
@@ -19,7 +21,10 @@ export function SectionHeader({
   description,
   align = "center",
   className,
+  level = "h2",
 }: SectionHeaderProps) {
+  const Heading = level === "h1" ? m.h1 : m.h2;
+
   return (
     <m.div
       initial="hidden"
@@ -48,7 +53,7 @@ export function SectionHeader({
           {badge}
         </m.span>
       )}
-      <m.h2
+      <Heading
         variants={{
           hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
           visible: {
@@ -58,10 +63,13 @@ export function SectionHeader({
             transition: { duration: 0.6, ease: easeOut },
           },
         }}
-        className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-fg tracking-tight text-balance"
+        className={cn(
+          "text-3xl md:text-4xl lg:text-5xl font-extrabold text-fg tracking-tight text-balance",
+          level === "h1" && "text-4xl md:text-5xl lg:text-6xl"
+        )}
       >
         {title}
-      </m.h2>
+      </Heading>
       {description && (
         <m.p
           variants={{

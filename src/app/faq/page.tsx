@@ -6,23 +6,42 @@ import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
+import { FAQ_ITEMS } from "@/lib/faq-data";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
+import { breadcrumbListJsonLd, faqPageJsonLd, pageMetadata } from "@/lib/seo";
 import { FAQSection } from "./faq-client";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Preguntas frecuentes",
   description:
     "Respuestas sobre planes, precios, pagos con Mercado Pago, proceso de trabajo, IA y soporte de Aeperion Systems.",
-};
+  path: "/faq",
+  keywords: [
+    "FAQ Aeperion Systems",
+    "precios planes automatización",
+    "pagos Mercado Pago Colombia",
+  ],
+});
 
 export default function FAQPage() {
+  const jsonLd = [
+    faqPageJsonLd(FAQ_ITEMS),
+    breadcrumbListJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Preguntas frecuentes" },
+    ]),
+  ];
+
   return (
     <div className="pt-20">
+      <JsonLdScript data={jsonLd} />
       <Section variant="glass" size="lg">
         <Container variant="narrow">
           <SectionHeader
             badge="Soporte"
             title="Preguntas frecuentes"
             description="Respuestas rápidas a las dudas más comunes. Si no encuentras lo que buscas, escríbenos directamente."
+            level="h1"
           />
 
           <FAQSection />

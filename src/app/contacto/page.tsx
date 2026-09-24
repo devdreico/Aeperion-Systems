@@ -6,12 +6,19 @@ import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/shared/section-header";
 import { PAYMENT_METHODS, SITE_CONFIG } from "@/lib/constants";
 import { ContactForm } from "./contact-form";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contacto",
   description:
     "Contáctanos por WhatsApp, email o formulario. Paga con Mercado Pago. Respuesta en menos de 1 hora.",
-};
+  path: "/contacto",
+  keywords: [
+    "contacto Aeperion Systems",
+    "desarrollo de software Bogotá",
+    "asesoría automatización Colombia",
+  ],
+});
 
 export default function ContactoPage() {
   return (
@@ -22,6 +29,7 @@ export default function ContactoPage() {
             badge="Contacto"
             title="Hablemos de tu proyecto"
             description="Estamos listos para escuchar tu operación y proponerte una solución. Respondemos en menos de 1 hora en horario laboral."
+            level="h1"
           />
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">

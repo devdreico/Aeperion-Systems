@@ -3,7 +3,8 @@
 Sitio corporativo de **Aeperion Systems**, startup fintech de desarrollo de software con IA
 orientada a automatización y eficiencia empresarial. Fundada en 2017 en Bogotá, Colombia.
 
-Dominio oficial: **aesystems.com**
+Dominio de indexación: **aeperion.presentto.online**  
+(Marca corporativa: aesystems.com)
 
 ## Stack
 
@@ -35,7 +36,7 @@ Todas son opcionales: si no se definen, el sitio usa los valores por defecto de
 
 | Variable | Descripción |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (canonical, sitemap, JSON-LD). |
+| `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (canonical, sitemap, JSON-LD). Por defecto: `https://aeperion.presentto.online`. |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Número de WhatsApp en formato internacional sin `+` (ej. `573000000000`). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Correo de contacto. |
 | `NEXT_PUBLIC_INSTAGRAM_URL` | URL del perfil de Instagram. |
@@ -43,6 +44,7 @@ Todas son opcionales: si no se definen, el sitio usa los valores por defecto de
 | `NEXT_PUBLIC_MP_LINK` | Link de pago de Mercado Pago. |
 | `NEXT_PUBLIC_MP_PUBLIC_KEY` | Public key de Mercado Pago (uso futuro). |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Token opcional de verificación de Google Search Console. |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Token opcional de verificación de Bing Webmaster Tools. |
 | `NEXT_PUBLIC_CONTACT_ENDPOINT` | Endpoint del formulario de contacto. |
 | `NEXT_PUBLIC_ADVISORY_ENDPOINT` | Endpoint del formulario de asesoría. |
 

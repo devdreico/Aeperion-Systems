@@ -4,12 +4,19 @@ import { Container } from "@/components/layout/container";
 import { AuroraBackground } from "@/components/animations/aurora-background";
 import { PROJECTS, PROJECT_INDUSTRIES } from "@/lib/projects-data";
 import { ProjectsGridClient } from "./projects-grid-client";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Proyectos y casos de éxito",
   description:
     "Casos reales de automatización, software a medida e IA en empresas colombianas. Resultados medibles con Aeperion Systems.",
-};
+  path: "/proyectos",
+  keywords: [
+    "casos de éxito automatización",
+    "proyectos software Colombia",
+    "casos de uso IA empresarial",
+  ],
+});
 
 export default function ProyectosPage() {
   return (
@@ -21,6 +28,7 @@ export default function ProyectosPage() {
             badge="Proyectos"
             title="Casos que cambiaron operaciones"
             description="Cada proyecto parte de un problema real y termina en resultados medibles. Explora por industria."
+            level="h1"
           />
         </Container>
       </section>

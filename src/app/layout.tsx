@@ -8,7 +8,7 @@ import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { ClientLayout } from "@/components/layout/client-layout";
 import { JsonLd } from "@/components/shared/json-ld";
-import { GOOGLE_SITE_VERIFICATION, SITE_CONFIG } from "@/lib/constants";
+import { BING_SITE_VERIFICATION, GOOGLE_SITE_VERIFICATION, SITE_CONFIG } from "@/lib/constants";
 import { montserrat } from "@/lib/fonts";
 
 export const metadata: Metadata = {
@@ -33,8 +33,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Aeperion Systems" }],
   creator: "Aeperion Systems",
   publisher: "Aeperion Systems",
-  alternates: {
-    canonical: "/",
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: false,
   },
   openGraph: {
     type: "website",
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Aeperion Systems",
     title: "Aeperion Systems — Automatización e IA para empresas",
     description: SITE_CONFIG.valueProp,
-    url: SITE_CONFIG.url,
+    url: `${SITE_CONFIG.url}/`,
     images: [
       {
         url: "/opengraph-image",
@@ -59,8 +61,10 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   icons: {
-    icon: "/images/logo/logo-aeperion.png",
-    apple: "/images/logo/logo-aeperion.png",
+    icon: [
+      { url: "/images/logo/logo-aeperion.png", sizes: "720x722", type: "image/png" },
+    ],
+    apple: [{ url: "/images/logo/logo-aeperion.png", sizes: "720x722", type: "image/png" }],
   },
   robots: {
     index: true,
@@ -73,9 +77,12 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  ...(GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
-    : {}),
+  verification: {
+    ...(GOOGLE_SITE_VERIFICATION
+      ? { google: GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(BING_SITE_VERIFICATION ? { bing: BING_SITE_VERIFICATION } : {}),
+  },
 };
 
 export const viewport: Viewport = {

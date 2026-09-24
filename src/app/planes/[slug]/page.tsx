@@ -15,6 +15,8 @@ import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PaymentButtons } from "@/components/shared/payment-buttons";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
+import { breadcrumbListJsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
 import { PlanHero } from "./plan-hero";
 
 interface PlanPageProps {
@@ -30,11 +32,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PlanPageProps): Promise<Metadata> {
   const { slug } = await params;
   const plan = PLANS.find((p) => p.id === slug);
-  if (!plan) return { title: "Plan no encontrado" };
-  return {
+  if (!plan) return { title: "Plan no encontrado", robots: { index: false } };
+  const description = `${plan.description} Desde ${formatCOP(plan.price)}.`;
+  return pageMetadata({
     title: plan.name,
-    description: `${plan.description} Desde ${formatCOP(plan.price)}.`,
-  };
+    description,
+    path: `/planes/${plan.id}`,
+    keywords: [plan.name, "plan software Colombia", plan.subtitle],
+  });
 }
 
 export default async function PlanPage({ params }: PlanPageProps) {
@@ -45,8 +50,24 @@ export default async function PlanPage({ params }: PlanPageProps) {
   const included = plan.features.filter((f) => f.included);
   const excluded = plan.features.filter((f) => !f.included);
 
+  const jsonLd = [
+    breadcrumbListJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Planes", path: "/planes" },
+      { name: plan.name },
+    ]),
+    productJsonLd({
+      name: plan.name,
+      description: plan.description,
+      path: `/planes/${plan.id}`,
+      price: plan.price,
+      category: "Software y automatización",
+    }),
+  ];
+
   return (
     <div className="pt-20">
+      <JsonLdScript data={jsonLd} />
       <PlanHero plan={plan} />
 
       <section className="py-16 md:py-20 bg-surface">

@@ -1,7 +1,7 @@
 /**
  * AEPERION — Global Constants
  *
- * Domain: aesystems.com · Brand: Aeperion Systems
+ * Domain: aeperion.presentto.online · Brand: Aeperion Systems
  * Founded 2017 · Bogotá, Colombia
  */
 
@@ -11,7 +11,8 @@ const WHATSAPP_NUMBER =
 const CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "contacto@aesystems.com";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aesystems.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://aeperion.presentto.online";
 
 const INSTAGRAM_URL =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com/aeperion.systems";
@@ -22,6 +23,9 @@ const LINKEDIN_URL =
 export const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
+export const BING_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
 export const TOOL_SALES_FORM_URL = "https://formspree.io/f/xljdbpdl";
 
 export const SITE_CONFIG = {
@@ -30,8 +34,8 @@ export const SITE_CONFIG = {
   tagline: "Automatización e inteligencia artificial para empresas que quieren crecer",
   description:
     "Startup fintech de desarrollo de software impulsado por IA. Automatizamos procesos y creamos sistemas digitales que dan eficiencia a las empresas. Desde 2017 en Bogotá, Colombia.",
-  url: SITE_URL,
-  domain: "aesystems.com",
+  url: SITE_URL.replace(/\/$/, ""),
+  domain: "aeperion.presentto.online",
   valueProp:
     "Deja de operar a mano. Diseñamos sistemas con IA que venden, automatizan, organizan y hacen crecer tu negocio.",
   foundedYear: 2017,

@@ -10,6 +10,10 @@ export interface BlogPostData {
   author: string;
   authorRole: string;
   publishedAt: string;
+  /** ISO 8601 para sitemap y JSON-LD (datePublished). */
+  publishedAtISO: string;
+  /** ISO 8601 opcional para dateModified. */
+  modifiedAtISO?: string;
   readingTime: number;
   category: string;
   tags: string[];
@@ -33,6 +37,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Content",
     publishedAt: "15 Mayo 2026",
+    publishedAtISO: "2026-05-15T08:00:00-05:00",
     readingTime: 8,
     category: "Transformación Digital",
     tags: ["pymes", "digitalización", "colombia"],
@@ -55,6 +60,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Product",
     publishedAt: "8 Mayo 2026",
+    publishedAtISO: "2026-05-08T08:00:00-05:00",
     readingTime: 12,
     category: "Automatización",
     tags: ["whatsapp", "ventas", "automatización"],
@@ -77,6 +83,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Legal",
     publishedAt: "1 Mayo 2026",
+    publishedAtISO: "2026-05-01T08:00:00-05:00",
     readingTime: 10,
     category: "Facturación",
     tags: ["dian", "facturación", "colombia", "legal"],
@@ -97,6 +104,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Product",
     publishedAt: "24 Abril 2026",
+    publishedAtISO: "2026-04-24T08:00:00-05:00",
     readingTime: 7,
     category: "CRM",
     tags: ["crm", "ventas", "pequeños-negocios"],
@@ -121,6 +129,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Marketing",
     publishedAt: "17 Abril 2026",
+    publishedAtISO: "2026-04-17T08:00:00-05:00",
     readingTime: 6,
     category: "Presencia Web",
     tags: ["web", "errores", "marketing"],
@@ -141,6 +150,7 @@ export const BLOG_POSTS: BlogPostData[] = [
     author: "Equipo Aeperion",
     authorRole: "Product",
     publishedAt: "10 Abril 2026",
+    publishedAtISO: "2026-04-10T08:00:00-05:00",
     readingTime: 9,
     category: "POS",
     tags: ["pos", "restaurantes", "ventas"],

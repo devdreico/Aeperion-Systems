@@ -7,6 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SectionTransition } from "@/components/animations/section-transition";
 import { BLOG_POSTS, getBlogPostBySlug } from "@/lib/blog-data";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
+import {
+  blogPostingJsonLd,
+  breadcrumbListJsonLd,
+  pageMetadata,
+} from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,8 +25,17 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
-  if (!post) return { title: "Artículo no encontrado" };
-  return { title: post.title, description: post.excerpt };
+  if (!post) return { title: "Artículo no encontrado", robots: { index: false } };
+  return pageMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAtISO,
+    modifiedTime: post.modifiedAtISO ?? post.publishedAtISO,
+    authors: [post.author],
+    keywords: post.tags,
+  });
 }
 
 export default async function BlogDetailPage({ params }: Props) {
@@ -30,8 +45,18 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
 
+  const jsonLd = [
+    blogPostingJsonLd(post),
+    breadcrumbListJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: post.title },
+    ]),
+  ];
+
   return (
     <div className="pt-20">
+      <JsonLdScript data={jsonLd} />
       <article>
         <Container variant="narrow" className="py-12 md:py-20">
           <Link

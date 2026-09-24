@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TOOLS } from "@/lib/tools-data";
 import { DemoContainer } from "@/components/demo/demo-container";
+import { breadcrumbListJsonLd, pageMetadata } from "@/lib/seo";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,12 +27,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = TOOLS.find((t) => t.id === slug);
-  if (!tool) return { title: "Demo no encontrada" };
+  if (!tool) return { title: "Demo no encontrada", robots: { index: false } };
 
-  return {
+  return pageMetadata({
     title: `Demo: ${tool.name}`,
     description: `Prueba interactiva de ${tool.name}. ${tool.description}`,
-  };
+    path: `/demo/${tool.id}`,
+  });
 }
 
 export default async function DemoPage({ params }: Props) {
@@ -39,8 +42,16 @@ export default async function DemoPage({ params }: Props) {
 
   if (!tool || !tool.hasDemo) notFound();
 
+  const jsonLd = breadcrumbListJsonLd([
+    { name: "Inicio", path: "/" },
+    { name: "Soluciones", path: "/herramientas" },
+    { name: tool.name, path: `/herramientas/${tool.id}` },
+    { name: `Demo ${tool.name}` },
+  ]);
+
   return (
     <div className="pt-20 min-h-screen bg-surface-1">
+      <JsonLdScript data={jsonLd} />
       <div className="fixed top-16 inset-x-0 z-30 glass-nav px-4 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link

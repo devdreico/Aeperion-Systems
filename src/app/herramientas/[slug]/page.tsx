@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { TOOLS, TOOL_CATEGORIES } from "@/lib/tools-data";
 import { CATEGORY_ICONS } from "@/components/features/tools/category-icons";
 import { formatCOP } from "@/lib/utils";
+import { JsonLdScript } from "@/components/shared/json-ld-script";
+import { breadcrumbListJsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
 import { ToolPurchaseForm } from "./tool-purchase-form";
 
 interface Props {
@@ -21,8 +23,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = TOOLS.find((t) => t.id === slug);
-  if (!tool) return { title: "Herramienta no encontrada" };
-  return { title: tool.name, description: tool.description };
+  if (!tool) return { title: "Herramienta no encontrada", robots: { index: false } };
+  const category = TOOL_CATEGORIES.find((c) => c.id === tool.category);
+  return pageMetadata({
+    title: tool.name,
+    description: tool.description,
+    path: `/herramientas/${tool.id}`,
+    keywords: [tool.name, tool.subtitle, category?.name].filter(
+      (k): k is string => Boolean(k)
+    ),
+  });
 }
 
 export default async function ToolDetailPage({ params }: Props) {
@@ -34,8 +44,24 @@ export default async function ToolDetailPage({ params }: Props) {
   const relatedTools = TOOLS.filter((t) => tool.relatedTools.includes(t.id));
   const Icon = CATEGORY_ICONS[tool.category];
 
+  const jsonLd = [
+    breadcrumbListJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Soluciones", path: "/herramientas" },
+      { name: tool.name },
+    ]),
+    productJsonLd({
+      name: tool.name,
+      description: tool.description,
+      path: `/herramientas/${tool.id}`,
+      price: tool.price,
+      category: category?.name,
+    }),
+  ];
+
   return (
     <div className="pt-20">
+      <JsonLdScript data={jsonLd} />
       <section className="relative overflow-hidden mesh-bg bg-surface py-12 md:py-20">
         <Container variant="narrow" className="relative z-10">
           <Link

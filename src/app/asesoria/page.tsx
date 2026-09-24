@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { AsesoriaClient } from "./asesoria-client";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Asesoría Gratuita",
   description:
     "Agenda una asesoría gratuita de 30 minutos. Respondemos 5 preguntas, analizamos tu negocio y te entregamos un reporte con oportunidades reales.",
-};
+  path: "/asesoria",
+});
 
 /**
  * AEPERION — Asesoría Gratuita Page

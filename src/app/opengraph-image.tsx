@@ -76,7 +76,7 @@ export default async function OpengraphImage() {
             color: "#6E7078",
           }}
         >
-          <span>aesystems.com</span>
+          <span>{SITE_CONFIG.domain}</span>
           <span style={{ color: "#6EC45E" }}>39 soluciones · 240+ clientes</span>
         </div>
       </div>

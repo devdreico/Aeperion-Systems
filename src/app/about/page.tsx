@@ -7,12 +7,14 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { COMPANY_VALUES, SITE_CONFIG } from "@/lib/constants";
 import { MILESTONES, TEAM } from "@/lib/team-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sobre Aeperion Systems",
   description:
     "Startup fintech de desarrollo de software con IA. Desde 2017 en Bogotá, automatizamos y damos eficiencia a las empresas colombianas.",
-};
+  path: "/about",
+});
 
 const values = [
   { icon: Search, title: COMPANY_VALUES[0].title, description: COMPANY_VALUES[0].description },

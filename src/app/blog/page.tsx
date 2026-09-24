@@ -6,12 +6,20 @@ import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import { SectionTransition } from "@/components/animations/section-transition";
 import { BLOG_POSTS } from "@/lib/blog-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blog",
   description:
     "Artículos sobre automatización con IA, transformación digital, CRM, facturación electrónica y crecimiento para tu negocio.",
-};
+  path: "/blog",
+  keywords: [
+    "blog automatización IA",
+    "transformación digital Colombia",
+    "facturación electrónica DIAN",
+    "CRM pymes",
+  ],
+});
 
 const CATEGORY_GRADIENTS: Record<string, string> = {
   "Transformación Digital": "from-ae-green-400 to-emerald-600",

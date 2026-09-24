@@ -6,12 +6,14 @@ import { Section } from "@/components/layout/section";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Button } from "@/components/ui/button";
 import { MetodoTimeline } from "./metodo-timeline";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Método de trabajo",
   description:
     "Nuestra metodología de 5 fases: Diagnóstico, Análisis de brechas, Arquitectura, Implementación y Expansión.",
-};
+  path: "/metodo",
+});
 
 export default function MetodoPage() {
   return (
