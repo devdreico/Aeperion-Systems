@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { MotionProvider } from "@/components/layout/motion-provider";
 import { Nav } from "@/components/layout/nav";
@@ -114,6 +115,7 @@ export default function RootLayout({
             <WhatsAppButton />
           </ThemeProvider>
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
