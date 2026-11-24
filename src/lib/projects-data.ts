@@ -1,174 +1,175 @@
 import type { CaseStudy } from "@/types";
 
+/**
+ * AEPERION — Casos de flujos de trabajo agénticos
+ *
+ * Evidencia de la tesis: agentes en producción, con métricas y operación.
+ */
 export const PROJECTS: CaseStudy[] = [
   {
     id: "p1",
-    slug: "clinica-dental-automatizacion-citas",
-    clientName: "Clínica Dental Sonrisa Viva",
-    industry: "Salud",
+    slug: "kspr-core-bancario",
+    clientName: "Fintech andina",
+    industry: "Servicios financieros",
     year: 2026,
     challenge:
-      "La recepción no daba abasto con las citas por WhatsApp. El 38% de los mensajes quedaba sin responder y las citas perdidas representaban pérdidas mensuales importantes.",
+      "Un core transaccional de 12 años sin documentación confiable. Cada cambio requería semanas de análisis manual y el riesgo de romper reglas de negocio ocultas era altísimo.",
     solution:
-      "Implementamos un flujo de automatización de WhatsApp con IA: agendamiento, confirmación, recordatorios y reagendamiento sin intervención humana. Se integró con la agenda del consultorio y la facturación electrónica.",
+      "KSPR reconstruyó la arquitectura, las reglas de negocio y las dependencias del core con agentes SPR. Generó documentación viva y un mapa de intervención priorizado para el equipo.",
     results: [
-      "Reducción del 47% en citas perdidas",
-      "Respuesta a pacientes en menos de 5 segundos, 24/7",
-      "Liberó 6 horas diarias de la recepción",
+      "Análisis inicial reducido de 6 semanas a 5 días",
+      "1.240 reglas de negocio extraídas y validadas",
+      "Mapa de dependencias con puntos de riesgo identificados",
     ],
     metrics: [
-      { label: "Citas perdidas", value: "-47%" },
-      { label: "Tiempo de respuesta", value: "<5s" },
-      { label: "Horas/semana ahorradas", value: "30h" },
+      { label: "Tiempo de análisis", value: "-88%" },
+      { label: "Reglas extraídas", value: "1.240" },
+      { label: "Cobertura documentada", value: "92%" },
     ],
     testimonial:
-      "El sistema agenda, confirma y recuerda solo. Recuperamos la tranquilidad y la agenda está más llena que nunca.",
-    testimonialAuthor: "Camila Restrepo",
-    testimonialRole: "Fundadora",
+      "KSPR nos mostró partes del sistema que ni el equipo original recordaba. Pasamos de miedo a un plan claro.",
+    testimonialAuthor: "CTO",
+    testimonialRole: "Fintech andina",
     accent: "from-ae-green-400 to-emerald-600",
-    tags: ["Automatización", "WhatsApp IA", "Salud"],
+    tags: ["KSPR", "Ingeniería inversa", "Legacy"],
   },
   {
     id: "p2",
-    slug: "distribuidora-facturacion-inventario",
-    clientName: "Distribuciones El Progreso",
-    industry: "Comercio mayorista",
-    year: 2025,
+    slug: "aelock-soc-agentico",
+    clientName: "SaaS B2B",
+    industry: "Tecnología",
+    year: 2026,
     challenge:
-      "Operación 100% manual en cuadernos y Excel. El inventario nunca cuadraba y la facturación electrónica ante la DIAN se hacía con retraso y errores.",
+      "El equipo de seguridad recibía miles de alertas semanales. El 70% era ruido y los incidentes reales se detectaban tarde.",
     solution:
-      "Sistema integrado de facturación electrónica, inventario en tiempo real y CRM de clientes. Dashboards ejecutivos para ver márgenes por producto y vendedor.",
+      "AELOCK se integró al SIEM y al stack cloud. Los agentes correlacionan señales, priorizan por riesgo real y preparan investigación y respuesta para el equipo humano.",
     results: [
-      "Facturación DIAN 100% al día desde el primer mes",
-      "Inventario con 99.2% de exactitud",
-      "Cierre contable reducido de 5 días a 1",
+      "Ruido operativo reducido en 72%",
+      "Tiempo de triage de horas a minutos",
+      "Playbooks de respuesta ejecutables con contexto",
     ],
     metrics: [
-      { label: "Exactitud inventario", value: "99.2%" },
-      { label: "Cierre contable", value: "1 día" },
-      { label: "Errores de facturación", value: "-91%" },
+      { label: "Ruido", value: "-72%" },
+      { label: "Triage", value: "Minutos" },
+      { label: "Cobertura", value: "24/7" },
     ],
     testimonial:
-      "Hoy facturamos electrónico y el inventario cuadra solo. Dejamos de operar a ciegas.",
-    testimonialAuthor: "Andrés Villalba",
-    testimonialRole: "Gerente General",
-    accent: "from-sky-400 to-blue-600",
-    tags: ["Facturación", "Inventario", "DIAN"],
+      "AELOCK no reemplazó al equipo: lo hizo mirar solo lo que importa. El cambio en carga operativa fue inmediato.",
+    testimonialAuthor: "Head of Security",
+    testimonialRole: "SaaS B2B",
+    accent: "from-violet-400 to-purple-600",
+    tags: ["AELOCK", "Ciberseguridad", "SOC"],
   },
   {
     id: "p3",
-    slug: "inmobiliaria-crm-ventas",
-    clientName: "Inmobiliaria Altavista",
-    industry: "Bienes raíces",
+    slug: "presentto-pymes",
+    clientName: "Red de pymes",
+    industry: "Servicios",
     year: 2025,
     challenge:
-      "Los prospectos se perdían entre hojas de cálculo, WhatsApp y correo. Sin seguimiento estructurado, las ventas dependían de la memoria del asesor.",
+      "120 pequeños negocios con dominios vencidos, sitios caídos, correos mal configurados y cero soporte técnico. Nadie sabía a quién llamar.",
     solution:
-      "CRM inmobiliario con pipeline de ventas, automatización de seguimiento multicanal y embudo con scoring de leads. Reportería de conversión por asesor y proyecto.",
+      "Presentto Online centralizó hosting, dominios, correo, backups y soporte. Un panel único y un equipo humano + agentes que monitorea y resuelve.",
     results: [
-      "Ventas mensuales de 6 a 11 propiedades",
-      "Tasa de respuesta a leads del 34% al 82%",
-      "Visibilidad total del pipeline comercial",
+      "Uptime agregado de 99.9%",
+      "Tickets críticos resueltos en menos de 4 horas",
+      "Cero conocimiento técnico requerido por parte del cliente",
     ],
     metrics: [
-      { label: "Ventas mensuales", value: "6 → 11" },
-      { label: "Respuesta a leads", value: "82%" },
-      { label: "Ciclo de venta", value: "-28%" },
+      { label: "Uptime", value: "99.9%" },
+      { label: "Pymes administradas", value: "120" },
+      { label: "Soporte", value: "<4h" },
     ],
     testimonial:
-      "Ya no se nos enfría un prospecto. El CRM cambió la forma en que vendemos.",
-    testimonialAuthor: "Laura Gómez",
-    testimonialRole: "Directora Comercial",
-    accent: "from-violet-400 to-purple-600",
-    tags: ["CRM", "Ventas", "Automatización"],
+      "Yo vendo comida, no entiendo de hosting. Presentto se encarga de todo y mi página nunca se cae.",
+    testimonialAuthor: "Propietaria",
+    testimonialRole: "Negocio gastronómico",
+    accent: "from-cyan-400 to-sky-600",
+    tags: ["Presentto", "Hosting", "Soporte"],
   },
   {
     id: "p4",
-    slug: "fintech-ia-conciliaciones",
-    clientName: "AhorraYa",
-    industry: "Fintech",
+    slug: "flujo-agentico-ventas",
+    clientName: "Distribuidora nacional",
+    industry: "Comercio",
     year: 2025,
     challenge:
-      "El equipo financiero conciliaba transacciones de forma manual durante días. Reportes regulatorios y de riesgo se construían a mano cada semana.",
+      "Los leads llegaban por WhatsApp, correo y formulario. Sin seguimiento unificado, el 40% se enfriaba antes del primer contacto.",
     solution:
-      "Automatización de conciliaciones con IA para detección de anomalías, generación automática de reportes y panel de control en tiempo real con alertas.",
+      "Flujo agéntico de ventas: captura multicanal, calificación, enriquecimiento, asignación y seguimiento. El agente redacta, agenda y escala a humano cuando toca.",
     results: [
-      "Conciliación diaria en 12 minutos (antes 2 días)",
-      "Detección temprana de fraude en transacciones",
-      "Ahorro equivalente a 2 cargos operativos",
+      "Tasa de respuesta a leads de 34% a 86%",
+      "Ciclo de venta reducido en 31%",
+      "Cero leads sin seguimiento",
     ],
     metrics: [
-      { label: "Tiempo de conciliación", value: "-94%" },
-      { label: "Anomalías detectadas", value: "+320" },
-      { label: "Cargos ahorrados", value: "2" },
+      { label: "Respuesta", value: "86%" },
+      { label: "Ciclo de venta", value: "-31%" },
+      { label: "Leads perdidos", value: "0" },
     ],
     testimonial:
-      "El equipo de Aeperion es de otro nivel técnico. Nos ahorraron dos cargos operativos.",
-    testimonialAuthor: "Ricardo Peña",
-    testimonialRole: "CEO",
+      "El flujo no se cansa, no olvida y no se salta pasos. Nos devolvió el control del pipeline.",
+    testimonialAuthor: "Gerente Comercial",
+    testimonialRole: "Distribuidora nacional",
     accent: "from-amber-400 to-orange-600",
-    tags: ["IA", "Fintech", "Automatización"],
+    tags: ["Agentes", "Ventas", "Multicanal"],
   },
   {
     id: "p5",
-    slug: "restaurante-pos-domicilios",
-    clientName: "Café Montaña Roja",
-    industry: "Restaurantes",
+    slug: "rag-firma-legal",
+    clientName: "Firma jurídica",
+    industry: "Legal",
     year: 2025,
     challenge:
-      "Pedidos por llamada y redes sociales sin control. Errores en domicilios, sin trazabilidad y sin datos de venta por producto.",
+      "800.000 documentos de jurisprudencia y contratos sin forma de consultarlos con precisión. Los abogados perdían horas buscando precedentes.",
     solution:
-      "Menú digital, POS integrado, gestión de domicilios con seguimiento y facturación. App de pedidos con pago en línea vía Mercado Pago.",
+      "Capa RAG con permisos por caso, evaluación de respuestas y citas verificables. El agente responde con fuente, página y nivel de confianza.",
     results: [
-      "Pedidos erróneos reducidos en 78%",
-      "Ticket promedio +19% con ventas sugeridas",
-      "Datos diarios de ventas por producto",
+      "Búsqueda de precedentes de horas a segundos",
+      "Respuestas con cita y trazabilidad",
+      "Adopción del 90% del equipo legal",
     ],
     metrics: [
-      { label: "Pedidos erróneos", value: "-78%" },
-      { label: "Ticket promedio", value: "+19%" },
-      { label: "Ventas en línea", value: "+41%" },
+      { label: "Tiempo de búsqueda", value: "-95%" },
+      { label: "Documentos indexados", value: "800k" },
+      { label: "Adopción", value: "90%" },
     ],
     testimonial:
-      "Pedí una página web y terminé con un sistema completo. La relación calidad-precio es increíble.",
-    testimonialAuthor: "Julián Ospina",
-    testimonialRole: "Propietario",
+      "No queríamos un chatbot que inventara. Queríamos respuestas con fuente. Eso es lo que construyeron.",
+    testimonialAuthor: "Socia",
+    testimonialRole: "Firma jurídica",
     accent: "from-rose-400 to-red-600",
-    tags: ["POS", "Domicilios", "Pagos"],
+    tags: ["RAG", "Legal", "Evaluación"],
   },
   {
     id: "p6",
-    slug: "constructora-dashboard-obra",
-    clientName: "Constructora Sólida",
-    industry: "Construcción",
+    slug: "agentes-operaciones-logistica",
+    clientName: "Operador logístico",
+    industry: "Logística",
     year: 2024,
     challenge:
-      "Sobrecostos detectados tarde y reportes de obra inconsistentes entre frentes de trabajo. Información dispersa en múltiples archivos.",
+      "Facturas, guías y documentos de transporte llegaban en PDF, imagen y correo. La digitación manual generaba errores y retrasos.",
     solution:
-      "Dashboard de obra en tiempo real con KPIs de avance, presupuesto y materiales. Alertas automáticas de desviación y reportes ejecutivos automáticos.",
+      "Agentes multimodales de extracción y validación: leen documentos, contrastan con el sistema, detectan anomalías y escalan excepciones.",
     results: [
-      "Detección de sobrecostos con 3 semanas de anticipación",
-      "Reportes de obra automatizados",
-      "Desviación de presupuesto reducida 22%",
+      "Documentos procesados sin digitación manual",
+      "Errores de captura reducidos en 91%",
+      "Cierre operativo diario en 30 minutos",
     ],
     metrics: [
-      { label: "Anticipación de alertas", value: "3 sem" },
-      { label: "Desviación de presupuesto", value: "-22%" },
-      { label: "Reportes manuales", value: "0" },
+      { label: "Errores", value: "-91%" },
+      { label: "Cierre diario", value: "30 min" },
+      { label: "Documentos/día", value: "2.400" },
     ],
     testimonial:
-      "El dashboard nos dejó ver por fin los sobrecostos a tiempo. Decidimos con datos.",
-    testimonialAuthor: "Mauricio Herrera",
-    testimonialRole: "Socio Fundador",
-    accent: "from-teal-400 to-cyan-600",
-    tags: ["Dashboard", "Analítica", "Construcción"],
+      "El equipo dejó de teclear y empezó a supervisar. La operación se volvió aburrida, en el buen sentido.",
+    testimonialAuthor: "Director de Operaciones",
+    testimonialRole: "Operador logístico",
+    accent: "from-sky-400 to-blue-600",
+    tags: ["Multimodal", "Operaciones", "Agentes"],
   },
 ];
 
-export function getProjectBySlug(slug: string) {
-  return PROJECTS.find((p) => p.slug === slug);
-}
-
-export const PROJECT_INDUSTRIES = Array.from(
-  new Set(PROJECTS.map((p) => p.industry))
-);
+export const PROJECT_MAP = Object.fromEntries(
+  PROJECTS.map((p) => [p.slug, p])
+) as Record<string, CaseStudy>;

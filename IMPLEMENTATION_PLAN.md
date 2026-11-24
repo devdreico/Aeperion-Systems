@@ -202,6 +202,136 @@ src/
 
 ---
 
+## 11. Handoff — Problemas específicos para agente de mayor potencia
+
+Esta sección detalla los problemas concretos que requieren un agente de mayor potencia (modelo superior) para resolverlos. Cada problema incluye contexto, archivos afectados, pasos exactos y criterio de verificación.
+
+### P1. Migración de routing (Next App Router → React Router v7)
+- **Contexto**: 13 rutas en `src/app/` (incluye dinámicas `[slug]`). Next usa file-based routing + `layout.tsx` raíz.
+- **Archivos afectados**: `src/app/**/page.tsx`, `src/app/layout.tsx`, `src/lib/seo.ts`.
+- **Pasos**:
+  1. Crear `src/routes/` con un archivo por ruta (`Home.tsx`, `Kspr.tsx`, ...).
+  2. Definir router en `src/router.tsx` con `createBrowserRouter` + `RouterProvider`, incluyendo `errorElement` y `loader` para datos (projects, tools).
+  3. Portar `layout.tsx` a `src/components/layout/RootLayout.tsx` (Nav + Outlet + Footer + providers).
+  4. Reemplazar `next/link` por `react-router-dom` `Link`/`NavLink` en todos los componentes (grep `from "next/link"`).
+  5. Reemplazar `next/navigation` (`useRouter`, `usePathname`) por `useNavigate`/`useLocation`.
+- **Verificación**: `npm run build` sin errores; navegación entre las 13 rutas sin 404; refresh en ruta dinámica funciona con SPA fallback.
+
+### P2. Tema claro/oscuro sin next-themes
+- **Contexto**: `src/components/theme/theme-provider.tsx` usa `next-themes`. Clase `.dark` en `<html>`.
+- **Pasos**:
+  1. Crear `src/store/theme.ts` (zustand) con `theme: 'light'|'dark'|'system'`, `resolvedTheme`, `setTheme`.
+  2. Inicializar en `main.tsx` antes de render (evitar flash): leer `localStorage` o `matchMedia('(prefers-color-scheme: dark)')`.
+  3. Aplicar clase `.dark` al `<html>` vía `useEffect` en provider.
+  4. Reemplazar `useTheme` de next-themes por el store en todos los consumidores (grep `useTheme`).
+- **Verificación**: toggle funciona, persiste en reload, respeta `prefers-color-scheme`, sin FOUC.
+
+### P3. Fuentes self-hosted sin next/font
+- **Contexto**: `src/lib/fonts.ts` exporta `montserrat` variable usada en `layout.tsx` className.
+- **Pasos**:
+  1. Instalar `@fontsource-variable/montserrat` (o `@fontsource/montserrat`).
+  2. Importar en `src/main.tsx`: `import '@fontsource-variable/montserrat'`.
+  3. Mapear `--font-montserrat` en `index.css` (Tailwind v4 `@theme`).
+  4. Eliminar `src/lib/fonts.ts` y referencias.
+- **Verificación**: fuente Montserrat visible, sin requests externos a Google Fonts.
+
+### P4. Three.js / R3F lazy load y fallback
+- **Contexto**: `cinematic-hero.tsx` usa `next/dynamic` con `ssr:false`. En Vite no hay SSR, pero lazy load sigue siendo necesario para bundle.
+- **Pasos**:
+  1. Reemplazar `next/dynamic` por `React.lazy(() => import('./command-center-3d'))` + `Suspense` con `<HeroVisualFallback />`.
+  2. Mantener detección de gama baja (`deviceMemory`, `hardwareConcurrency`, `saveData`) y `IntersectionObserver` para montar.
+  3. Verificar que `three` y `@react-three/*` queden en chunk separado (Vite code splitting automático por dynamic import).
+- **Verificación**: `npm run build` genera chunk separado para three; Lighthouse no bloquea; fallback se muestra en equipos de gama baja.
+
+### P5. SEO en SPA (meta tags, sitemap, robots, OG)
+- **Contexto**: Next genera metadata vía `export const metadata` y `opengraph-image.tsx`. En SPA no hay SSR.
+- **Pasos**:
+  1. Instalar `react-helmet-async`. Crear `src/components/shared/Seo.tsx` wrapper.
+  2. Portar `src/lib/seo.ts` (`pageMetadata`) a función que devuelve props para `<Seo />`.
+  3. Crear `public/sitemap.xml` y `public/robots.txt` estáticos (portar `src/app/sitemap.ts` y `robots.ts`).
+  4. Generar OG image estática (1200x630) en `public/og-image.png` (reemplazar `opengraph-image.tsx`).
+  5. (Opcional avanzado) prerender rutas clave con `vite-plugin-prerender` para SEO.
+- **Verificación**: cada ruta tiene `<title>` y meta description correctos; sitemap accesible; OG image válida.
+
+### P6. Variables de entorno (NEXT_PUBLIC_ → VITE_)
+- **Contexto**: constantes usan `process.env.NEXT_PUBLIC_*`.
+- **Pasos**:
+  1. Renombrar todas a `import.meta.env.VITE_*` en `src/lib/constants.ts`.
+  2. Crear `.env.example` con las variables `VITE_*`.
+  3. Actualizar `vercel.json` / Vercel project env vars.
+- **Verificación**: build con env vacío usa defaults; con env definido usa valores.
+
+### P7. Formularios y endpoints
+- **Contexto**: `TOOL_SALES_FORM_URL` (Formspree) y endpoints de contacto/asesoría.
+- **Pasos**:
+  1. Portar `tool-purchase-form.tsx` y formularios a React (sin cambios de lógica).
+  2. Mantener endpoints en `import.meta.env.VITE_CONTACT_ENDPOINT` etc.
+- **Verificación**: envío de formulario llega a Formspree (test manual).
+
+### P8. Rebranding de contenido (IA-first)
+- **Contexto**: constants, plans-data, tools-data, projects-data, team-data, faq-data orientados a fintech/automatización.
+- **Pasos**:
+  1. Refactor `SITE_CONFIG` (tagline, description, valueProp) a IA-first.
+  2. Crear `src/lib/products-data.ts` (KSPR, AELOCK, Presentto) con tipos en `types`.
+  3. Crear `src/lib/value-tiers-data.ts` (niveles de valor, sin precios fijos).
+  4. Deprecar `plans-data.ts` (o convertir a value-tiers).
+  5. Reframed `projects-data.ts` como casos de IA (o mantener como evidencia).
+  6. Añadir tipos `Product`, `ValueTier` en `src/types/index.ts`.
+- **Verificación**: ningún texto menciona "planes con precio" en UI principal; productos principales visibles en home.
+
+### P9. Animaciones 3D — pipeline de recorrido
+- **Contexto**: hero actual es "command center" 3D. Nuevo concepto: pipeline de recorrido (imágenes → video → animaciones nativas) representando flujo de IA.
+- **Pasos**:
+  1. Diseñar escena R3F: nodos flotantes (glass panels) conectados por flujo de partículas, representando etapas (input multimodal → modelo → agente → output).
+  2. Integrar videos/imágenes como texturas en planos 3D (lazy).
+  3. Añadir scroll-driven (GSAP ScrollTrigger) que avanza el pipeline.
+  4. Fallback CSS con animación 2D equivalente.
+  5. Respetar `prefers-reduced-motion` (desactivar 3D, mostrar estático).
+- **Verificación**: hero carga < 3s en desktop; no jank en scroll; fallback funciona.
+
+### P10. Deploy y verificación en producción
+- **Contexto**: Vercel configurado para Next.js (`vercel.json` framework nextjs).
+- **Pasos**:
+  1. Actualizar `vercel.json`: `framework: "vite"`, `buildCommand: "npm run build"`, `outputDirectory: "dist"`, SPA fallback rewrites.
+  2. Configurar env vars `VITE_*` en Vercel.
+  3. Deploy a preview (rama migration/react-vite) y validar.
+  4. Smoke test: todas las rutas, formularios, tema, 3D.
+- **Verificación**: preview deploy OK, Lighthouse ≥ 90.
+
+---
+
+## 12. Primera base de producción real (Release 0.2.0-alpha)
+
+Objetivo: dejar en la rama `migration/react-vite` una base mínima funcional de React+Vite+Tailwind que compile, se despliegue y sirva como punto de partida para las fases siguientes.
+
+### Pasos (ejecutables)
+
+1. **Snapshot**: rama `backup/next` ya creada ✓.
+2. **Limpiar Next**: en `migration/react-vite`, eliminar `next.config.ts`, `src/app/`, `postcss.config.mjs` (se recrea), mantener `src/components`, `src/lib`, `src/types`, `public`, `globals.css`.
+3. **Scaffold Vite**:
+   - Crear `index.html` en raíz con `<div id="root">` y script `src/main.tsx`.
+   - Crear `vite.config.ts` con plugins `react()` y `tailwindcss()`, alias `@` → `./src`.
+   - Crear `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json` (sin plugin next).
+4. **package.json**: actualizar `name` a `aeperion-vite`, scripts (`dev`, `build`, `preview`, `lint`), deps (react, react-dom, react-router-dom, vite, @vitejs/plugin-react, tailwindcss v4, @tailwindcss/vite, framer-motion, three, @react-three/fiber, @react-three/drei, gsap, lucide-react, zustand, react-helmet-async, clsx, tailwind-merge, cva, radix-ui, @vercel/analytics), devDeps (typescript, eslint + react hooks, @types/*).
+5. **Entry**: crear `src/main.tsx` (render App, import index.css, fonts).
+6. **App shell**: crear `src/App.tsx` con `RouterProvider` + providers (Theme, Motion) + RootLayout.
+7. **Estilos**: portar `src/app/globals.css` → `src/index.css` (ajustar `@import "tailwindcss"` y `@theme inline`).
+8. **Tema**: implementar `src/store/theme.ts` + `ThemeProvider` (P2).
+9. **Fuentes**: instalar `@fontsource-variable/montserrat`, importar en main (P3).
+10. **Home mínima**: portar `CinematicHero` (con fallback, sin 3D por ahora) + `CapabilitiesGrid` + `FinalCTA` a una ruta `/`.
+11. **Verificación**: `npm install` → `npm run dev` (puerto 5173) → `npm run build` → `npm run preview`. Lint sin errores.
+12. **Deploy preview**: actualizar `vercel.json`, push, validar preview URL.
+13. **Commit**: `feat: primera base de produccion React+Vite+Tailwind (0.2.0-alpha)` en `migration/react-vite`.
+
+### Criterio de "base de producción real"
+- `npm run build` exitoso, output en `dist/`.
+- Preview deploy en Vercel accesible.
+- Ruta `/` renderiza Home con hero + capacidades + CTA.
+- Tema claro/oscuro funcional.
+- Sin errores de consola en producción.
+
+---
+
 ## Decisiones pendientes para Andrei
 
 - [ ] ¿Mantener los 39 módulos (tools) como "soluciones" o reframed como "capacidades IA"?

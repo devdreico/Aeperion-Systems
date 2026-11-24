@@ -1,43 +1,46 @@
 /**
- * AEPERION — Global Constants
+ * AEPERION SYSTEMS — Global Constants
  *
  * Domain: aeperion.presentto.online · Brand: Aeperion Systems
  * Founded 2017 · Bogotá, Colombia
+ *
+ * Aeperion diseña, construye y opera flujos de trabajo agénticos.
+ * Expertos en uso, aplicación y desarrollo de IA.
  */
 
 const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "573001234567";
+  import.meta.env.VITE_WHATSAPP_NUMBER ?? "573001234567";
 
 const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "contacto@aesystems.com";
+  import.meta.env.VITE_CONTACT_EMAIL ?? "contacto@aesystems.com";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://aeperion.presentto.online";
+  import.meta.env.VITE_SITE_URL ?? "https://aeperion.presentto.online";
 
 const INSTAGRAM_URL =
-  process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com/aeperion.systems";
+  import.meta.env.VITE_INSTAGRAM_URL ?? "https://instagram.com/aeperion.systems";
 
 const LINKEDIN_URL =
-  process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com/company/aeperion-systems";
+  import.meta.env.VITE_LINKEDIN_URL ?? "https://linkedin.com/company/aeperion-systems";
 
 export const GOOGLE_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+  import.meta.env.VITE_GOOGLE_SITE_VERIFICATION;
 
 export const BING_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+  import.meta.env.VITE_BING_SITE_VERIFICATION;
 
 export const TOOL_SALES_FORM_URL = "https://formspree.io/f/xljdbpdl";
 
 export const SITE_CONFIG = {
   name: "Aeperion Systems",
   shortName: "Aeperion",
-  tagline: "Automatización e inteligencia artificial para empresas que quieren crecer",
+  tagline: "Desarrollo de flujos de trabajo agénticos e IA aplicada",
   description:
-    "Startup fintech de desarrollo de software impulsado por IA. Automatizamos procesos y creamos sistemas digitales que dan eficiencia a las empresas. Desde 2017 en Bogotá, Colombia.",
+    "Aeperion Systems diseña, construye y opera flujos de trabajo agénticos. Expertos en uso, aplicación y desarrollo de IA. Creadores de KSPR, AELOCK y Presentto Online. Desde 2017 en Bogotá, Colombia.",
   url: SITE_URL.replace(/\/$/, ""),
   domain: "aeperion.presentto.online",
   valueProp:
-    "Deja de operar a mano. Diseñamos sistemas con IA que venden, automatizan, organizan y hacen crecer tu negocio.",
+    "Convertimos procesos complejos en flujos de trabajo agénticos que operan, aprenden y escalan solos.",
   foundedYear: 2017,
   city: "Bogotá",
   country: "Colombia",
@@ -46,8 +49,11 @@ export const SITE_CONFIG = {
     email: CONTACT_EMAIL,
     instagram: INSTAGRAM_URL,
     linkedin: LINKEDIN_URL,
+    kspr: "https://kspr.presentto.online",
+    presentto: "https://presentto.online",
+    aelock: "https://aelock.presentto.online",
     mercadoPago:
-      process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
+      import.meta.env.VITE_MP_LINK ?? "https://www.mercadopago.com.co/",
   },
   contact: {
     phoneDisplay: `+${WHATSAPP_NUMBER.slice(0, 2)} ${WHATSAPP_NUMBER.slice(2, 5)} ${WHATSAPP_NUMBER.slice(5, 8)} ${WHATSAPP_NUMBER.slice(8)}`,
@@ -62,19 +68,21 @@ export const SITE_CONFIG = {
       label: "Mercado Pago",
       description: "Tarjetas, PSE y efectivo. Checkout seguro.",
       link:
-        process.env.NEXT_PUBLIC_MP_LINK ?? "https://www.mercadopago.com.co/",
-      publicKey: process.env.NEXT_PUBLIC_MP_PUBLIC_KEY ?? "",
+        import.meta.env.VITE_MP_LINK ?? "https://www.mercadopago.com.co/",
+      publicKey: import.meta.env.VITE_MP_PUBLIC_KEY ?? "",
     },
   },
 } as const;
 
 export const NAV_LINKS = [
   { href: "/", label: "Inicio" },
-  { href: "/planes", label: "Planes" },
-  { href: "/herramientas", label: "Soluciones" },
-  { href: "/proyectos", label: "Proyectos" },
+  { href: "/kspr", label: "KSPR" },
+  { href: "/aelock", label: "AELOCK" },
+  { href: "/presentto", label: "Presentto" },
+  { href: "/capacidades", label: "Capacidades" },
+  { href: "/casos", label: "Casos" },
   { href: "/metodo", label: "Método" },
-  { href: "/about", label: "Nosotros" },
+  { href: "/nosotros", label: "Nosotros" },
 ] as const;
 
 export const NAV_LINKS_SECONDARY = [
@@ -110,37 +118,36 @@ export const SOCIAL_LINKS = {
 
 export const COMPANY_VALUES = [
   {
-    title: "Análisis Primero",
+    title: "IA aplicada, no promesas",
     description:
-      "No construimos sin entender. Cada solución nace de un diagnóstico profundo de la operación real.",
-    icon: "search",
-  },
-  {
-    title: "IA con Propósito",
-    description:
-      "Aplicamos inteligencia artificial donde genera eficiencia real: atención, ventas, datos y decisiones.",
-    icon: "bot",
-  },
-  {
-    title: "Soluciones Reales",
-    description:
-      "No vendemos software genérico. Identificamos problemas específicos y construimos herramientas que los resuelven.",
+      "Cada flujo que diseñamos termina en producción con métricas, evaluación y observabilidad. Nada de demos que no escalan.",
     icon: "target",
   },
   {
-    title: "Acompañamiento Continuo",
+    title: "Agentes con criterio",
     description:
-      "No desaparecemos después de la entrega. Cada solución incluye soporte, capacitación y evolución.",
+      "Orquestamos agentes con herramientas, memoria, guardrails y evaluación. La autonomía se gana con evidencia.",
+    icon: "bot",
+  },
+  {
+    title: "Ingeniería inversa",
+    description:
+      "Entendemos el sistema antes de cambiarlo. KSPR reconstruye lógica, reglas y dependencias para intervenir con precisión.",
+    icon: "search",
+  },
+  {
+    title: "Acompañamiento real",
+    description:
+      "Operamos contigo: capacitación, transferencia y evolución continua. La IA no reemplaza al equipo, lo amplifica.",
     icon: "heart-handshake",
   },
 ] as const;
 
 export const TRUST_METRICS = {
-  toolsOffered: 39,
-  plansDelivered: 3,
-  avgDeliveryDays: 12,
+  agenticFlows: 60,
+  agentsDeployed: 180,
+  industries: 14,
   satisfactionRate: 98,
-  clientsServed: 240,
   yearsActive: new Date().getFullYear() - SITE_CONFIG.foundedYear,
 } as const;
 

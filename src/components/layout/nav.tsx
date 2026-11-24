@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@/components/ui/link";
+import { useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -15,7 +15,7 @@ const isActivePath = (pathname: string, href: string) =>
   pathname === href || (href !== "/" && pathname.startsWith(href));
 
 export function Nav() {
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -139,9 +139,9 @@ export function Nav() {
 
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Link href="/asesoria" onClick={closeMenus}>
+          <Link href="/cotizacion" onClick={closeMenus}>
             <Button variant="primary" size="sm" className="group">
-              Asesoría Gratuita
+              Cotizar proyecto
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </Link>
@@ -208,9 +208,9 @@ export function Nav() {
                   transition={{ delay: 0.4 }}
                   className="pt-4"
                 >
-                  <Link href="/asesoria" onClick={closeMenus}>
+                  <Link href="/cotizacion" onClick={closeMenus}>
                     <Button variant="primary" size="lg" className="w-full">
-                      Asesoría Gratuita
+                      Cotizar proyecto
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
