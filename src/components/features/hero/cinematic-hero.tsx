@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import dynamic from "next/dynamic";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Link } from "@/components/ui/link";
 import { ArrowRight, Sparkles, MapPin, Layers } from "lucide-react";
 import { m, useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme/theme-provider";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "@/components/animations/magnetic-button";
 import { NoiseTexture } from "@/components/animations/noise-texture";
@@ -15,9 +14,8 @@ import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, TRUST_METRICS } from "@/lib/constants";
 import { HeroVisualFallback } from "./hero-visual-fallback";
 
-const CommandCenter3D = dynamic(
-  () => import("./command-center-3d").then((m) => ({ default: m.CommandCenter3D })),
-  { ssr: false, loading: () => <HeroVisualFallback /> }
+const CommandCenter3D = lazy(() =>
+  import("./command-center-3d").then((m) => ({ default: m.CommandCenter3D }))
 );
 
 interface CinematicHeroProps {
@@ -27,8 +25,8 @@ interface CinematicHeroProps {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const stats = [
-  { to: TRUST_METRICS.clientsServed, suffix: "+", label: "Clientes" },
-  { to: TRUST_METRICS.toolsOffered, suffix: "", label: "Soluciones" },
+  { to: TRUST_METRICS.agenticFlows, suffix: "+", label: "Flujos agénticos" },
+  { to: TRUST_METRICS.agentsDeployed, suffix: "+", label: "Agentes desplegados" },
   { to: TRUST_METRICS.satisfactionRate, suffix: "%", label: "Satisfacción" },
   { to: TRUST_METRICS.yearsActive, suffix: "", label: "Años" },
 ];
@@ -116,11 +114,13 @@ export function CinematicHero({ className }: CinematicHeroProps) {
         {showFallback ? (
           <HeroVisualFallback />
         ) : (
-          <CommandCenter3D
-            theme={heroTheme}
-            reducedMotion={shouldReduceMotion}
-            onFail={() => setWebglFailed(true)}
-          />
+          <Suspense fallback={<HeroVisualFallback />}>
+            <CommandCenter3D
+              theme={heroTheme}
+              reducedMotion={shouldReduceMotion}
+              onFail={() => setWebglFailed(true)}
+            />
+          </Suspense>
         )}
         <NoiseTexture opacity={0.03} />
       </div>

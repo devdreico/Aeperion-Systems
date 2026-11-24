@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
@@ -46,16 +45,16 @@ export function Logo({
           aria-hidden
           className="absolute inset-0 rounded-full bg-ae-green-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         />
-        <Image
+        <img
           src="/images/logo/logo-aeperion.png"
           alt="Aeperion Systems"
           width={mark}
           height={mark}
+          loading="eager"
           className={cn(
             "relative object-contain select-none",
             onDark ? "invert" : "dark:invert"
           )}
-          priority
         />
       </span>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { m } from "framer-motion";
 import { SITE_CONFIG, SOCIAL_LINKS, PAYMENT_METHODS } from "@/lib/constants";
@@ -9,23 +9,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const footerLinks = {
-  Empresa: [
-    { href: "/about", label: "Nosotros" },
-    { href: "/metodo", label: "Método" },
-    { href: "/proyectos", label: "Proyectos" },
-    { href: "/blog", label: "Blog" },
+  Productos: [
+    { href: "/kspr", label: "KSPR" },
+    { href: "/aelock", label: "AELOCK" },
+    { href: "/presentto", label: "Presentto Online" },
+    { href: "/capacidades", label: "Capacidades" },
   ],
-  Soluciones: [
-    { href: "/herramientas", label: "Todos los servicios" },
-    { href: "/herramientas?categoria=automatizacion", label: "Automatización" },
-    { href: "/herramientas?categoria=crm-ventas", label: "CRM y Ventas" },
-    { href: "/planes", label: "Planes y precios" },
+  Empresa: [
+    { href: "/nosotros", label: "Nosotros" },
+    { href: "/metodo", label: "Método" },
+    { href: "/casos", label: "Casos" },
+    { href: "/blog", label: "Blog" },
   ],
   Soporte: [
     { href: "/faq", label: "Preguntas frecuentes" },
     { href: "/contacto", label: "Contacto" },
-    { href: "/asesoria", label: "Asesoría gratuita" },
-    { href: "/planes", label: "Métodos de pago" },
+    { href: "/cotizacion", label: "Cotizar proyecto" },
+    { href: "/cotizacion", label: "Métodos de pago" },
   ],
 };
 
@@ -116,10 +116,10 @@ export function Footer() {
         >
           <div>
             <h4 className="text-lg font-bold text-fg">
-              Notas de IA y automatización
+              Notas de IA y flujos agénticos
             </h4>
             <p className="mt-1.5 text-sm text-fg-muted max-w-md">
-              Ideas prácticas para automatizar tu empresa. Sin spam.
+              Ideas prácticas sobre agentes, ingeniería inversa y operación de IA. Sin spam.
             </p>
           </div>
           <form
@@ -172,7 +172,7 @@ export function Footer() {
             <Link href="/contacto" className="hover:text-ae-green-600 dark:hover:text-ae-green-300 transition-colors">
               Contacto
             </Link>
-            <Link href="/proyectos" className="hover:text-ae-green-600 dark:hover:text-ae-green-300 transition-colors">
+            <Link href="/casos" className="hover:text-ae-green-600 dark:hover:text-ae-green-300 transition-colors">
               Proyectos
             </Link>
           </div>

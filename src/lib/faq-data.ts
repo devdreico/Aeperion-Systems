@@ -2,108 +2,75 @@ import type { FAQItem } from "@/types";
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    category: "planes",
-    question: "¿Qué incluye cada plan?",
+    category: "servicios",
+    question: "¿Qué hace exactamente Aeperion Systems?",
     answer:
-      "El Plan Standart incluye página web de 1 página, automatización de WhatsApp básica y 1 solución individual. El Fullpack agrega CRM, facturación electrónica, 3 soluciones y capacitación. El Syspack incluye todo lo anterior más sistema administrativo, dashboard de KPIs, redes sociales y 10 soluciones.",
+      "Diseñamos, construimos y operamos flujos de trabajo agénticos: sistemas de IA que usan herramientas, memoria, permisos y evaluación para ejecutar procesos reales. También desarrollamos productos propios como KSPR, AELOCK y Presentto Online.",
   },
   {
-    category: "planes",
-    question: "¿Puedo comprar soluciones individuales sin contratar un plan?",
+    category: "servicios",
+    question: "¿Venden planes con precios fijos?",
     answer:
-      "Sí. Ofrecemos 39 soluciones individuales que puedes adquirir por separado, cada una con precio único. Los planes ofrecen un ahorro significativo si necesitas varias.",
+      "No. Trabajamos con niveles de valor y cotizaciones a medida. Cada flujo tiene alcance, datos, riesgos y métricas distintas; cotizamos después de entender tu caso.",
   },
   {
-    category: "planes",
-    question: "¿Los precios son en pesos colombianos?",
+    category: "servicios",
+    question: "¿Qué es un flujo de trabajo agéntico?",
     answer:
-      "Sí, todos nuestros precios están en pesos colombianos (COP). Aceptamos tarjetas, PSE, efectivo y cuotas a través de Mercado Pago.",
+      "Es un proceso donde uno o varios agentes de IA reciben un objetivo, deciden pasos, usan herramientas y ejecutan acciones con supervisión. No es un chatbot: es un sistema que termina el trabajo.",
   },
   {
-    category: "planes",
-    question: "¿Ofrecen financiación?",
+    category: "servicios",
+    question: "¿Qué son los agentes SPR?",
     answer:
-      "Para los planes Fullpack y Syspack ofrecemos opciones de pago en 2 o 3 cuotas sin interés. Consulta con nuestro equipo de asesoría.",
-  },
-  {
-    category: "planes",
-    question: "¿Cómo usan la inteligencia artificial?",
-    answer:
-      "Aplicamos IA donde genera eficiencia real: atención automatizada en WhatsApp, clasificación de datos, detección de anomalías, analítica predictiva y agentes que ejecutan tareas repetitivas. No usamos IA como adorno, sino para ahorrar tiempo y costo.",
+      "SPR es el nombre de nuestros agentes propios. Cada SPR tiene un rol especializado (análisis, ingeniería inversa, seguridad, operaciones) y opera dentro de flujos con guardrails y evaluación.",
   },
   {
     category: "proceso",
-    question: "¿Cuánto tiempo toma implementar una solución?",
+    question: "¿Cómo empieza un proyecto?",
     answer:
-      "Depende del plan: Standart en 5-7 días hábiles, Fullpack en 10-15 días y Syspack en 20-30 días. Las soluciones individuales suelen estar listas en 2-5 días hábiles.",
+      "Con un diagnóstico. Mapeamos procesos, datos y sistemas, y priorizamos los casos de uso donde la IA genera valor real. De ahí sale una propuesta de piloto o plataforma.",
+  },
+  {
+    category: "proceso",
+    question: "¿Cuánto tarda un piloto?",
+    answer:
+      "Un piloto agéntico típico toma entre 4 y 8 semanas, dependiendo de integraciones y calidad de datos. Entregamos un flujo en producción con métricas, no una demo.",
   },
   {
     category: "proceso",
     question: "¿Necesito conocimientos técnicos?",
     answer:
-      "No. Nos encargamos de todo: desarrollo, configuración y puesta en marcha. Solo necesitas contarnos qué necesitas. Incluimos capacitación para tu equipo.",
+      "No. Nos encargamos de la arquitectura, implementación, integración y operación. Tu equipo participa en el conocimiento del negocio y recibe capacitación para operar y evaluar los agentes.",
   },
   {
     category: "proceso",
-    question: "¿Cómo es el proceso de trabajo?",
+    question: "¿Trabajan con sistemas legados?",
     answer:
-      "Nuestro método tiene 5 fases: Diagnóstico, Análisis de brechas, Arquitectura de solución, Implementación y Expansión. Puedes verlo en detalle en la página de Método.",
+      "Sí. KSPR existe precisamente para eso: reconstruir la lógica de sistemas existentes, documentarla y permitir intervenciones seguras sin reescribir todo desde cero.",
   },
   {
-    category: "soporte",
-    question: "¿Qué soporte incluye cada plan?",
+    category: "pagos",
+    question: "¿Cómo se cotiza?",
     answer:
-      "Standart incluye 1 mes, Fullpack 3 meses y Syspack 6 meses con mantenimiento. El soporte cubre ajustes, resolución de problemas y actualizaciones menores.",
-  },
-  {
-    category: "soporte",
-    question: "¿Cuáles son los tiempos de respuesta?",
-    answer:
-      "Respondemos en menos de 1 hora en horario laboral (L-V 8:00-18:00). Para clientes con plan activo, el máximo es de 4 horas en incidencias críticas.",
+      "Según alcance, complejidad de integraciones, datos, requisitos de seguridad y tiempo. Enviamos una propuesta con entregables, hitos y métricas de éxito antes de empezar.",
   },
   {
     category: "pagos",
     question: "¿Qué métodos de pago aceptan?",
     answer:
-      "Aceptamos Mercado Pago con tarjetas, PSE, efectivo y cuotas. Todos los pagos se procesan en una plataforma segura certificada.",
+      "Transferencia bancaria, tarjetas y PSE a través de Mercado Pago. Para proyectos grandes trabajamos por hitos.",
   },
   {
-    category: "pagos",
-    question: "¿Es seguro pagar en línea?",
+    category: "soporte",
+    question: "¿Qué pasa después del despliegue?",
     answer:
-      "Sí. No almacenamos datos de tarjetas; el procesamiento lo hace Mercado Pago bajo estándares de seguridad bancaria. Recibirás confirmación y factura electrónica.",
+      "Operamos y evolucionamos el flujo: monitoreo, evaluación, mejoras y nuevos casos de uso. También transferimos capacidad a tu equipo si quieres internalizarlo.",
   },
   {
-    category: "pagos",
-    question: "¿Hay garantía?",
+    category: "soporte",
+    question: "¿Cómo manejan la seguridad y los datos?",
     answer:
-      "Todos nuestros planes incluyen una garantía de satisfacción de 15 días. Si no estás conforme con el resultado acordado, revisamos el caso y aplicamos la devolución correspondiente.",
-  },
-  {
-    category: "general",
-    question: "¿Qué tipo de clientes atienden?",
-    answer:
-      "Desde negocios unipersonales hasta empresas en expansión, típicamente entre 1 y 50 empleados. Trabajamos con cualquier industria: comercio, servicios, restaurantes, salud, construcción, fintech y más.",
-  },
-  {
-    category: "general",
-    question: "¿Trabajan solo en Colombia?",
-    answer:
-      "Operamos principalmente en Colombia, con clientes en otros países de Latinoamérica. Nuestro modelo es 100% remoto, sin limitación geográfica.",
-  },
-  {
-    category: "general",
-    question: "¿Desde cuándo existe Aeperion Systems?",
-    answer:
-      "Nacimos en 2017 en Bogotá, Colombia. Llevamos más de 9 años construyendo software y automatizaciones para empresas de todo el país.",
+      "Con permisos por rol, minimización de datos, trazabilidad y evaluación. Para seguridad ofensiva y defensiva integramos AELOCK. La arquitectura se diseña según el riesgo de cada cliente.",
   },
 ];
-
-export const FAQ_CATEGORIES = [
-  { id: "all", label: "Todas" },
-  { id: "planes", label: "Planes" },
-  { id: "proceso", label: "Proceso" },
-  { id: "soporte", label: "Soporte" },
-  { id: "pagos", label: "Pagos" },
-  { id: "general", label: "General" },
-] as const;

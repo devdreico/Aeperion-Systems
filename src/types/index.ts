@@ -148,5 +148,68 @@ export interface Testimonial {
 export interface FAQItem {
   question: string;
   answer: string;
-  category: "planes" | "proceso" | "pagos" | "soporte" | "general";
+  category: "servicios" | "proceso" | "pagos" | "soporte" | "general";
+}
+
+// ============================================================
+// PRODUCTS / AGENTIC AI
+// ============================================================
+
+export interface Product {
+  id: "kspr" | "aelock" | "presentto";
+  name: string;
+  tagline: string;
+  description: string;
+  longDescription: string;
+  href: string;
+  external?: boolean;
+  accent: "green" | "cyan" | "violet";
+  icon: string;
+  category: string;
+  capabilities: string[];
+  outcomes: { label: string; value: string }[];
+  stack: string[];
+  status: "production" | "beta" | "private";
+  useCases: { title: string; description: string }[];
+  integrations: string[];
+}
+
+export interface ValueTier {
+  id: string;
+  level: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  idealFor: string;
+  outcome: string;
+  includes: string[];
+  upgrades: string[];
+  highlight?: boolean;
+  cta: string;
+}
+
+export interface Capability {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  accent: "green" | "cyan" | "violet";
+  bullets: string[];
+}
+
+export interface MethodStep {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  deliverables: string[];
+  duration: string;
+}
+
+export interface FlowStage {
+  id: string;
+  label: string;
+  title: string;
+  description: string;
+  icon: string;
 }

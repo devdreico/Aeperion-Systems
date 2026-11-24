@@ -2,14 +2,14 @@
 
 import { type ReactNode } from "react";
 import { m, AnimatePresence, useReducedMotion } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useLocation } from "react-router-dom";
 
 interface ClientLayoutProps {
   children: ReactNode;
 }
 
 export function ClientLayout({ children }: ClientLayoutProps) {
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {

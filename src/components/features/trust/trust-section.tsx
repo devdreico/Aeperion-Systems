@@ -31,9 +31,9 @@ export function TrustSection({ className }: TrustSectionProps) {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const metrics = [
-    { value: TRUST_METRICS.clientsServed, label: "Clientes atendidos", suffix: "+" },
-    { value: TRUST_METRICS.toolsOffered, label: "Soluciones disponibles", suffix: "" },
-    { value: TRUST_METRICS.satisfactionRate, label: "Satisfacción", suffix: "%" },
+    { value: TRUST_METRICS.agenticFlows, label: "Flujos agénticos", suffix: "+" },
+    { value: TRUST_METRICS.agentsDeployed, label: "Agentes desplegados", suffix: "+" },
+    { value: TRUST_METRICS.industries, label: "Industrias", suffix: "+" },
     { value: TRUST_METRICS.yearsActive, label: "Años de experiencia", suffix: "+" },
   ];
 

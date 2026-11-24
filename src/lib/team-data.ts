@@ -1,25 +1,30 @@
 import type { TeamMember } from "@/types";
 
+/**
+ * AEPERION — Equipo híbrido
+ *
+ * Humanos + agentes. Los agentes propios se llaman SPR.
+ */
 export const TEAM: TeamMember[] = [
   {
-    name: "Felipe Aeperion",
-    role: "CEO & Fundador",
-    bio: "Estrategia de producto y negocio. Lleva 9 años ayudando a empresas colombianas a digitalizar su operación con foco en eficiencia.",
+    name: "Andrei Cifuentes",
+    role: "Fundador & CEO",
+    bio: "Estrategia, producto y relación con clientes. Lidera la tesis de Aeperion: flujos de trabajo agénticos que operan en producción, no demos.",
   },
   {
-    name: "Sofía Martínez",
-    role: "CTO",
-    bio: "Arquitectura de software e inteligencia artificial. Lidera el desarrollo de automatizaciones y modelos aplicados a operaciones reales.",
+    name: "Núcleo SPR",
+    role: "Agentes de ingeniería",
+    bio: "Agentes especializados en análisis de sistemas, ingeniería inversa, generación de código y evaluación. Operan KSPR y aceleran cada proyecto.",
   },
   {
-    name: "Tomás Rivera",
-    role: "Head of Design",
-    bio: "Diseño de producto e interfaces. Traduce procesos complejos en experiencias simples para el equipo de cada cliente.",
+    name: "AELOCK Core",
+    role: "Agentes de seguridad",
+    bio: "Agentes de detección, triage y respuesta. Correlacionan señales, priorizan riesgo y preparan evidencia para el equipo humano.",
   },
   {
-    name: "Gabriela Torres",
-    role: "Head of Customer Success",
-    bio: "Acompaña a cada cliente desde el diagnóstico hasta la adopción. Garantiza que la solución se use y genere resultados.",
+    name: "Presentto Ops",
+    role: "Agentes de administración digital",
+    bio: "Agentes de hosting, monitoreo, backups y soporte. Mantienen la presencia digital de los clientes de Presentto Online.",
   },
 ];
 
@@ -28,30 +33,30 @@ export const MILESTONES = [
     year: "2017",
     title: "Nace Aeperion Systems",
     description:
-      "Fundada en Bogotá como startup de desarrollo de software enfocada en resolver problemas operativos reales de las empresas.",
-  },
-  {
-    year: "2019",
-    title: "Primera ola de automatización",
-    description:
-      "Lanzamos nuestras primeras integraciones de WhatsApp y facturación electrónica para pymes.",
+      "Fundada en Bogotá para resolver problemas operativos reales con software a medida.",
   },
   {
     year: "2021",
-    title: "IA aplicada a la operación",
+    title: "IA aplicada",
     description:
-      "Incorporamos modelos de IA para atención, clasificación de datos y analítica predictiva.",
+      "Incorporamos modelos de IA a procesos de atención, datos y decisiones.",
   },
   {
     year: "2023",
-    title: "Plataforma integral",
+    title: "Primeros agentes",
     description:
-      "Consolidamos 39 soluciones en 10 categorías, desde presencia web hasta sistemas empresariales completos.",
+      "Diseñamos nuestros primeros flujos multi-agente con herramientas y evaluación.",
+  },
+  {
+    year: "2025",
+    title: "KSPR y AELOCK",
+    description:
+      "Lanzamos el sistema de ingeniería inversa agéntica y el agente de ciberseguridad.",
   },
   {
     year: "2026",
-    title: "240+ clientes",
+    title: "Presentto Online",
     description:
-      "Compañías de todo el país operan sobre nuestras soluciones con un 98% de satisfacción.",
+      "Consolidamos la administración digital para clientes inexpertos bajo Presentto.",
   },
 ] as const;

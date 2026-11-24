@@ -30,8 +30,8 @@ export function ReviewsSection({ className, limit }: ReviewsSectionProps) {
       <Container className="relative">
         <SectionHeader
           badge="Reseñas"
-          title="Empresas que ya operan mejor"
-          description="Más de 240 compañías en Colombia automatizan y crecen con Aeperion Systems."
+          title="Equipos que ya operan con agentes"
+          description="Flujos agénticos, ingeniería inversa y seguridad operando en empresas colombianas."
           align="center"
         />
 

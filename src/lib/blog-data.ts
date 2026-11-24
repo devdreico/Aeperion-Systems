@@ -1,7 +1,6 @@
 /**
- * AEPERION — Blog Posts Data
+ * AEPERION — Blog / Notas técnicas
  */
-
 export interface BlogPostData {
   slug: string;
   title: string;
@@ -10,9 +9,7 @@ export interface BlogPostData {
   author: string;
   authorRole: string;
   publishedAt: string;
-  /** ISO 8601 para sitemap y JSON-LD (datePublished). */
   publishedAtISO: string;
-  /** ISO 8601 opcional para dateModified. */
   modifiedAtISO?: string;
   readingTime: number;
   category: string;
@@ -21,146 +18,103 @@ export interface BlogPostData {
 
 export const BLOG_POSTS: BlogPostData[] = [
   {
-    slug: "transformacion-digital-pymes-colombia",
-    title: "Transformación Digital para PYMES en Colombia: Por dónde empezar",
-    excerpt: "Guía práctica para pequeñas y medianas empresas que quieren dar el salto digital sin morir en el intento. Pasos concretos, herramientas clave y errores comunes.",
+    slug: "que-es-un-flujo-de-trabajo-agentico",
+    title: "Qué es un flujo de trabajo agéntico (y qué no lo es)",
+    excerpt:
+      "No todo chatbot es un agente. Un flujo agéntico tiene objetivo, herramientas, memoria, permisos y evaluación. Esta es la diferencia que importa en producción.",
     content: `
-      <p>La transformación digital ya no es una opción para las pequeñas y medianas empresas en Colombia. Es una necesidad competitiva. Sin embargo, muchos negocios no saben por dónde empezar y terminan paralizados frente a la decisión.</p>
-      <p>En Aeperion, nuestro primer paso siempre es un diagnóstico. No vendemos sin entender. Y ese enfoque nos ha permitido ayudar a más de 150 negocios a dar el salto digital de forma ordenada.</p>
-      <h2>Los 3 pilares de la transformación digital</h2>
-      <p><strong>1. Presencia Digital:</strong> Tu sitio web es tu carta de presentación. No necesitas 10 páginas. Necesitas una página que comunique claramente qué haces.</p>
-      <p><strong>2. Automatización de Procesos:</strong> WhatsApp, email, redes sociales. Automatizar no es reemplazar personas, es liberarlas para que hagan trabajo de verdad.</p>
-      <p><strong>3. Gestión de Clientes:</strong> Un CRM no es un lujo. Es una necesidad. Si no tienes un registro organizado de tus clientes, estás perdiendo ventas todos los días.</p>
-      <h2>Por dónde empezar hoy</h2>
-      <p>El primer paso no es comprar software. Es tomar 30 minutos para hablar con alguien que entienda de transformación digital. Por eso ofrecemos asesorías gratuitas.</p>
+      <p>La palabra “agente” se usa para todo. Un chatbot con respuestas precargadas no es un agente. Un prompt que resume texto tampoco. Un flujo de trabajo agéntico es un sistema que recibe un objetivo, decide pasos, usa herramientas y ejecuta acciones con supervisión.</p>
+      <h2>Los cinco componentes</h2>
+      <p><strong>1. Objetivo:</strong> el agente sabe qué resultado debe producir, no solo qué decir.</p>
+      <p><strong>2. Herramientas:</strong> APIs, bases de datos, correo, CRM. Sin herramientas, el agente solo habla.</p>
+      <p><strong>3. Memoria:</strong> contexto de la tarea y del negocio. Sin memoria, cada ejecución empieza de cero.</p>
+      <p><strong>4. Permisos:</strong> qué puede leer, escribir y ejecutar. La autonomía sin límites es un incidente esperando ocurrir.</p>
+      <p><strong>5. Evaluación:</strong> métricas de calidad, costo, latencia y riesgo. Sin evaluación no hay producción, solo fe.</p>
+      <h2>Qué no es un flujo agéntico</h2>
+      <p>Un asistente que solo responde preguntas. Un script que ejecuta pasos fijos sin decidir. Un modelo con acceso total a todo. Un demo que funciona con tres ejemplos cuidadosamente elegidos.</p>
+      <p>La diferencia entre un demo y un sistema es la misma que entre una idea y una operación: evidencia.</p>
     `,
     author: "Equipo Aeperion",
-    authorRole: "Content",
-    publishedAt: "15 Mayo 2026",
-    publishedAtISO: "2026-05-15T08:00:00-05:00",
-    readingTime: 8,
-    category: "Transformación Digital",
-    tags: ["pymes", "digitalización", "colombia"],
+    authorRole: "Ingeniería",
+    publishedAt: "12 Nov 2026",
+    publishedAtISO: "2026-11-12T08:00:00-05:00",
+    readingTime: 5,
+    category: "Agentes",
+    tags: ["Agentes", "Producción", "Evaluación"],
   },
   {
-    slug: "automatizacion-whatsapp-ventas",
-    title: "Automatización de Ventas con WhatsApp: Guía Completa 2026",
-    excerpt: "Cómo implementar un sistema de ventas automatizado por WhatsApp que califica leads, responde al instante y cierra más ventas.",
+    slug: "ingenieria-inversa-con-agentes",
+    title: "Ingeniería inversa con agentes: cómo KSPR entiende un sistema legado",
+    excerpt:
+      "Reconstruir la lógica de un sistema de 12 años no es leer código. Es recuperar reglas, dependencias y decisiones que nadie documentó. Así lo hace KSPR.",
     content: `
-      <p>WhatsApp se ha convertido en el canal de comunicación más importante para los negocios en Latinoamérica. Con más de 50 millones de usuarios activos en Colombia, no es una opción — es el estándar.</p>
-      <h2>¿Por qué automatizar WhatsApp?</h2>
-      <p>La automatización de WhatsApp no se trata de enviar mensajes masivos. Se trata de responder al instante, calificar leads automáticamente y cerrar ventas mientras tu equipo duerme.</p>
-      <h2>Casos de uso reales</h2>
-      <p><strong>Restaurantes:</strong> Recibir pedidos por WhatsApp, confirmar automáticamente, y enviar actualizaciones de estado.</p>
-      <p><strong>Tiendas:</strong> Catálogo interactivo, cotizaciones automáticas, seguimiento post-venta.</p>
-      <p><strong>Servicios:</strong> Agenda de citas, recordatorios, notificaciones de pago.</p>
-      <h2>Lo que necesitas para empezar</h2>
-      <p>Un número de WhatsApp Business API, un sistema de gestión (como nuestro CRM), y reglas de automatización claras. Nosotros te ayudamos con todo.</p>
+      <p>Los sistemas legados no fallan por falta de código. Fallan porque nadie recuerda por qué el código hace lo que hace. La documentación está desactualizada, las reglas viven en la cabeza de alguien que se fue y cada cambio es una apuesta.</p>
+      <h2>El problema real</h2>
+      <p>Antes de migrar, integrar o reemplazar, hay que entender. La ingeniería inversa tradicional es manual, lenta y depende de heroicidades individuales. Los agentes cambian la economía de ese proceso.</p>
+      <h2>Cómo opera KSPR</h2>
+      <p><strong>Lectura multi-repositorio:</strong> los agentes SPR recorren código, infraestructura, migraciones y documentación.</p>
+      <p><strong>Extracción de reglas:</strong> identifican condiciones, validaciones y flujos de negocio, y los contrastan entre capas.</p>
+      <p><strong>Mapa de dependencias:</strong> reconstruyen qué depende de qué, qué es crítico y dónde intervenir primero.</p>
+      <p><strong>Documentación viva:</strong> generan especificaciones que se actualizan cuando el sistema cambia.</p>
+      <h2>El resultado</h2>
+      <p>No es un informe bonito. Es un mapa de intervención con evidencia: qué se puede tocar, qué no, y qué riesgo tiene cada decisión.</p>
     `,
     author: "Equipo Aeperion",
-    authorRole: "Product",
-    publishedAt: "8 Mayo 2026",
-    publishedAtISO: "2026-05-08T08:00:00-05:00",
-    readingTime: 12,
-    category: "Automatización",
-    tags: ["whatsapp", "ventas", "automatización"],
-  },
-  {
-    slug: "facturacion-electronica-dian-2026",
-    title: "Facturación Electrónica DIAN 2026: Todo lo que debes saber",
-    excerpt: "Actualización completa sobre los requisitos de facturación electrónica en Colombia. Resolución, plazos, sanciones y cómo cumplir sin complicaciones.",
-    content: `
-      <p>La facturación electrónica en Colombia sigue evolucionando. La DIAN ha implementado nuevos requisitos para 2026 que todos los negocios deben conocer.</p>
-      <h2>¿Qué cambió en 2026?</h2>
-      <p>Este año, la DIAN ha actualizado la resolución de facturación electrónica con nuevos campos obligatorios, plazos de reporte más estrictos, y mayores controles de validación en tiempo real.</p>
-      <h2>Obligaciones principales</h2>
-      <p>Si facturas electrónicamente, debes: validar la existencia del cliente en el RUT, incluir códigos de productos y servicios actualizados, reportar en los plazos establecidos, y conservar los documentos por 5 años.</p>
-      <h2>Sanciones por incumplimiento</h2>
-      <p>Las multas por no facturar electrónicamente pueden alcanzar los 15.000 UVT (más de 600 millones de pesos colombianos). No vale la pena arriesgarse.</p>
-      <h2>Cómo cumplir sin complicaciones</h2>
-      <p>Con nuestro sistema de facturación, todo el proceso está automatizado. Nosotros nos encargamos de las validaciones, los reportes y el cumplimiento normativo.</p>
-    `,
-    author: "Equipo Aeperion",
-    authorRole: "Legal",
-    publishedAt: "1 Mayo 2026",
-    publishedAtISO: "2026-05-01T08:00:00-05:00",
-    readingTime: 10,
-    category: "Facturación",
-    tags: ["dian", "facturación", "colombia", "legal"],
-  },
-  {
-    slug: "crm-para-pequenos-negocios",
-    title: "CRM para Pequeños Negocios: La herramienta que necesitas para organizar tus ventas",
-    excerpt: "Deja el Excel. Descubre cómo un CRM puede transformar la gestión de clientes de tu negocio y aumentar tus ventas.",
-    content: `
-      <p>Si todavía estás manejando tus clientes en Excel, hojas sueltas o —peor— en tu memoria, este artículo es para ti.</p>
-      <h2>¿Qué es un CRM y por qué lo necesitas?</h2>
-      <p>CRM significa Customer Relationship Management. Es un sistema que centraliza toda la información de tus clientes: contactos, historial de compras, preferencias, interacciones, y más.</p>
-      <h2>Señales de que necesitas un CRM</h2>
-      <p>Has perdido una venta porque olvidaste hacer seguimiento. Tus clientes te repiten información que ya te dieron. No sabes quién compró qué ni cuándo. Tus descuentos son al azar.</p>
-      <h2>Qué buscar en un CRM para PYME</h2>
-      <p>Que sea fácil de usar (no necesitas un ingeniero), que tenga integración con WhatsApp, que permita automatizar seguimientos, y que tenga un precio claro sin costos ocultos. Como nuestro CRM básico.</p>
-    `,
-    author: "Equipo Aeperion",
-    authorRole: "Product",
-    publishedAt: "24 Abril 2026",
-    publishedAtISO: "2026-04-24T08:00:00-05:00",
-    readingTime: 7,
-    category: "CRM",
-    tags: ["crm", "ventas", "pequeños-negocios"],
-  },
-  {
-    slug: "errores-comunes-presencia-digital",
-    title: "5 Errores Comunes en Presencia Digital que están ahuyentando clientes",
-    excerpt: "Identifica y corrige los errores más frecuentes que cometen los negocios colombianos en su presencia digital.",
-    content: `
-      <p>Tu presencia digital es muchas veces el primer contacto que un cliente potencial tiene con tu negocio. Si está mal, probablemente no haya segunda oportunidad.</p>
-      <h2>Error 1: Sitio web que no carga en móvil</h2>
-      <p>Más del 70% del tráfico web en Colombia viene de dispositivos móviles. Si tu sitio no está optimizado para móvil, estás perdiendo 7 de cada 10 clientes potenciales.</p>
-      <h2>Error 2: Información de contacto difícil de encontrar</h2>
-      <p>Si un cliente tiene que buscar más de 5 segundos para encontrar tu número de WhatsApp, lo pierdes. Pon tu contacto en un lugar visible y repetido.</p>
-      <h2>Error 3: No tener WhatsApp Business</h2>
-      <p>WhatsApp Business es gratis, profesionaliza tu comunicación, y permite automatizar respuestas. No tenerlo en 2026 es imperdonable.</p>
-      <h2>Error 4: Redes sociales sin plan</h2>
-      <p>Publicar sin estrategia es ruido. Define objetivos, público y métricas antes de publicar.</p>
-      <h2>Error 5: No medir nada</h2>
-      <p>Lo que no se mide no se mejora. Google Analytics es gratis. Instagram Insights es gratis. No hay excusa.</p>
-    `,
-    author: "Equipo Aeperion",
-    authorRole: "Marketing",
-    publishedAt: "17 Abril 2026",
-    publishedAtISO: "2026-04-17T08:00:00-05:00",
+    authorRole: "KSPR",
+    publishedAt: "28 Oct 2026",
+    publishedAtISO: "2026-10-28T08:00:00-05:00",
     readingTime: 6,
-    category: "Presencia Web",
-    tags: ["web", "errores", "marketing"],
+    category: "Ingeniería inversa",
+    tags: ["KSPR", "Legacy", "Agentes"],
   },
   {
-    slug: "pos-sistema-ventas-restaurante",
-    title: "Sistema POS para Restaurantes: Cómo elegir el mejor para tu negocio",
-    excerpt: "Todo lo que necesitas saber para elegir e implementar un sistema POS en tu restaurante. Comparativa, costos y funcionalidades clave.",
+    slug: "ciberseguridad-agentica-donde-si-donde-no",
+    title: "Ciberseguridad agéntica: dónde sí y dónde no",
+    excerpt:
+      "Un agente puede triagear alertas y preparar respuesta. No debería decidir solo un bloqueo crítico. Estos son los límites que aplicamos en AELOCK.",
     content: `
-      <p>Elegir un sistema POS para tu restaurante es una decisión que afecta directamente tus ingresos, la experiencia de tus clientes y la eficiencia de tu operación.</p>
-      <h2>¿Qué debe tener un buen POS para restaurantes?</h2>
-      <p>Gestión de mesas, comandas digitales, integración con cocina, control de inventario, facturación electrónica, y reportes de ventas en tiempo real. Todo esto lo ofrecemos en nuestro sistema POS.</p>
-      <h2>Errores al elegir POS</h2>
-      <p>Elegir el más barato (luego sale caro), no verificar que cumpla con facturación electrónica, no considerar la velocidad del internet en tu zona, y no capacitar al personal.</p>
-      <h2>El costo real de un POS</h2>
-      <p>Un buen POS no es un gasto, es una inversión. Con nuestro sistema, recuperas la inversión en los primeros meses gracias a la reducción de errores y el aumento en la eficiencia operativa.</p>
+      <p>La ciberseguridad es un dominio donde la autonomía mal calibrada es más peligrosa que la falta de automatización. Un falso positivo puede tumbar un servicio; un falso negativo puede abrir una brecha.</p>
+      <h2>Dónde un agente aporta</h2>
+      <p>Correlación de señales, enriquecimiento de alertas, triage inicial, búsqueda de contexto, generación de hipótesis, preparación de playbooks y documentación de evidencia.</p>
+      <h2>Dónde el humano decide</h2>
+      <p>Acciones destructivas, cambios de producción, comunicación externa, decisiones legales y cualquier respuesta con impacto irreversible.</p>
+      <h2>El principio</h2>
+      <p>El agente amplifica la capacidad del equipo, no sustituye su criterio. AELOCK está diseñado con human-in-the-loop para acciones críticas y con trazabilidad completa de cada recomendación.</p>
     `,
     author: "Equipo Aeperion",
-    authorRole: "Product",
-    publishedAt: "10 Abril 2026",
-    publishedAtISO: "2026-04-10T08:00:00-05:00",
-    readingTime: 9,
-    category: "POS",
-    tags: ["pos", "restaurantes", "ventas"],
+    authorRole: "AELOCK",
+    publishedAt: "14 Oct 2026",
+    publishedAtISO: "2026-10-14T08:00:00-05:00",
+    readingTime: 4,
+    category: "Ciberseguridad",
+    tags: ["AELOCK", "Seguridad", "Human-in-the-loop"],
+  },
+  {
+    slug: "evaluar-un-agente-antes-de-produccion",
+    title: "Cómo evaluar un agente antes de ponerlo en producción",
+    excerpt:
+      "Calidad, costo, latencia, seguridad y regresión. Un checklist práctico para decidir si un agente está listo o solo parece estarlo.",
+    content: `
+      <p>Un agente que responde bien en una demo no está listo para producción. Producción significa usuarios reales, datos sucios, casos límite y consecuencias.</p>
+      <h2>Las cinco evaluaciones</h2>
+      <p><strong>Calidad:</strong> ¿resuelve la tarea? ¿con qué frecuencia? ¿con qué tipo de errores?</p>
+      <p><strong>Costo:</strong> ¿cuánto cuesta cada ejecución y cada resultado exitoso?</p>
+      <p><strong>Latencia:</strong> ¿el tiempo de respuesta es compatible con el proceso?</p>
+      <p><strong>Seguridad:</strong> ¿puede filtrar datos, ejecutar acciones no permitidas o ser manipulado?</p>
+      <p><strong>Regresión:</strong> ¿qué pasa cuando cambia el modelo, el prompt o una herramienta?</p>
+      <h2>El criterio</h2>
+      <p>No preguntamos “¿funciona?”. Preguntamos “¿bajo qué condiciones deja de funcionar y qué pasa cuando eso ocurre?”. Esa respuesta es la que separa un piloto de un sistema.</p>
+    `,
+    author: "Equipo Aeperion",
+    authorRole: "Ingeniería",
+    publishedAt: "30 Sep 2026",
+    publishedAtISO: "2026-09-30T08:00:00-05:00",
+    readingTime: 5,
+    category: "Producción",
+    tags: ["Evaluación", "Producción", "Calidad"],
   },
 ];
 
-export function getBlogPostBySlug(slug: string): BlogPostData | undefined {
-  return BLOG_POSTS.find((post) => post.slug === slug);
-}
-
-export function getRecentPosts(count: number = 4): BlogPostData[] {
-  return BLOG_POSTS.slice(0, count);
-}
+export const BLOG_POST_MAP = Object.fromEntries(
+  BLOG_POSTS.map((post) => [post.slug, post])
+) as Record<string, BlogPostData>;

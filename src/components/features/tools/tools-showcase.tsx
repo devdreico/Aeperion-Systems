@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import { ArrowRight, Zap } from "lucide-react";
 import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
